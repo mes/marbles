@@ -1,0 +1,33 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+@prefix xsd:   <http://www.w3.og/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix :      <http://simile.mit.edu/2006/01/ontologies/fsl-ns#> .
+
+<http://simile.mit.edu/2006/01/ontologies/fsl-ns> rdf:type owl:Ontology ;
+  dc:title "FSL Namespaces Ontology"@en ;
+  dc:description "Ad-hoc vocabulary for namespaces in FSL, as implemented in SIMILE tools"@en ;
+  dc:date "2006-01-27"^^xsd:date ;
+  dc:format "RDF" ;
+  dc:creator "Ryan Lee <ryanlee@w3.org>" ;
+  dc:identifier <http://simile.mit.edu/2006/01/ontologies/fsl-ns#> .
+
+:Namespace rdf:type owl:Class ;
+  rdfs:label "Namespace"@en ;
+  rdfs:comment "Resources used as namespaces in FSL expressions."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fsl-ns> ;
+  rdfs:subClassOf rdfs:Resource ;
+  rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :abbreviated ;
+    owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:allValuesFrom xsd:string
+  ] .
+
+:abbreviated rdf:type owl:DatatypeProperty ;
+  rdfs:label "abbreviated"@en ;
+  rdfs:comment "Known abbreviations for this namespace as seen in FSL expressions; the colon is not considered part of an abbreviation."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fsl-ns> ;
+  rdfs:domain :Namespace ;
+  rdfs:range xsd:string .

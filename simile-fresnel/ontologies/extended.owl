@@ -1,0 +1,278 @@
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:f="http://www.w3.org/2004/09/fresnel#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <rdf:Description rdf:about="http://www.w3.org/2004/09/fresnel#Format">
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#displayAs"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#containerStyle"/>
+        </subClassOf>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://www.w3.org/2004/09/fresnel#Lens">
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#extends"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#extends"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#use"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#moreDetailsFor"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2004/09/fresnel#Lens"/>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#moreDetailsFor"/>
+        </subClassOf>
+    </rdf:Description>
+
+    <owl:Class rdf:about="http://www.w3.org/2004/09/fresnel#PropertyDescription">
+        <comment xml:lang="en">More detailed description of the property, e.g. for specifing sublenses or merging properties.</comment>
+        <label xml:lang="en">Property Description</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#alternateProperties"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#alternateProperties"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#alternateProperties"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#mergeProperties"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#mergeProperties"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#mergeProperties"/>
+        </subClassOf>
+    </owl:Class>
+
+    <rdf:Description rdf:about="http://www.w3.org/2004/09/fresnel#StyleDescription">
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#contentReplace"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="http://www.w3.org/2004/09/fresnel#contentReplace"/>
+        </subClassOf>
+    </rdf:Description>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#active">
+        <comment xml:lang="en">The active pseudo-class applies while an element is being activated by the user. For example, between the times the user presses the mouse button and releases it.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">active</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/09/fresnel#alternateProperties">
+        <comment xml:lang="en">Defines a sequence of alterntive properties that are used if a property is missing.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#PropertyDescription"/>
+        <label xml:lang="en">alternate properties</label>
+        <range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+    </owl:ObjectProperty>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#animation">
+        <comment xml:lang="en">Retrieve the resource named by the property value and display it as animated vector graphics or other animated format.</comment>
+        <label xml:lang="en">animation</label>
+    </f:PropertyValueStyle>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#audio">
+        <comment xml:lang="en">Retrieve the resource named by the property value and play it as an audio clip.</comment>
+        <label xml:lang="en">audio</label>
+    </f:PropertyValueStyle>
+
+    <rdf:Property rdf:about="http://www.w3.org/2004/09/fresnel#containerStyle">
+        <comment xml:lang="en"></comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#Format"/>
+        <label xml:lang="en">container style</label>
+    </rdf:Property>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#contentReplace">
+        <comment xml:lang="en">Replaces the content of the current box with the specified content.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">content replace</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <rdf:Property rdf:about="http://www.w3.org/2004/09/fresnel#displayAs">
+        <comment xml:lang="en">Specifies how the class is displayed (e.g. image, video).</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#Format"/>
+        <label xml:lang="en">displayAs</label>
+    </rdf:Property>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#firstLetter">
+        <comment xml:lang="en">The :firstLetter pseudo-class allows you to style the first letter of a text.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">first letter</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#focus">
+        <comment xml:lang="en">The :focus pseudo-class applies while an element has the focus (accepts keyboard or mouse events, or other forms of input).</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">focus</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <Datatype rdf:about="http://www.w3.org/2004/09/fresnel#fslSelector">
+        <comment xml:lang="en">Fresnel Selector Language (FSL) Selector datatype</comment>
+        <isDefinedBy rdf:resource="http://www.w3.org/2004/09/fresnel"/>
+        <label>fslSelector</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </Datatype>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#hover">
+        <comment xml:lang="en">The :hover pseudo-class applies while the user designates an element (with some pointing device), but does not activate it.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">hover</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#html">
+        <comment xml:lang="en">Retrieve an HTML document and display its body element inside the rendered output document.</comment>
+        <label xml:lang="en">animation</label>
+    </f:PropertyValueStyle>
+
+    <owl:Thing rdf:about="http://www.w3.org/2004/09/fresnel#labelOfParent">
+        <comment xml:lang="en">Displayes the label of the partent resource, if lenses are related using the sublens property.  fresnel:labelOfParent can be used as property value for fresnel:contentBefore, fresnel:contentAfter, fresnel:contentFirst, fresnel:contentLast.  This might be useful when rendering large graphs.</comment>
+        <label xml:lang="en">label of parent</label>
+    </owl:Thing>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#link">
+        <comment xml:lang="en">The :link pseudo-class applies to all links.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">link</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/09/fresnel#mergeProperties">
+        <comment xml:lang="en">The values of all properties in the fresnel:mergeProperties are displayed as one set of property values.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#PropertyDescription"/>
+        <label xml:lang="en">merge properties</label>
+        <range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/09/fresnel#moreDetailsFor">
+        <comment xml:lang="en">The lens provides more details about an instance than the nother lens.  Good for drill-down.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#Lens"/>
+        <label xml:lang="en">more details for</label>
+        <range rdf:resource="http://www.w3.org/2004/09/fresnel#Lens"/>
+    </owl:ObjectProperty>
+
+    <f:Purpose rdf:about="http://www.w3.org/2004/09/fresnel#print">
+        <comment xml:lang="en">Intended for paged, opaque material and for documents viewed on screen in print preview mode.</comment>
+        <label xml:lang="en">Label Lens</label>
+    </f:Purpose>
+
+    <f:Purpose rdf:about="http://www.w3.org/2004/09/fresnel#projection">
+        <comment xml:lang="en">Intended for projected presentations, for example projectors or print to transparencies.</comment>
+        <label xml:lang="en">Label Lens</label>
+    </f:Purpose>
+
+    <f:Purpose rdf:about="http://www.w3.org/2004/09/fresnel#screen">
+        <comment xml:lang="en">Intended primarily for color computer screens.</comment>
+        <label xml:lang="en">screen</label>
+    </f:Purpose>
+
+    <Datatype rdf:about="http://www.w3.org/2004/09/fresnel#sparqlSelector">
+        <comment xml:lang="en">SPARQL Selector datatype</comment>
+        <isDefinedBy rdf:resource="http://www.w3.org/2004/09/fresnel"/>
+        <label>sparqlSelector</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </Datatype>
+
+    <Datatype rdf:about="http://www.w3.org/2004/09/fresnel#styleClass">
+        <comment xml:lang="en">Style class (i.e., HTML class names)</comment>
+        <isDefinedBy rdf:resource="http://www.w3.org/2004/09/fresnel"/>
+        <label>styleClass</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </Datatype>
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2004/09/fresnel#stylesheetLink">
+        <comment xml:lang="en">Reference to an external CSS stylesheet that works with the CSS classes or other instructions used in the group.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#Group"/>
+        <label xml:lang="en">sylesheet link</label>
+        <range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    </owl:ObjectProperty>
+
+    <Datatype rdf:about="http://www.w3.org/2004/09/fresnel#stylingInstructions">
+        <comment xml:lang="en">Styling instructions (i.e., CSS styling instructions)</comment>
+        <isDefinedBy rdf:resource="http://www.w3.org/2004/09/fresnel"/>
+        <label>stylingInstructions</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </Datatype>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#text">
+        <comment xml:lang="en">Retrieve the resource named by the property value and display it as text format, such as PDF or MS word using an appropriate viewer.</comment>
+        <label xml:lang="en">animation</label>
+    </f:PropertyValueStyle>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#textstream">
+        <comment xml:lang="en">Retrieve the resource named by the property value and display it as textstream using an appropriate viewer.</comment>
+        <label xml:lang="en">animation</label>
+    </f:PropertyValueStyle>
+
+    <f:PropertyValueStyle rdf:about="http://www.w3.org/2004/09/fresnel#video">
+        <comment xml:lang="en">Retrieve the resource named by the property value and play it as an video clip.</comment>
+        <label xml:lang="en">video</label>
+    </f:PropertyValueStyle>
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2004/09/fresnel#visited">
+        <comment xml:lang="en">The :visited pseudo-class applies to all visited links.</comment>
+        <domain rdf:resource="http://www.w3.org/2004/09/fresnel#StyleDescription"/>
+        <label xml:lang="en">visited</label>
+        <range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:Ontology rdf:about="http://www.w3.org/2004/09/fresnel-extended">
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chris Bizer &#60;chris@bizer.de&#62;</dc:creator>
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Emmanuel Pietriga &#60;emmanuel.pietriga@inria.fr&#62;</dc:creator>
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ryan Lee &#60;ryanlee@w3.org&#62;</dc:creator>
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Stefano Mazzocchi &#60;stefanom@mit.edu&#62;</dc:creator>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2005-03-09</dc:date>
+        <dc:description xml:lang="en">Vocabulary for relating and grouping lenses and styles.</dc:description>
+        <dc:format xml:lang="en">RDF</dc:format>
+        <dc:identifier rdf:resource="http://www.w3.org/2004/09/fresnel-extended#"/>
+        <comment xml:lang="en">Extended Lens and Style Vocabulary</comment>
+        <owl:imports rdf:resource="http://www.w3.org/2004/09/fresnel"/>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">$Id: extended.owl.n3 4058 2006-05-13 00:11:05Z ryanlee $</owl:versionInfo>
+    </owl:Ontology>
+</rdf:RDF>

@@ -1,0 +1,13 @@
+# In order to provision Marbles on a Tomcat server using "ant install",
+# save this file as build.properties and customize it as required
+
+# Context path to install this application on
+app.path=/Marbles
+
+# Tomcat installation directory
+catalina.home=/var/lib/tomcat6
+
+# Manager webapp username and password
+manager.url=http://localhost:8080/manager
+manager.username=manager
+manager.password=changeme

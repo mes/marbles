@@ -1,0 +1,157 @@
+\begin{thebibliography}{10}
+
+\bibitem{simile}
+SIMILE:
+\newblock {L}ongwell {RDF} {B}rowser (2003-2005)
+  http://simile.mit.edu/longwell/.
+
+\bibitem{huynh05}
+Huynh, D., Mazzocchi, S., Karger, D.:
+\newblock {Piggy Bank: Experience the Semantic Web Inside Your Web Browser}.
+\newblock In: Proceedings of the 4th International Semantic Web Conference
+  (ISWC). (2005)  413--430
+
+\bibitem{Steer03}
+Steer, D.:
+\newblock {B}rown{S}auce: {A}n {RDF} {B}rowser.
+\newblock \url{http://www.xml.com/pub/a/2003/02/05/brownsauce.html} (2003)
+  {XML}.com.
+
+\bibitem{Rutledge05}
+Rutledge, L., van Ossenbruggen, J., Hardman, L.:
+\newblock Making {RDF} {P}resentable: {S}election, {S}tructure and
+  {S}urfability for the {S}emantic {W}eb.
+\newblock In: Proceedings of the 14th international conference on World Wide
+  Web. (2005)  199--206
+
+\bibitem{MindSwap05}
+Kalyanpur, A., Parsia, B., Hendler, J.:
+\newblock A {T}ool for {W}orking with {W}eb {O}ntologies.
+\newblock In: Proceedings of Extreme Markup Languages. (2004)
+
+\bibitem{isaviz}
+Pietriga, E.:
+\newblock {I}sa{V}iz: {A} {V}isual {A}uthoring {T}ool for {RDF}.
+\newblock \url{http://www.w3.org/2001/11/IsaViz/} (2001-2006)
+
+\bibitem{Welkin}
+SIMILE:
+\newblock Welkin.
+\newblock \url{http://simile.mit.edu/welkin/} (2004-2005)
+
+\bibitem{Quan03}
+Quan, D., Huynh, D., Karger, D.R.:
+\newblock {Haystack: A Platform for Authoring End User Semantic Web
+  Applications}.
+\newblock In: 2nd International Semantic Web Conference (ISWC). (2003)
+  738--753
+
+\bibitem{mspace2005}
+mc~schraefel, Smith, D., Owens, A., Russell, A., Harris, C.:
+\newblock The evolving m{S}pace platform: leveraging the {S}emantic {W}eb on
+  the {T}rail of the {M}emex.
+\newblock In: 16th ACM Conference on Hypertext and Hypermedia. (2005)  174--183
+
+\bibitem{timbl06}
+Berners-Lee, T., Chen, Y., Chilton, L., Connolly, D., Dhanaraj, R., Hollenbach,
+  J., Lerer, A., Sheets, D.:
+\newblock {Tabulator: Exploring and Analyzing linked data on the Semantic Web}.
+\newblock In: Proceedings of the 3rd Int. Semantic Web User Interaction
+  Workshop, Athens, USA (2006)
+
+\bibitem{cocoon05}
+ASF:
+\newblock The {A}pache {C}ocoon {P}roject.
+\newblock \url{http://cocoon.apache.org} (2005)
+
+\bibitem{Carroll04}
+Carroll, J.J., Stickler, P.:
+\newblock {T}ri{X}: {RDF} triples in {XML}.
+\newblock In: In the International Journal on Semantic Web and Information
+  Systems, Vol.1, No.1, Jan-Mar 2005. (2005)
+
+\bibitem{quan05}
+Quan, D., Karger, D.:
+\newblock Xenon: {A}n {RDF} {S}tylesheet {O}ntology.
+\newblock \url{general@simile.mit.edu} mailing list attachment (2004)
+
+\bibitem{HaystackUI03}
+Huynh, D.:
+\newblock {Haystack's User Interface Framework: Tutorial and Reference}.
+\newblock \url{http://haystack.lcs.mit.edu/documentation/ui.pdf} (2003)
+
+\bibitem{pietriga06b}
+Pietriga, E.:
+\newblock {Semantic Web Data Visualization with Graph Style Sheets}.
+\newblock In: {Proceedings of the ACM Symposium on Software Visualization
+  (SoftVis'06)}, Brighton, UK (2006)
+
+\bibitem{fresnel05}
+Bizer, C., Lee, R., Pietriga, E.:
+\newblock {F}resnel - {D}isplay {V}ocabulary for {RDF}.
+\newblock \url{http://www.w3.org/2005/04/fresnel-info/manual-20050726/} (2005)
+
+\bibitem{foaf}
+{FOAF}ers:
+\newblock {F}riend-of-a-{F}riend ({FOAF}).
+\newblock \url{http://www.foaf-project.org/} (2001)
+
+\bibitem{horus}
+Erdmann, T.I., Bizer, C.:
+\newblock {Horus RDF Browser}.
+\newblock
+  \url{http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/} (2005)
+
+\bibitem{N3}
+Berners-Lee, T.:
+\newblock {P}rimer: {G}etting into {RDF} \& {S}emantic {W}eb using {N3}.
+\newblock \url{http://www.w3.org/2000/10/swap/Primer.html} (2005)
+
+\bibitem{sparql05}
+Prud'hommeaux, E., Seaborne, A.:
+\newblock {SPARQL} {Q}uery {L}anguage for {RDF}.
+\newblock \url{http://www.w3.org/TR/rdf-sparql-query/} (2005)
+
+\bibitem{xpr06}
+Cohen-Boulakia, S., Froidevaux, C., Pietriga, E.:
+\newblock {S}electing {B}iological {D}ata {S}ources and {T}ools with {XPR}, a
+  {P}ath {L}anguage for {RDF}.
+\newblock In: Pacific Symposium on Biocomputing ({PSB}), Maui, Hawaii. (2006)
+  116--127
+
+\bibitem{xpath}
+Clark, J., DeRose, S.:
+\newblock {XML Path Language (XPath) version 1.0}.
+\newblock \url{http://www.w3.org/TR/xpath} (1999)
+
+\bibitem{rdfcas04}
+W3C:
+\newblock Resource {D}escription {F}ramework ({RDF}): {C}oncepts and {A}bstract
+  {S}yntax.
+\newblock \url{http://www.w3.org/TR/rdf-concepts/} (2004)
+
+\bibitem{fsl05}
+Pietriga, E.:
+\newblock {F}resnel {S}elector {L}anguage for {RDF}.
+\newblock \url{http://www.w3.org/2005/04/fresnel-info/fsl-20050726/} (2005)
+
+\bibitem{furnas06}
+Furnas, G.W.:
+\newblock A fisheye follow-up: further reflections on focus + context.
+\newblock In: CHI '06: Proceedings of the SIGCHI conference on Human Factors in
+  computing systems, ACM Press (2006)  999--1008
+
+\bibitem{bier93}
+Bier, E.A., Stone, M.C., Pier, K., Buxton, W., DeRose, T.D.:
+\newblock Toolglass and magic lenses: the see-through interface.
+\newblock In: SIGGRAPH '93: Proc. of the 20th conference on Computer graphics
+  and interactive techniques, ACM Press (1993)  73--80
+
+\bibitem{pietriga05}
+Pietriga, E.:
+\newblock {A Toolkit for Addressing HCI Issues in Visual Language
+  Environments}.
+\newblock In: {IEEE Symposium on Visual Languages and Human-Centric Computing
+  (VL/HCC'05)}, Dallas, USA (2005)  145--152
+
+\end{thebibliography}

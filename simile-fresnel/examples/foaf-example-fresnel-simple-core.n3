@@ -1,0 +1,97 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix vCard:      <http://www.w3.org/2001/vcard-rdf/3.0#> .
+
+@prefix fresnel:    <http://www.w3.org/2004/09/fresnel#> .
+@prefix :           <http://example.org/foaf#> .
+
+# -----------------------------------------------
+# About this document
+<> rdfs:comment     "Lenses and Styles for foaf:Person."@en ;
+   dc:date          "2005-03-10"^^dtype:date ;
+   dc:format        "RDF" ;
+   dc:author        "Chris Bizer <chris@bizer.de>" ;
+   dc:author        "Ryan Lee <ryanlee@w3.org>" ;
+   dc:author        "Stefano Mazzocchi <stefanom@mit.edu>" ;
+   dc:author        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>" ;
+   dc:identifier    <> ;
+   .
+
+# -----------------------------------------------
+# FOAF Example Fresnel Simple Core
+# -----------------------------------------------   
+#
+# This example defines lenses and styles for foaf:Person
+# using only the features from Fresnel Simple Core, meaning
+# - only the lens-core and the style-core vocabulary
+# - direct node naming, no FresnelSelectors or SPARQL.
+
+# Contents:
+#
+# 1. Lenses for foaf:Person
+#    1.1. Standard Lenses
+#    1.2. Identification and Contact Information Lenses
+# 2. Styles for foaf:Person
+
+
+# -----------------------------------------------
+# 1.1. Standard Lenses for FOAF Person
+# -----------------------------------------------
+
+:foafPersonDefaultLens rdf:type fresnel:Lens ;
+        fresnel:purpose fresnel:defaultLens ;
+	fresnel:classLensDomain foaf:Person ;
+	fresnel:showProperties ( foaf:name 
+	                         foaf:surname 
+			         foaf:depiction ) .
+
+:foafPersonLabelLens rdf:type fresnel:Lens ;
+        fresnel:purpose fresnel:labelLens ;
+	fresnel:classLensDomain foaf:Person ;
+	fresnel:showProperties foaf:name .
+
+
+# -----------------------------------------------
+# 1.2. Identification and Type Lens
+# -----------------------------------------------
+
+:identificationLens rdf:type fresnel:Lens ;
+        rdfs:label "Identification and Type Lens for FOAF Persons"@en ;
+        fresnel:classLensDomain foaf:Person ;
+        fresnel:showProperties ( foaf:name 
+		                 foaf:surname 
+			         foaf:depiction
+			         foaf:mbox 
+			         foaf:mbox_sha1sum 
+			         owl:sameAs 
+			         rdf:type ) .
+
+
+# -----------------------------------------------
+# 2. Styles 
+# -----------------------------------------------
+
+:groupOne rdf:type fresnel:Group ;
+        fresnel:resourceStyle "ex-all-resource"^^dtype:string ;
+	fresnel:valueStyle "ex-all-value"^^dtype:string ;
+	fresnel:labelStyle "ex-all-label"^^dtype:string .
+
+# -----------------------------------------------
+# Styles for several specific FOAF properties
+# -----------------------------------------------
+
+:depictFormat rdf:type fresnel:Format ;
+	fresnel:propertyFormatDomain foaf:depict ;
+	fresnel:label fresnel:none ;
+	fresnel:value fresnel:image ;
+	fresnel:valueStyle "depict-value"^^dtype:string .
+
+:urlFormat rdf:type fresnel:Format ;
+	fresnel:propertyFormatDomain foaf:homepage ;
+	fresnel:propertyFormatDomain foaf:workHomepage ;
+	fresnel:propertyFormatDomain foaf:mbox ;
+	fresnel:value fresnel:uri .

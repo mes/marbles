@@ -1,0 +1,23 @@
+%--------------------------------------------------------------------
+\section{Implementations}
+\label{impl}
+
+Fresnel has been designed as an application- and output format-independent RDF presentation vocabulary. In this section we give an overview of various applications implementing Fresnel: Longwell \cite{simile} and Horus \cite{horus} which both render RDF data as HTML Web pages using nested box layouts, IsaViz \cite{isaviz} which represents RDF graphs as node-link diagrams, and Cardovan, a browser and lens editor based on the SWT GUI toolkit.
+
+\input{fresnelImplLongwell}
+
+\input{fresnelImplHorus}
+
+\input{fresnelImplIsaViz}
+
+\vspace{1em}
+{\bf Cardovan} is IBM's implementation of Fresnel lenses (see Figure \ref{cardovanFig}). Written in Java, Cardovan renders lenses with the SWT graphical user interface toolkit.  Cardovan is similar to other implementations in that it uses a subset of CSS to specify the layout of lens components on the screen. A remarkable feature of Cardovan is that it allows users to modify a lens in place. Users can add new properties to the lens, modify property values, and rearrange the physical layout of the properties displayed, though it is not a full WYSIWYG Fresnel lens designer. The project is still in its early stages, but is functional and is already being used for internal projects at IBM.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=12.2cm]{cardovan.png}
+\end{center}
+\vspace{-2em}
+\caption{Editing a lens (left) and visualizing the result (right) in Cardovan}
+\label{cardovanFig}
+\end{figure}

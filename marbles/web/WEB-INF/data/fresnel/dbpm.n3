@@ -1,0 +1,176 @@
+@prefix fresnel:	<http://www.w3.org/2004/09/fresnel#> .
+@prefix foaf:		<http://xmlns.com/foaf/0.1/> .
+@prefix rdf:		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:		<http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix p:			<http://dbpedia.org/property/> .
+@prefix rev:		<http://purl.org/stuff/rev#> .
+@prefix dc:			<http://purl.org/dc/elements/1.1/> .
+@prefix event:		<http://purl.org/NET/c4dm/event.owl#> .
+@prefix timeline:	<http://purl.org/NET/c4dm/timeline.owl#> .
+@prefix :			<http://beckr.org/fresnel/> .
+
+# -----------------------------------------------
+# Fresnel Formats
+# -----------------------------------------------
+
+# Default lens for any entry
+:defaultLens		rdf:type fresnel:Lens ;
+					fresnel:purpose fresnel:defaultLens ;
+				
+					# Lens selection order would be useful
+					fresnel:instanceLensDomain "*"^^fresnel:fslSelector ;
+
+					fresnel:group :defaultGroup ;
+					fresnel:showProperties ( 
+						fresnel:allProperties
+					) .
+								
+# Abstract purpose lens
+:abstractLens		rdf:type fresnel:Lens ;
+					fresnel:purpose :abstractPurpose ;
+					fresnel:instanceLensDomain "*"^^fresnel:fslSelector ;
+
+					fresnel:group :defaultGroup ;
+					fresnel:showProperties ( 
+							# review
+							[ rdf:type fresnel:PropertyDescription ;
+							      fresnel:property rev:hasReview ;
+							      fresnel:sublens :reviewLens ]
+						
+							# homepage
+							foaf:homepage
+							
+							# based near
+							foaf:based_near
+							
+							# place
+							event:place
+							
+#							"event:time/*/timeline:start"^^fresnel:fslSelector
+							
+							# "those depictions which are particularly representative of something"
+							foaf:img
+							
+							# also show depictions as a fallback
+							foaf:depiction
+							
+							# DBpedia Abstract
+							[ rdf:type fresnel:PropertyDescription ;
+							      fresnel:property "p:abstract[text()@##lang##]"^^fresnel:fslSelector ;
+							      fresnel:use :abstractTextFormat ]
+
+							# Event description
+							dc:description
+					) .
+						 
+# Photo purpose lens
+:photoLens			rdf:type fresnel:Lens ;
+					fresnel:purpose :photoPurpose ;
+	                fresnel:instanceLensDomain "*"^^fresnel:fslSelector ;
+
+					fresnel:group :defaultGroup ;
+					fresnel:showProperties (				
+								foaf:img
+								foaf:depiction
+					) .
+
+# -----------------------------------------------
+# Fresnel Formats
+# -----------------------------------------------
+
+
+# Default
+:defaultFormat		rdf:type fresnel:Format ;
+					
+					# Applies to all properties except depictions and images
+					fresnel:propertyFormatDomain "*[uri(.) != exp('foaf:img') and uri(.) != exp('foaf:depiction')]"^^fresnel:fslSelector ;
+					
+					fresnel:group :defaultGroup .
+
+:imgDepictionFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain foaf:depiction;
+					fresnel:propertyFormatDomain foaf:img;
+					fresnel:propertyStyle "singleValueInAbstract abstractRightBox"^^xsd:string;
+					fresnel:value fresnel:image ;
+					fresnel:group :defaultGroup .
+
+:homepageFormat		rdf:type fresnel:Format ;					fresnel:propertyFormatDomain foaf:homepage;
+					fresnel:propertyStyle "list singleValueInAbstract"^^fresnel:styleClass ;
+					fresnel:valueStyle "listelement"^^fresnel:styleClass ;
+					fresnel:labelStyle "showInAbstract"^^fresnel:styleClass ;
+					fresnel:label "Homepage"^^xsd:string ;
+					fresnel:value fresnel:externalLink ;
+					fresnel:group :defaultGroup  .
+
+:titleFormat		rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain "rdfs:label[text()@##lang##]"^^fresnel:fslSelector ;
+					fresnel:propertyStyle "exclude"^^fresnel:styleClass ;
+					fresnel:valueStyle "title"^^fresnel:styleClass ;
+					fresnel:group :defaultGroup .
+              
+:abstractTextFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain p:abstract ;
+					fresnel:propertyStyle "block"^^fresnel:styleClass ;
+					fresnel:group :defaultGroup .
+					
+# Copy of abstractTextFormat with the propertyFormatDomain foaf:img
+:descriptionFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain dc:description ;
+					fresnel:propertyStyle "block"^^fresnel:styleClass ;
+					fresnel:group :defaultGroup .					
+					
+:hasReviewFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain rev:hasReview; 
+					fresnel:group :defaultGroup ;
+					fresnel:label "has Review"^^xsd:string ;
+					
+					fresnel:propertyStyle "boxed singleValueInAbstract"^^fresnel:styleClass .
+#					fresnel:labelStyle "showInAbstract"^^fresnel:styleClass .
+
+:basedNearFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain foaf:based_near; 
+					fresnel:group :defaultGroup ;
+					fresnel:label "Based near"^^xsd:string ;
+					fresnel:propertyStyle "block"^^fresnel:styleClass ;
+					fresnel:labelStyle "showInAbstract"^^fresnel:styleClass .
+
+:reviewFormat		rdf:type fresnel:Format ;
+					fresnel:classFormatDomain rev:Review; 
+					fresnel:resourceStyle "showInAbstract"^^fresnel:styleClass;
+					fresnel:group :defaultGroup .
+
+
+# -----------------------------------------------
+# Sublenses
+# -----------------------------------------------
+
+:reviewLens 		rdf:type fresnel:Lens ;
+					fresnel:classLensDomain rev:Review;
+					fresnel:group :defaultGroup ;
+					fresnel:showProperties ( 
+		       					rev:rating 
+		       					rev:maxRating 
+		       					rev:text
+					) .
+					
+# -----------------------------------------------
+# Sublens Formats
+# -----------------------------------------------
+					
+
+:reviewTextFormat	rdf:type fresnel:Format;
+					fresnel:propertyFormatDomain rev:text;
+					fresnel:group :defaultGroup;
+					fresnel:propertyStyle "block"^^fresnel:styleClass .
+
+:reviewRatingFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain rev:rating ;
+					fresnel:valueStyle "rating"^^fresnel:styleClass ;
+					fresnel:group :defaultGroup .
+
+:maxRatingFormat	rdf:type fresnel:Format ;
+					fresnel:propertyFormatDomain rev:maxRating; 
+					fresnel:group :defaultGroup ;
+					fresnel:valueStyle "maxrating"^^fresnel:styleClass ;
+					fresnel:propertyFormat [ fresnel:contentBefore "of "^^xsd:string ] .

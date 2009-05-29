@@ -1,0 +1,96 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+@prefix xsd:   <http://www.w3.og/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix :      <http://simile.mit.edu/2006/01/ontologies/fresnel-facets#> .
+
+<http://simile.mit.edu/2006/01/ontologies/fresnel-facets> rdf:type owl:Ontology ;
+  dc:title "Fresnel Facets Ontology"@en ;
+  dc:description "Expressing facets in Fresnel, for SIMILE tools."@en ;
+  dc:date "2006-01-27"^^xsd:date ;
+  dc:format "RDF" ;
+  dc:creator "Ryan Lee <ryanlee@w3.org>" ;
+  dc:identifier <http://simile.mit.edu/2006/01/ontologies/fresnel-facets#> .
+
+:FacetSet a owl:Class ;
+  rdfs:label "Facet Set"@en ;
+  rdfs:comment "Set of facets per class."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+  rdfs:subClassOf rdfs:Resource ;
+  rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :types ;
+    owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:allValuesFrom :TypeList
+  ] ;
+  rdfs:subClassOf [
+    rdf:type owl:Restriction ;
+    owl:onProperty :facets ;
+    owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:allValuesFrom :FacetList
+  ] .
+
+:Facet a owl:Class ;
+  rdfs:label "Facet"@en ;
+  rdfs:comment "Resources to be used as facets."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+  rdfs:subClassOf rdfs:Resource .
+
+:TypeList rdf:type owl:Class ;
+    rdfs:label "Type List"@en ;
+    rdfs:comment "This is a convenience class for a list of types; order is irrelevant."@en ;
+    rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+    rdfs:subClassOf rdf:List ;
+    rdfs:subClassOf [
+        a owl:Restriction, owl:Class ;
+        owl:onProperty rdf:first ;
+        owl:allValuesFrom rdfs:Class ] ;
+    rdfs:subClassOf [
+        a owl:Restriction, owl:Class ;
+        owl:onProperty rdf:rest ;
+        owl:allValuesFrom [
+            owl:unionOf ( :TypeList rdf:nil ) ] ] .
+
+:FacetList rdf:type owl:Class ;
+    rdfs:label "Facet List"@en ;
+    rdfs:comment "This is a convenience class for an ordered list of facets."@en ;
+    rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+    rdfs:subClassOf rdf:List ;
+    rdfs:subClassOf [
+        a owl:Restriction, owl:Class ;
+        owl:onProperty rdf:first ;
+        owl:allValuesFrom :Facet ] ;
+    rdfs:subClassOf [
+        a owl:Restriction, owl:Class ;
+        owl:onProperty rdf:rest ;
+        owl:allValuesFrom [
+            owl:unionOf ( :FacetList rdf:nil ) ] ] .
+
+# the range could also be the exact resource :allTypes, but
+# this is tricky to represent in OWL
+:types rdf:type owl:ObjectProperty ;
+  rdfs:label "types"@en ;
+  rdfs:comment "A list of classes that a FacetSet applies to."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+  rdfs:domain :FacetSet ;
+  rdfs:range :TypeList .
+
+:facets rdf:type owl:ObjectProperty ;
+  rdfs:label "facets"@en ;
+  rdfs:comment "An ordered list of facets in a FacetSet."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+  rdfs:domain :FacetSet ;
+  rdfs:range :FacetList .
+
+:hides rdf:type owl:ObjectProperty ;
+  rdfs:label "hides"@en ;
+  rdfs:comment "A list of facets in a FacetSet to avoid displaying at all."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> ;
+  rdfs:domain :FacetSet ;
+  rdfs:range :FacetList .
+
+:allTypes rdf:type rdfs:Resource ;
+  rdfs:label "All Types"@en ;
+  rdfs:comment "A special symbol used to indicate the facets are to be used for any and all types."@en ;
+  rdfs:isDefinedBy <http://simile.mit.edu/2006/01/ontologies/fresnel-facets> .

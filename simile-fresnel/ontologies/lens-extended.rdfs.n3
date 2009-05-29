@@ -1,0 +1,160 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+
+# Lens Namespace
+@prefix :           <http://www.w3.org/2004/09/fresnel#>  .
+
+# -----------------------------------------------
+# About this document
+<> rdfs:comment     "Lens Group Vocabulary"@en^^dtype:string ;
+   dc:description   "Vocabulary for relating and grouping lenses."@en^^dtype:string ;
+   dc:date          "2005-03-09"^^dtype:date ;
+   dc:format        "RDF"@en^^dtype:string ;
+   dc:author        "Chris Bizer <chris@bizer.de>"^^dtype:string ;
+   dc:author        "Ryan Lee <ryanlee@w3.org>"^^dtype:string ;
+   dc:author        "Stefano Mazzocchi <stefanom@mit.edu>"^^dtype:string ;
+   dc:author        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>"^^dtype:string ;
+   dc:identifier    <http://www.w3.org/2004/09/fresnel/lens-extended#> 
+   .
+   
+# --------------------------------------------------------------   
+# Extended Lens Vocabulary 
+# --------------------------------------------------------------  
+#
+# The extended lens vocabulary allows you to specify  
+#    -  which RDF resources are displayed together using a lens and related sublenses. 
+#    -  lens inheritance.
+#    -  zoom-in/zoom-out functionality or alike.
+#    -  merged and alternate properties.
+   
+# Contents:
+# 1. Lens Inheritance Vocabulary 
+# 2. Property Description Vocabulary
+# 3. Lens Relation Vocabulary
+
+
+# -----------------------------------------------
+# 1. Lens Inheritance Vocabulary 
+# -----------------------------------------------
+				
+:extends		rdf:type rdf:Property ;
+				rdfs:label "extends"@en^^dtype:string ;
+     			rdfs:comment "Extends allows you to model inheritance relation between lenses.  No multiple inheritance, browser detects and stops on loops."@en^^dtype:string ;
+				rdfs:domain :Lens ;
+             	rdfs:range :Lens
+				.
+				
+:super  		rdf:type rdf:Resource ;
+			    rdfs:label "Super"@en^^dtype:string ;
+			    rdfs:comment "Ordered List of all properties which are defined by the super lens."@en^^dtype:string
+				.
+						
+				
+# -----------------------------------------------
+# 2. Property Description Vocabulary 
+# -----------------------------------------------
+
+# The property description vocabulary is used for specifying sublenses, 
+# merged and alternate properties.
+
+:propertyDescription rdf:type rdfs:Class ;
+			rdfs:label "Property Description"@en^^dtype:string ;
+			rdfs:comment "More detailed description of the property, e.g. for specifing sublenses or merging properties."@en^^dtype:string
+			.
+				
+:property	rdf:type rdf:Property ;
+			rdfs:label "property"@en^^dtype:string ;
+    		rdfs:comment "The RDF property, which is described."@en^^dtype:string  ;
+			rdfs:domain :propertyDescription ;
+            rdfs:range rdf:Property
+            .
+
+# -----------------------------------------------
+# Sublens 
+# -----------------------------------------------            
+            
+:sublens	rdf:type rdf:Property ;
+			rdfs:label "sublens"@en^^dtype:string ;
+    		rdfs:comment "Sublens which should be used for displaying property values."@en^^dtype:string ;
+			rdfs:domain :propertyDescription ;
+            # rdfs:range :Lens or FresnelSelector or SPARQL 
+            .
+
+:depth		rdf:type rdf:Property ;
+			rdfs:label "closure"@en^^dtype:string ;
+    		rdfs:comment "Closure mechanism, if lenses are recursively used."@en^^dtype:string ;
+			rdfs:domain :propertyDescription;
+            rdfs:range dtype:nonNegativeInteger
+            .
+           
+:use		rdf:type rdf:Property ;
+			rdfs:label "style"@en^^dtype:string ;
+    		rdfs:comment "Explicit definition of fresnel:Group containing styles that should be used to render the lens or sublens."@en^^dtype:string ;
+			# rdfs:domain :propertyDescription or :lens ;
+            # rdfs:range :Group or :Style 
+            .
+            
+# -----------------------------------------------
+# Ordering
+# -----------------------------------------------  
+
+# If a property value is
+# 1. a literal, then the values are ordered according to the order given by the datatype.
+# 2. a resource, then the values are ordered using 
+#            2.1 their labels defined by the label lens,
+#            2.2 rdf:label and dc:title.
+
+:orderValues	rdf:type rdf:Property ;
+			rdfs:label "sort values"@en^^dtype:string ;
+    		rdfs:comment "Sorts the values of the property in an given order."@en^^dtype:string ;
+			rdfs:domain :propertyDescription ;
+            rdfs:range :Style 
+            .
+
+:sortOrder rdf:type rdfs:Class ;
+			rdfs:label "Abstract superclass of all sort orders."@en^^dtype:string ;
+			.           
+
+:asc	rdf:type :sortOrder ;
+			rdfs:label "asc"@en^^dtype:string ;
+    		rdfs:comment "Sorts property values ASC."@en^^dtype:string
+    		. 
+
+:desc	rdf:type :sortOrder ;
+			rdfs:label "desc"@en^^dtype:string ;
+    		rdfs:comment "Sorts property values DESC."@en^^dtype:string
+    		.            
+
+# -----------------------------------------------
+# Alternate and Merged Properties
+# ----------------------------------------------- 
+    		
+:alternateProperties	rdf:type rdfs:Property ;
+			rdfs:label "alternate properties"@en^^dtype:string ;
+    		rdfs:comment "Defines a sequence of alterntive properties that are used if a property is missing."@en^^dtype:string ;
+            rdfs:domain :propertyDescription ;
+    		rdfs:range rdf:List 
+    		.
+
+:mergeProperties rdf:type rdfs:Property ;
+			rdfs:label "merge properties"@en^^dtype:string ;
+    		rdfs:comment "The values of all properties in the fresnel:mergeProperties are displayed as one set of property values."@en^^dtype:string ; 
+            rdfs:domain :propertyDescription ;
+    		rdfs:range rdf:List 
+    		.
+
+# -----------------------------------------------    		
+# 4. Lens Relation Vocabulary
+# -----------------------------------------------
+
+# The lens relation vocabulary is used for spezifying inheritance relation between lenses 
+# and for realizing zoom-in/zoom-out functionality.
+
+:moreDetailsFor	rdf:type rdf:Property ;
+				rdfs:label "more details for"@en^^dtype:string ;
+     			rdfs:comment "The lens provides more details about an instance than the nother lens.  Good for drill-down."@en^^dtype:string ;
+				rdfs:domain :Lens ;
+             	rdfs:range :Lens
+				.

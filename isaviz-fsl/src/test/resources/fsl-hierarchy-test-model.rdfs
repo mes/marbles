@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- $Id: fsl-hierarchy-test-model.rdfs 45 2007-09-25 00:56:27Z epietrig $ -->
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xml:base="http://jfresnel.gforge.inria.fr/tests/fsl-hierarchy-test-model.rdfs">
+  <owl:Class rdf:ID="ClassB">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ClassA"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ClassC">
+    <rdfs:subClassOf rdf:resource="#ClassA"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ClassD">
+    <rdfs:subClassOf rdf:resource="#ClassC"/>
+  </owl:Class>
+  <rdf:Property rdf:ID="PropA"/>
+  <rdf:Property rdf:ID="PropC">
+    <rdfs:subPropertyOf rdf:resource="#PropA"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="PropD">
+    <rdfs:subPropertyOf rdf:resource="#PropC"/>
+  </rdf:Property>
+  <rdf:Property rdf:ID="PropB">
+    <rdfs:subPropertyOf rdf:resource="#PropA"/>
+  </rdf:Property>
+</rdf:RDF>

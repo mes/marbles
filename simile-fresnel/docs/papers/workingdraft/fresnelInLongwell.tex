@@ -1,0 +1,9 @@
+%--------------------------------------------------------------------
+% $Id: fresnelInLongwell.tex 1370 2005-04-20 20:34:09Z ryanlee $
+\subsection{Longwell}
+
+Longwell is a suite of RDF browsing applications written in Java and developed by the SIMILE project \cite{simile}.  Initial releases of Longwell implemented an {\em ad hoc} display vocabulary, amended as application needs arose.  The next major stable release, currently under development, will instead support the core selection terms from Fresnel.  Graph results from searches will be filtered through Fresnel lens definitions before being passed on to the rendering engine.  Also, a basic, experimental RDF browser, @@@unnamed, based off the same set of selection and browsing code, will implement all of the core Fresnel terms.
+
+(@@@assuming a screenshot of longwell2 shows off the same data used in the IsaViz screenshot) As seen in the screenshot of Longwell \ref{longwellScreen}, the display of a \rdf{foaf:Person} using the (@@@which lens?) renders only what is specified in the lens in the order of specification; there is more data in the underlying collection involving contact information that is not shown.
+
+Longwell generates XHTML and uses CSS to style data according to the CSS box model; this portion does not use Fresnel styling.

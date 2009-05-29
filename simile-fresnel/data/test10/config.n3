@@ -1,0 +1,25 @@
+@prefix fresnel:		<http://www.w3.org/2004/09/fresnel#> .
+@prefix xsd:    		<http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:   		<http://xmlns.com/foaf/0.1/> .
+@prefix :       		<#> .
+
+:testGroup a fresnel:Group .
+
+###############################################
+# foaf:knows values shown as sublens, depth 1 #
+###############################################
+
+:foafPersonLabelLens a fresnel:Lens ;
+	fresnel:purpose fresnel:labelLens ;
+	fresnel:classLensDomain foaf:Person ;
+	fresnel:showProperties foaf:name ;
+	fresnel:group :foafGroup .
+
+:foafPersonLens a fresnel:Lens;
+	fresnel:purpose fresnel:defaultLens ;
+	fresnel:classLensDomain foaf:Person ;
+	fresnel:showProperties (
+		[ fresnel:property foaf:knows ;
+		fresnel:sublens :foafPersonLens ;
+		fresnel:depth "4"^^xsd:nonNegativeInteger ]);
+	fresnel:group :foafGroup .

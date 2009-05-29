@@ -1,0 +1,64 @@
+\section{Fresnel Selectors}
+\label{selectors}
+
+Selection in Fresnel occurs when specifying the domain of a lens or format and when specifying what properties of a resource a lens should show. Such selection expressions identify elements of the RDF model to be presented; in other words, specific nodes and arcs in the graph. As we expect selection conditions to be of varying complexity, we allow them to be expressed using different languages in an attempt to balance expressive power against ease of use.
+
+\subsection{Basic Selectors}
+
+The simplest selectors, called basic selectors, take the form of plain URI references as shown in section \ref{fresnelov}. Depending on whether they are used as values of \rdf{fresnel:instan\-ceLensDomain} or \rdf{fresnel:classLensDomain}, these URI references are interpreted respectively either as:
+\begin{itemize}
+\item URI equality constraints (the resource to be selected should be identified by this URI),
+\item or type constraints (the resources to be selected should be instances of the class identified by this URI).
+\end{itemize}
+
+Basic selectors are also used to identify properties, which are used for instance as values of \rdf{fresnel:showProperties} or \rdf{fresnel:alternateProperties}.
+
+%In the following example, property \rdf{fresnel:lensDomain} indicates that this lens should be used to display instances of class \rdf{foaf:Person}, i.e., resources that have an rdf:type property pointing at class (or at a subclass of \footnote{Subclass and subproperty relationships must be taken into account by the selection mechanism, provided that an RDF Schema or OWL ontology is available at runtime 
+%for the associated vocabulary.}) \rdf{foaf:Person}. Property \rdf{fresnel:showProperties} takes as its value a list of URIs referencing RDF property types. Properties \rdf{foaf:name} and \rdf{foaf:depiction} of resources displayed by this lens should be shown. 
+
+%\begin{small}
+%\begin{verbatim}
+%:PersonLens a fresnel:Lens ; 
+%    fresnel:lensDomain foaf:Person ; 
+%    fresnel:showProperties (
+%        foaf:name 
+%        foaf:depiction
+%    ).
+%\end{verbatim}
+%\end{small}
+
+Basic selectors are easy to use but have very limited expressive power. For instance, they cannot be used to specify that a lens should apply to all instances of class \rdf{foaf:Person} that are the subject of at least five \rdf{foaf:knows} statements. More powerful languages are required to express such selection constraints.
+
+\subsection{Languages for Complex Selection Expressions}
+
+Fresnel presentation designers can use two different languages for expressing complex selection expressions. The first option is the SPARQL query language for RDF \cite{sparql05}. In the context of Fresnel, SPARQL queries must always return exactly one result set, meaning that only one variable is allowed in the query's SELECT clause. Figure \ref{fslsparqlExample}-a gives an example of a lens whose domain is defined by a SPARQL expression. Alternatively, designers who prefer a more XPath-like approach, which proved to be a well-adapted selector language for XSLT, can use the Fresnel Selector Language (FSL). FSL is a language for modeling traversal paths in RDF graphs, designed to address the specific requirements of a selector language for Fresnel. It does not pretend to be a full so-called RDFPath language (contrary to XPR \cite{xpr06}, an extension of FSL) but tries to be as simple as possible, both from usability and implementation perspectives. FSL is strongly inspired by XPath \cite{xpath}, reusing many of its concepts and syntactic constructs while adapting them to RDF's graph-based data model. RDF models are considered directed labeled graphs according to RDF Concepts and Abstract Syntax \cite{rdfcas04}. FSL is therefore fully independent from any serialization. A lens definition using two FSL expressions is shown in Figure \ref{fslsparqlExample}-b. More information about FSL, including its grammar, data model and semantics is available in the FSL specification \cite{fsl05}.
+
+\begin{figure}
+%\begin{center}
+\begin{scriptsize}
+\begin{verbatim}
+# (a) Lens for John Doe's mailboxes    (SPARQL)
+:PersonLens a fresnel:Lens ;
+            fresnel:instanceLensDomain
+              "SELECT ?mbox WHERE ( ?x foaf:name 'John Doe' )
+                                  ( ?x foaf:mbox ?mbox )"^^fresnel:sparqlSelector .
+
+# (b) Lens for foaf:Person instances that know at least five other resources  (FSL)
+:PersonLens a fresnel:Lens ;
+            fresnel:instanceLensDomain
+                       "foaf:Person[count(foaf:knows) >= 5]"^^fresnel:fslSelector ;
+# and which shows the foaf:name property of all foaf:Person
+# instances known by the current resource.
+            fresnel:showProperties (
+                         "foaf:knows/foaf:Person/foaf:name"^^fresnel:fslSelector) .
+\end{verbatim}
+\end{scriptsize}
+%\end{center}
+\vspace{-1em}
+\caption{Examples of SPARQL and FSL expressions used in Fresnel lens definitions}
+\label{fslsparqlExample}
+\vspace{-1em}
+\end{figure}
+
+
+Applications implementing Fresnel are required to support basic selectors, and we expect a reasonable share of them to support the two other languages: SPARQL is gaining momentum as a W3C recommendation, and four open-source Java implementations of FSL are already available\footnote{http://dev.w3.org/cvsweb/java/classes/org/w3c/IsaViz/fresnel/} for HP's Jena Semantic Web Toolkit\footnote{http://jena.sourceforge.net}, for IsaViz (providing a visual FSL debugger) and for different versions of the Sesame RDF database\footnote{http://openrdf.org}.

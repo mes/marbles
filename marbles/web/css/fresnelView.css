@@ -1,0 +1,77 @@
+/*
+ *   Copyright (c) 2009, MediaEvent Services GmbH & Co. KG
+ *   http://mediaeventservices.com
+ *   
+ *   This file is part of Marbles.
+ *
+ *   Marbles is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   Marbles is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with Marbles.  If not, see <http://www.gnu.org/licenses/>.
+ *   
+ */
+
+a, a:visited, a:active {
+	color: #445878;
+}
+
+hr {
+	color: #D2D3DA;
+	border-style: solid;
+}
+
+.boxed {
+	border: 1px solid #d2d3da;
+	display: block !important;
+}
+
+.source {
+	margin-left: 2px;
+}
+
+.source img {
+	display: inline !important;
+	vertical-align: middle;
+}
+
+#sources {
+	margin-bottom: 20px;
+}
+
+.mainbox h1, .mainbox p {
+	padding-left: 5px;
+}
+
+#sources ul li {
+	padding: 2px;
+	clear: both;
+	font-size: 8pt;
+}
+
+#sources ul {
+	padding-left: 5px;
+	list-style: none;
+}
+
+#sources img {
+	display: inline !important;
+	vertical-align: middle;
+	margin: 0 4px 0 0;
+	border: 0px;
+}
+
+.clearLink {
+	cursor: pointer;
+}
+
+a img {
+	border: 0;
+}

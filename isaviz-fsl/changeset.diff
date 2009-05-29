@@ -1,0 +1,966 @@
+Index: trunk/isaviz-fsl/.classpath
+===================================================================
+--- trunk/isaviz-fsl/.classpath (revision 19)
++++ trunk/isaviz-fsl/.classpath (revision 19)
+@@ -0,0 +1,38 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<classpath>
++	<classpathentry kind="src" path="src/main/java"/>
++	<classpathentry kind="src" path="src/test/java"/>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-collections-1.4.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-concurrent-1.4.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-io-1.3.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-iteration-1.5.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-lang-1.4.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-net-1.5.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-text-1.3.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/aduna-xml-1.5.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/antlr-2.7.7.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/fsl-core-0.6.5.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/junit-3.8.1.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-model-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-query-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-queryalgebra-evaluation-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-queryalgebra-model-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-queryparser-api-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-queryparser-sparql-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-repository-api-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-repository-sail-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-api-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-n3-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-ntriples-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-rdfxml-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-trix-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-rio-turtle-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-sail-api-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-sail-inferencer-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-sail-memory-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/openrdf-sail-nativerdf-2.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/slf4j-api-1.3.0.jar"/>
++	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/isaviz-fsl/target/slf4j-simple-1.3.0.jar"/>
++	<classpathentry kind="output" path="bin"/>
++</classpath>
+Index: trunk/isaviz-fsl/.project
+===================================================================
+--- trunk/isaviz-fsl/.project (revision 19)
++++ trunk/isaviz-fsl/.project (revision 19)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<projectDescription>
++	<name>isaviz-fsl</name>
++	<comment></comment>
++	<projects>
++	</projects>
++	<buildSpec>
++		<buildCommand>
++			<name>org.eclipse.jdt.core.javabuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++	</buildSpec>
++	<natures>
++		<nature>org.eclipse.jdt.core.javanature</nature>
++	</natures>
++</projectDescription>
+Index: trunk/isaviz-fsl/deploy.sh
+===================================================================
+--- trunk/isaviz-fsl/deploy.sh (revision 76)
++++ trunk/isaviz-fsl/deploy.sh (revision 76)
+@@ -0,0 +1,3 @@
++mvn -Dmaven.test.skip=true package
++cp target/isaviz-fsl-* ../simile-fresnel/target
++cp target/isaviz-fsl-* ../Marbles/web/WEB-INF/lib
+Index: trunk/isaviz-fsl/src/main/java/fr/inria/jfresnel/fsl/sesame/FSLSesameEvaluator.java
+===================================================================
+--- trunk/isaviz-fsl/src/main/java/fr/inria/jfresnel/fsl/sesame/FSLSesameEvaluator.java (revision 16)
++++ trunk/isaviz-fsl/src/main/java/fr/inria/jfresnel/fsl/sesame/FSLSesameEvaluator.java (revision 76)
+@@ -1,618 +1,636 @@
+ /*   AUTHOR : Emmanuel Pietriga (emmanuel.pietriga@inria.fr)
+  *
+  *  (c) COPYRIGHT INRIA (Institut National de Recherche en Informatique et en Automatique), 2005-2007.
+  *  Licensed under the GNU LGPL. For full terms see the file COPYING.
+  *
+  * $Id: FSLSesameEvaluator.java 103 2007-11-09 17:08:36Z epietrig $
+  */ 
+ 
+ package fr.inria.jfresnel.fsl.sesame;
+ 
+ import fr.inria.jfresnel.fsl.*;
+ 
+ 
+ import java.io.File;
+ import java.io.FileReader;
+ import java.io.IOException;
+ import java.net.URL;
+ import java.net.MalformedURLException;
+ import java.util.Vector;
+ import java.util.HashMap;
+ import java.util.Collection;
+ import java.util.Iterator;
+ 
+ import org.openrdf.model.Literal;
+ import org.openrdf.model.Statement;
+ import org.openrdf.model.Resource;
+ import org.openrdf.model.Value;
+ import org.openrdf.model.URI;
+ import org.openrdf.model.vocabulary.RDF;
+ import org.openrdf.repository.Repository;
+ import org.openrdf.repository.RepositoryConnection;
+ import org.openrdf.repository.RepositoryException;
+ import org.openrdf.repository.RepositoryResult;
+ import org.openrdf.repository.sail.SailRepository;
+ import org.openrdf.sail.memory.model.MemStatementList;
+ import org.openrdf.sail.memory.model.MemResource;
+ import org.openrdf.sail.memory.model.MemValue;
+ import org.openrdf.sail.memory.MemoryStore;
+ import org.openrdf.rio.RDFFormat;
+ 
+ import org.openrdf.OpenRDFException;
+ import org.openrdf.query.TupleQuery;
+ import org.openrdf.query.TupleQueryResult;
+ import org.openrdf.query.BindingSet;
+ import org.openrdf.query.QueryLanguage;
+ 
+ /**<strong>Main class for evaluating an FSL expression on a Sesame repository (requires Sesame 2-alpha4 or 2-alpha5)</strong>*/
+ 
+ public class FSLSesameEvaluator extends FSLEvaluator {
+ 
+     private static boolean DEBUG = false;
+ 
+     Repository sesameRepository;
+     RepositoryConnection connection;
+ 
+     /** Construct an FSL Path evaluator for expression path
+      *@param nsr namespace prefix bindings used in the FSL expression (this has to be instantiated by the client)
+      *@param fhs class / type hierarchy store for RDFS/OWL awareness (this has to be instantiated by the client)
+      */
+     public FSLSesameEvaluator(FSLNSResolver nsr, FSLHierarchyStore fhs){
+ 	this.nsr = nsr;
+ 	this.fhs = fhs;
+     }
+ 
+     /** Evaluate this FSL expression on an RDF/XML file
+      *@param path the FSL path expression as a String
+      *@param firstStepType one of {FSLPath.NODE_STEP, FSLPath.ARC_STEP} - specifies how the first location step should be interpreted (as a node step or arc step)
+      *@param loc the file's URL (either a local file or an http URL)
+      *@param printPaths should the result paths be printed on System.out or not
+      *@return the set of paths in the model that instantiate the FSL expression
+      */
+     public Vector evaluate(String path, short firstStepType, String loc, boolean printPaths){
+ 	if (loc.startsWith("http://")){
+ 	    try {
+ 		return evaluate(FSLPath.pathFactory(path, this.nsr, firstStepType), new URL(loc), printPaths);
+ 	    }
+ 	    catch (MalformedURLException ex){
+ 		System.err.println("FSLSesameEvaluator: ill-formed URL "+loc);
+ 		return new Vector();
+ 	    }
+ 	}
+ 	else {
+ 	    return evaluate(FSLPath.pathFactory(path, this.nsr, firstStepType), new File(loc), printPaths);
+ 	}
+     }
+ 
+     /** Evaluate this FSL expression on an RDF/XML file 
+      *@param p the FSL path expression (use FSLPath.pathFactory() to build it from its String representation)
+      *@param file the file's URL
+      *@param printPaths should the result paths be printed on System.out or not
+      *@return the set of paths in the model that instantiate the FSL expression
+      */
+     public Vector evaluate(FSLPath p, File file, boolean printPaths){
+ 	initRepository();
+ 	try {
+ 	    storeRDFInRepository(file, file.toURL().toString());
+ 	    Vector res = evaluatePath(p);
+ 	    if (printPaths){
+ 		printPaths(res);
+ 	    }
+ 	    return res;
+ 	}
+ 	catch (Exception ex){
+ 	    System.err.println("FSLSesameEvaluator: Error: failed to load file " + file.toString());
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	    return new Vector();
+ 	}
+     }
+ 
+     /** Evaluate this FSL expression on an RDF/XML file.
+      *@param p the FSL path expression (use FSLPath.pathFactory() to build it from its String representation)
+      *@param url the file's URL
+      *@param printPaths should the result paths be printed on System.out or not
+      *@return the set of paths in the model that instantiate the FSL expression
+      */
+     public Vector evaluate(FSLPath p, URL url, boolean printPaths){
+ 	initRepository();
+ 	try {
+ 	    storeRDFInRepository(url);
+ 	    Vector res = evaluatePath(p);
+ 	    if (printPaths){
+ 		printPaths(res);
+ 	    }
+ 	    return res;
+ 	}
+ 	catch (Exception ex){
+ 	    System.err.println("FSLSesameEvaluator: Error: failed to load file " + url.toString());
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	    return new Vector();
+ 	}
+     }
+ 
+     /** Set the Sesame repository on which the path expression will be evaluated<br>
+      * This method should be used when the repository is created, initialized and populated somewhere else.<br>
+      * When just evaluating the path expression on a file or URL, it is simpler to use methods evaluate(...)
+      *@param r the repository on which to evaluate the expression
+      */
+     public void setRepository(Repository r){
+ 	sesameRepository = r;
+ 	try {
+ 	    connection = r.getConnection();
+ 	}
+ 	catch (Exception ex){
+ 	    System.err.println("FSLSesameEvaluator: Error: failed to set repository ");
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	}
+     }
+ 
++    /** 
++     * Closes connection, if present and resets the repository
++     */
++    public void unsetRepository(){
++    	if (connection != null) {
++    		try {
++    			connection.close();
++    		}
++    		catch (Exception ex){
++    		    System.err.println("FSLSesameEvaluator: Error: failed to close connection ");
++    		    if (DEBUG){ex.printStackTrace();}
++    		}
++    	}
++    	connection = null;
++    	sesameRepository = null;
++    }
++
+     /** Get the Sesame repository on which the path expression is evaluated
+      *@return the Sesame repository 
+      */
+     public Repository getRepository(){
+ 	return sesameRepository;
+     }
+ 
+     void initRepository(){
+ 	try {
+ 	    sesameRepository = new SailRepository(new MemoryStore());
+ 	    sesameRepository.initialize();
+ 	    connection = sesameRepository.getConnection();
+ 	}
+ 	catch (RepositoryException ex){
+ 	    System.err.println("Error while initializing Sesame repository:");
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	}
+     }
+ 
+     void storeRDFInRepository(File rdfFile, String baseURI){
+ 	try {
+  	    connection.add(rdfFile, baseURI, RDFFormat.RDFXML);
+ 	}
+ 	catch (Exception ex){
+ 	    System.err.println("FSLSesameEvaluator: Error: Failed to load RDF data from " + rdfFile.toString());
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	}
+     }
+ 
+     void storeRDFInRepository(URL rdfURL){
+ 	try {
+ 	    connection.add(rdfURL, rdfURL.toString(), RDFFormat.RDFXML);
+ 	}
+ 	catch (Exception ex){
+ 	    System.err.println("FSLSesameEvaluator: Error: Failed to load RDF data from " + rdfURL.toString());
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	}
+     }
+ 
+     /** Evaluate a path expression on the repository set by setRepository(Repository r).<br>
+      * The initial set of nodes/arcs (i.e., the set of nodes or arcs that are going to be considered as potential starting points for matching paths) is:<br>1) all resource nodes in the graph if firstStepType = NODE_STEP and the first location step does not test for a literal node (i.e. it is not "text()");<br>2) all literal nodes in the graph if firstStepType = NODE_STEP and the first location step tests for a literal node (i.e. it is "text()");<br>3) all property arcs in the graph if firstStepType = ARC_STEP
+      *@param p the FSL path expression (use FSLPath.pathFactory() to build it from its String representation)
+      *@return a Vector containing Vectors that represent sequences of nodes/arcs that are instances of actual paths in the graph that match the FSL expression. These vectors are made of Sesame org.openrdf.model.Resource or org.openrdf.model.Literal objects for node steps and org.openrdf.model.Statement objects for arc steps. Naturally, one every two steps is a Resource or a Literal, the other being a Statement.
+      *@see #evaluatePath(FSLPath p, HashMap startSet)
+      */
+     public Vector evaluatePath(FSLPath p){
+ 	if (DEBUG){
+ 	    System.out.println("Evaluating FSL path expression  " + p.serialize());
+ 	}
+ 	Vector pathInstances = new Vector();
+ 	try {
+ 	    if (p.steps[0].type == FSLLocationStep.P_STEP){// step is an arc step
+-		RepositoryResult<Statement> si = connection.getStatements(null, null, null, false);
++		RepositoryResult<Statement> si = connection.getStatements(null, null, null, true);
+ 		evaluateArcPath(p, si, pathInstances);
+ 		si.close();
+ 	    }
+ 	    else {// step is a node step
+ 		Statement s;
+ 		Resource r;
+ 		Object o;
+ 		HashMap startSet = new HashMap();
+ 		if (p.steps[0].type == FSLLocationStep.L_STEP){
+-		    RepositoryResult<Statement> si = connection.getStatements(null, null, null, false);
++		    RepositoryResult<Statement> si = connection.getStatements(null, null, null, true);
+ 		    // only interested in objects since literals cannot be subjects of statements
+ 		    while (si.hasNext()){
+ 			s = si.next();
+ 			o = s.getObject();
+ 			if (o instanceof Literal){startSet.put(o, null);}
+ 		    }
+ 		    si.close();
+ 		    evaluateNodePathL(p, startSet, pathInstances);
+ 		}
+ 		else {
+-		    try {
+-			String queryString = "SELECT DISTINCT ?s WHERE { ?s ?p ?o }";
+-			TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
+-			TupleQueryResult subjectsOfStatements = tupleQuery.evaluate();
+-			try {
+-			    while (subjectsOfStatements.hasNext()) {
+-				BindingSet bindingSet = subjectsOfStatements.next();
+-				o = bindingSet.getValue("s");
+-				if (!startSet.containsKey(o)){startSet.put(o, null);}
+-			    }
+-			}
+-			finally {
+-			    subjectsOfStatements.close();
+-			}
+-		    }
+-		    catch (OpenRDFException ex) {
+-			System.err.println("Error while constructing start set from Sesame repository:");
+-			ex.printStackTrace();
+-		    }
+-		    if (p.firstStepDoesNotOnlySelectsStatementSubjects()){
+-			/* When this test fails, it means that resources that are worth inspecting are necessarily the
+-			   subject of at least one statement (based on the analysis of the FSL path expression). So in this
+-			   case only get resources that meet this constraint from the model.
+-			   In other words, put resources that are not statement subjects in the startSet only if the path
+-			   expression is likely to select such resources. */
+-			try {
+-			    String queryString = "SELECT DISTINCT ?o WHERE { ?s ?p ?o }";
+-			    TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
+-			    TupleQueryResult objectsOfStatements = tupleQuery.evaluate();
+-			    try {
+-				while (objectsOfStatements.hasNext()) {
+-				    BindingSet bindingSet = objectsOfStatements.next();
+-				    o = bindingSet.getValue("o");
+-				    
+-				    if (o instanceof Resource && !startSet.containsKey(o)){startSet.put(o, null);}
+-				}
+-			    }
+-			    finally {
+-				objectsOfStatements.close();
+-			    }
+-			}
+-			catch (OpenRDFException ex) {
+-			    System.err.println("Error while constructing start set from Sesame repository:");
+-			    ex.printStackTrace();
+-			}
+-		    }
+-		    evaluateNodePathR(p, startSet, pathInstances);
++			throw new IllegalArgumentException("Won't select over the whole database!");
++//		    try {
++//			String queryString = "SELECT DISTINCT ?s WHERE { ?s ?p ?o }";
++//			TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
++//			TupleQueryResult subjectsOfStatements = tupleQuery.evaluate();
++//			try {
++//			    while (subjectsOfStatements.hasNext()) {
++//				BindingSet bindingSet = subjectsOfStatements.next();
++//				o = bindingSet.getValue("s");
++//				if (!startSet.containsKey(o)){startSet.put(o, null);}
++//			    }
++//			}
++//			finally {
++//			    subjectsOfStatements.close();
++//			}
++//		    }
++//		    catch (OpenRDFException ex) {
++//			System.err.println("Error while constructing start set from Sesame repository:");
++//			ex.printStackTrace();
++//		    }
++//		    if (p.firstStepDoesNotOnlySelectsStatementSubjects()){
++//			/* When this test fails, it means that resources that are worth inspecting are necessarily the
++//			   subject of at least one statement (based on the analysis of the FSL path expression). So in this
++//			   case only get resources that meet this constraint from the model.
++//			   In other words, put resources that are not statement subjects in the startSet only if the path
++//			   expression is likely to select such resources. */
++//			try {
++//			    String queryString = "SELECT DISTINCT ?o WHERE { ?s ?p ?o }";
++//			    TupleQuery tupleQuery = connection.prepareTupleQuery(QueryLanguage.SPARQL, queryString);
++//			    TupleQueryResult objectsOfStatements = tupleQuery.evaluate();
++//			    try {
++//				while (objectsOfStatements.hasNext()) {
++//				    BindingSet bindingSet = objectsOfStatements.next();
++//				    o = bindingSet.getValue("o");
++//				    
++//				    if (o instanceof Resource && !startSet.containsKey(o)){startSet.put(o, null);}
++//				}
++//			    }
++//			    finally {
++//				objectsOfStatements.close();
++//			    }
++//			}
++//			catch (OpenRDFException ex) {
++//			    System.err.println("Error while constructing start set from Sesame repository:");
++//			    ex.printStackTrace();
++//			}
++//		    }
++//		    evaluateNodePathR(p, startSet, pathInstances);
+ 		}
+ 	    }
+ 	}
+ 	catch (RepositoryException ex){
+ 	    System.err.println("Error while getting statements from repository:");
+ 	    if (DEBUG){ex.printStackTrace();}
+ 	}
+ 	return pathInstances;
+     }
+ 
+     /** Evaluate a path expression on the repository set by setRepository(Repository r), only considering specific nodes/arcs in the graph as potential starting points for paths.
+      *@param p the FSL path expression (use FSLPath.pathFactory() to build it from its String representation)
+      *@param startSet The initial set of nodes/arcs (i.e., the set of nodes or arcs that are going to be considered as potential starting points for matching paths).<br>1) if firstStepType = NODE_STEP and the first location step does not test for a literal node (i.e. it is not "text()"), startSet should contain objects that implement org.openrdf.model.Resource;<br>2) if firstStepType = NODE_STEP and the first location step tests for a literal node (i.e. it is "text()"), startSet should contain objects that implement org.openrdf.model.Literal;<br>3) if firstStepType = ARC_STEP, startsSet should contain objects that implement org.openrdf.model.Statement<br>
+      * Objects should be stored as keys in the map. Values do not matter (set to null).
+      *@return a Vector containing Vectors that represent sequences of nodes/arcs that are instances of actual paths in the graph that match the FSL expression. These vectors are made of Sesame org.openrdf.model.Resource or org.openrdf.model.Literal objects for node steps and org.openrdf.model.Statement objects for arc steps. Naturally, one every two steps is a Resource or a Literal, the other being a Statement.
+      *@see #evaluatePath(FSLPath p)
+      */
+     public Vector evaluatePath(FSLPath p, HashMap startSet){
+ 	if (DEBUG){
+ 	    System.out.println("Evaluating FSL path expression  " + p.serialize());
+ 	}
+ 	Vector pathInstances = new Vector();
+ 	if (p.steps[0].type == FSLLocationStep.P_STEP){// step is an arc step
+  	    evaluateArcPath(p, startSet, pathInstances);
+ 	}
+ 	else {// step is a node step
+ 	    if (p.steps[0].type == FSLLocationStep.L_STEP){
+ 		evaluateNodePathL(p, startSet, pathInstances);
+ 	    }
+ 	    else {
+ 		evaluateNodePathR(p, startSet, pathInstances);		
+ 	    }
+ 	}
+ 	return pathInstances;
+     }
+ 
+     protected void evaluateNodePathR(FSLPath p, HashMap startSet, Vector pathInstances){
+     	Iterator ssi = startSet.keySet().iterator();
+     	while (ssi.hasNext()){
+     	    Vector selectedElements = new Vector();
+     	    selectResource(p, 0, (Resource)ssi.next(), selectedElements, pathInstances);
+     	}
+     }
+ 
+     protected void evaluateNodePathL(FSLPath p, HashMap startSet, Vector pathInstances){
+     	Iterator ssi = startSet.keySet().iterator();
+     	while (ssi.hasNext()){
+     	    Vector selectedElements = new Vector();
+     	    selectLiteral(p, 0, (Literal)ssi.next(), selectedElements, pathInstances);
+     	}
+     }
+ 
+     protected void evaluateArcPath(FSLPath p, HashMap startSet, Vector pathInstances){
+     	Iterator ssi = startSet.keySet().iterator();
+     	while (ssi.hasNext()){
+     	    Vector selectedElements = new Vector();
+     	    selectProperty(p, 0, (Statement)ssi.next(), selectedElements, pathInstances);
+     	}
+     }
+ 
+     protected void evaluateArcPath(FSLPath p, RepositoryResult<Statement> startSet, Vector pathInstances) throws RepositoryException {
+ 	Vector selectedElements;
+ 	while (startSet.hasNext()){
+ 	    selectedElements = new Vector();
+ 	    selectProperty(p, 0, startSet.next(), selectedElements, pathInstances);
+ 	}
+     }
+ 
+     protected void selectResource(FSLPath path, int stepIndex, Resource node,
+ 				  Vector selectedElements, Vector pathInstances){
+-	if (testResource((FSLResourceStep)path.steps[stepIndex], (MemResource)node)){
++	if (testResource((FSLResourceStep)path.steps[stepIndex], node)){
+ 	    Vector v = (Vector)selectedElements.clone();
+ 	    v.add(node);
+ 	    if (stepIndex + 1 == path.steps.length){
+ 		pathInstances.add(v);
+ 	    }
+ 	    else {
+ 		MemStatementList properties = getPropertyArcs((MemResource)node, path.steps[stepIndex+1].axis);
+ 		for (int i=0;i<properties.size();i++){
+ 		    selectProperty(path, stepIndex+1, properties.get(i), v, pathInstances);
+ 		}
+ 	    }
+ 	}
+     }
+ 
+     protected void selectLiteral(FSLPath path, int stepIndex, Literal node,
+ 				 Vector selectedElements, Vector pathInstances){
+ 	if (testLiteral((FSLLiteralStep)path.steps[stepIndex], node)){
+ 	    Vector v = (Vector)selectedElements.clone();
+ 	    v.add(node);
+ 	    if (stepIndex + 1 == path.steps.length){
+ 		pathInstances.add(v);
+ 	    }
+ 	    else {
+ 		MemStatementList properties = getLPropertyArcs((MemValue)node, path.steps[stepIndex+1].axis);
+ 		for (int i=0;i<properties.size();i++){
+ 		    selectProperty(path, stepIndex+1, properties.get(i), v, pathInstances);
+ 		}
+ 	    }
+ 	}
+     }
+ 
+     protected void selectProperty(FSLPath path, int stepIndex, Statement arc,
+ 				  Vector selectedElements, Vector pathInstances){
+ 	if (testProperty((FSLArcStep)path.steps[stepIndex], arc)){
+ 	    Vector v = (Vector)selectedElements.clone();
+ 	    v.add(arc);
+ 	    if (stepIndex + 1 == path.steps.length){
+ 		pathInstances.add(v);
+ 	    }
+ 	    else {
+ 		if (path.steps[stepIndex].axis == FSLLocationStep.AXIS_IN || path.steps[stepIndex+1].axis == FSLLocationStep.AXIS_IN){
+ 		    selectResource(path, stepIndex+1, arc.getSubject(), v, pathInstances);
+ 		}
+ 		else {// AXIS_IN (and necessarily an FSLResourceStep)
+ 		    if (path.steps[stepIndex+1].type == FSLLocationStep.R_STEP){
+ 			if (arc.getObject() instanceof Resource){
+ 			    selectResource(path, stepIndex+1, (Resource)arc.getObject(), v, pathInstances);
+ 			}
+ 		    }
+ 		    else {// FSLLiteralStep
+ 			if (arc.getObject() instanceof Literal){
+ 			    selectLiteral(path, stepIndex+1, (Literal)arc.getObject(), v, pathInstances);
+ 			}
+ 		    }
+ 		}
+ 	    }
+ 	}
+     }
+ 
+     protected MemStatementList getPropertyArcs(MemResource node, short axis){
+ 	if (axis == FSLLocationStep.AXIS_OUT){
+ 	    return node.getSubjectStatementList();
+ 	}
+ 	else {// AXIS_IN
+ 	    return node.getObjectStatementList();
+ 	}
+     }
+ 
+     protected MemStatementList getLPropertyArcs(MemValue node, short axis){
+ 	if (axis == FSLLocationStep.AXIS_IN){
+ 	    return node.getObjectStatementList();
+ 	}
+ 	else {// AXIS_IN
+ 	    System.err.println("Warning : selectLiteral: path models a literal with an outgoing arc: " + node.toString());
+ 	    return null;
+ 	}
+     }
+ 
+-    protected boolean testResource(FSLResourceStep step, MemResource node){
++    protected boolean testResource(FSLResourceStep step, Resource node){
+ 	boolean typeTest = false;
+ 	if (step.nsURI != null){
+ // 	    CloseableIterator si = sesameRepository.getStatements(node, RDF.TYPE, null);
+ 	    try {
+ 		RepositoryResult<Statement> si = connection.getStatements(node, RDF.TYPE, null, true);
+ 		
+ 		if (step.localName != null){// rdf:type constraint = class must have this URI
+ 		    String uri = step.nsURI + step.localName;
+ 		    String typeURI;
+ 		    while (si.hasNext()){
+ 			typeURI = si.next().getObject().toString();
+ 			if (typeURI.equals(uri) || (step.isSubClassSubPropMatching() && fhs.isSubclassOf(typeURI, uri))){
+ 			    // test passes if resource's type is the one given in the type test or if it is a subclass of it
+ 			    typeTest = true;
+ 			    break;
+ 			}
+ 		    }
+ 		}
+ 		else {// rdf:type contraint = class must be in the given namespace
+ 		    while (si.hasNext()){
+ 			if (si.next().getObject().toString().startsWith(step.nsURI)){
+ 			    typeTest = true;
+ 			    break;
+ 			}
+ 		    }
+ 		}
+ 		si.close();
+ 	    }
+ 	    catch (RepositoryException ex){
+ 		System.err.println("Error while getting statements from repository:");
+ 		if (DEBUG){ex.printStackTrace();}
+ 	    }
+ 	}
+ 	else {
+ 	    if (step.localName != null){// rdf:type constraint = class must have this local name
+ 		// 		CloseableIterator si = sesameRepository.getStatements(node, RDF.TYPE, null);
+ 		try {
+ 		    RepositoryResult<Statement> si = connection.getStatements(node, RDF.TYPE, null, true);
+ 		    while (si.hasNext()){
+ 			if (si.next().getObject().toString().endsWith(step.localName)){
+ 			    typeTest = true;
+ 			    break;
+ 			}
+ 		    }
+ 		    si.close();
+ 		}
+ 		catch (RepositoryException ex){
+ 		    System.err.println("Error while getting statements from repository:");
+ 		    if (DEBUG){ex.printStackTrace();}
+ 		}
+ 	    }
+ 	    else {
+ 		typeTest = true;
+ 	    }
+ 	}
+ 	if (typeTest){
+ 	    return (step.predicates != null) ? testNodePredicates(step.predicates, node) : true;
+ 	}
+ 	else return false;
+     }
+ 
+     protected boolean testLiteral(FSLLiteralStep step, Literal node){
+ 	boolean valueTest = false;
+ 	if (step.literalText != null){
+ 	    if (node.getLabel().equals(step.literalText)){
+ 		valueTest = true;
+ 	    }
+ 	}
+ 	else {
+ 	    valueTest = true;
+ 	}
+ 	if (valueTest){
+ 	    if (step.datatypeURI != null){
+ 		if (node.getDatatype().toString() != null &&
+ 		    node.getDatatype().toString().equals(step.datatypeURI)){return true;}
+ 		else {return false;}
+ 	    }
+ 	    else if (step.lang != null){
+ 		if (node.getLanguage() != null &&
+ 		    node.getLanguage().equals(step.lang)){return true;}
+ 		else {return false;}
+ 	    }
+ 	    else return true;
+ 	}
+ 	else return false;
+     }
+ 
+     protected boolean testProperty(FSLArcStep step, Statement arc){
+ 	boolean typeTest = false;
+ 	if (step.nsURI != null){
+ 	    if (step.localName != null){
+ 		String uri = step.nsURI + step.localName;
+ 		String typeURI = arc.getPredicate().toString();
+ 		if (typeURI.equals(uri) || (step.isSubClassSubPropMatching() && fhs.isSubpropertyOf(typeURI, uri))){
+ 		    // test passes if property is the one given in the type test or if it is one of its subproperties
+ 		    typeTest = true;
+ 		}
+ 	    }
+ 	    // rdf:type contraint = property must be in the given namespace
+ 	    else if (arc.getPredicate().toString().startsWith(step.nsURI)){
+ 		typeTest = true;
+ 	    }
+ 	}
+ 	else {
+ 	    if (step.localName != null){// rdf:type constraint = property must have this local name
+ 		if (arc.getPredicate().toString().endsWith(step.localName)){
+ 		    typeTest = true;
+ 		}
+ 	    }
+ 	    else {
+ 		typeTest = true;
+ 	    }
+ 	}
+ 	if (typeTest){
+ 	    return (step.predicates != null) ? testArcPredicates(step.predicates, arc) : true;
+ 	}
+ 	else return false;
+     }
+ 
+     protected boolean testNodePredicates(FSLExpression[] predicates, Resource node){
+ 	for (int i=0;i<predicates.length;i++){
+ 	    if (!evaluateBooleanExpr(predicates[i], node)){return false;}
+ 	}
+ 	return true;
+     }
+ 
+     protected boolean testArcPredicates(FSLExpression[] predicates, Statement arc){
+ 	for (int i=0;i<predicates.length;i++){
+ 	    if (!evaluateBooleanExpr(predicates[i], arc)){return false;}
+ 	}
+ 	return true;
+     }
+ 
+     public Vector evaluatePathExpr(FSLPath expr, Object nodeOrArc){// nodeOrArc is the context node/arc
+ 	// against which the path expression should be evaluated
+ 	Vector selectedElements = new Vector();
+  	Vector pathInstances = new Vector();
+ 	int startStepIndex = 0;
+ 	/*deal with the case of location step "." (node or arc makes no difference)*/
+ 	if (expr.steps[0] instanceof FSLSelfNodeStep || expr.steps[0] instanceof FSLSelfArcStep){
+ 	    selectedElements.add(nodeOrArc);
+ 	    pathInstances.add(selectedElements);
+ 	    if (expr.steps.length == 1){// path expression is just "."
+ 		return pathInstances;
+ 	    }
+ 	    else {// path expression is of the form "./???/???/???/..."
+ 		/*XXX: this isn't working, there is an issue with the following steps' types*/
+ 		startStepIndex = 1;
+ 	    }
+ 	}
+ 	if (nodeOrArc instanceof Resource){// the path should start with an arc location step
+ 	    // path expr should be evaluated either on incoming or outgoing statements
+ 	    // whether we evaluate it on incoming or outgoing arcs depends on the 1st location step's axis
+ 	    MemStatementList properties = getPropertyArcs((MemResource)nodeOrArc, expr.steps[0].axis);
+ 	    for (int i=0;i<properties.size();i++){
+ 		selectProperty(expr, startStepIndex, properties.get(i), selectedElements, pathInstances);
+ 	    }
+ 	}
+ 	else if (nodeOrArc instanceof Statement){// the path should start with a node location step
+ 	    // path expr should be evaluated either on subject or object of statement
+ 	    // depending on the 1st location step's axis
+ 	    if (expr.steps[0].axis == FSLLocationStep.AXIS_OUT){
+ 		Statement arc = (Statement)nodeOrArc;
+ 		if (expr.steps[0].type == FSLLocationStep.R_STEP && arc.getObject() instanceof Resource){
+ 		    selectResource(expr, startStepIndex, (Resource)arc.getObject(), selectedElements, pathInstances);
+ 		}
+ 		else if (expr.steps[0].type == FSLLocationStep.L_STEP && arc.getObject() instanceof Literal){// Literal
+ 		    selectLiteral(expr, startStepIndex, (Literal)arc.getObject(), selectedElements, pathInstances);
+ 		}
+ 	    }
+ 	    else {// AXIS_IN
+ 		selectResource(expr, startStepIndex, ((Statement)nodeOrArc).getSubject(), selectedElements, pathInstances);
+ 	    }
+ 	}
+ 	//the case of a literal having predicates is not supposed to happen
+ // 	else {// the path should start with an arc location step
+ // 	    selectLiteral(expr, 0, null, selectedElements, pathInstances);
+ // 	}
+ 	return pathInstances;
+     }
+ 
+     public float[] getLiteralsAsNumbers(FSLPath expr, Object nodeOrArc){
+ 	Vector pathInstances = evaluatePathExpr(expr, nodeOrArc);
+ 	Vector floatValues = new Vector();
+ 	Object o;
+ 	for (int i=0;i<pathInstances.size();i++){
+ 	    o = ((Vector)pathInstances.elementAt(i)).lastElement();
+ 	    if (o instanceof Literal){
+ 		try {//.trim() not necessary (leading and trailing whitespaces handled by parseFloat)
+ 		    floatValues.add(new Float(((Literal)o).getLabel()));
+ 		}
+ 		catch (NumberFormatException ex){}
+ 	    }
+ 	}
+ 	float[] res = new float[floatValues.size()];
+ 	for (int i=0;i<floatValues.size();i++){
+ 	    res[i] = ((Float)floatValues.elementAt(i)).floatValue();
+ 	}
+ 	return res;
+     }
+Index: trunk/isaviz-fsl/pom.xml
+===================================================================
+--- trunk/isaviz-fsl/pom.xml (revision 16)
++++ trunk/isaviz-fsl/pom.xml (revision 44)
+@@ -1,169 +1,184 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project xmlns="http://maven.apache.org/POM/4.0.0" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>edu.mit.simile</groupId>
+   <artifactId>isaviz-fsl-simile</artifactId>
+   <name>JFresnel FSL Sesame Implementation - SIMILE fork</name>
+   <version>0.6.5-SNAPSHOT</version>
+ 
+   <!-- For more on the original project, see the following URL:
+ 
+          http://jfresnel.gforge.inria.fr
+ 
+        The only difference is in this POM file, for SIMILE-specific
+        dependencies
+   -->
+  
+   <!-- Repositories -->
+   <repositories>
+     <repository>
+       <id>jfresnel</id>
+       <name>JFresnel Repository</name>
+       <url>http://jfresnel.gforge.inria.fr/maven</url>
++    </repository>
++    <repository>
++      <releases>
++        <enabled>true</enabled>
++        <updatePolicy>always</updatePolicy>
++        <checksumPolicy>warn</checksumPolicy>
++      </releases>
++      <snapshots>
++        <enabled>false</enabled>
++        <updatePolicy>never</updatePolicy>
++        <checksumPolicy>fail</checksumPolicy>
++      </snapshots>
++      <id>aduna-repo</id>
++      <name>Aduna Repository</name>
++      <url>http://repository.aduna-software.org/maven2</url>
+     </repository>
+   </repositories>
+  
+   <!-- Distribution - Deploy via SCP -->
+   <distributionManagement>
+     <repository>
+       <id>simile.mit.edu</id>
+       <url>scpexe://simile.mit.edu/var/maven</url>
+     </repository>
+   </distributionManagement>
+  
+   <!-- Dependencies -->
+   <dependencies>
+     <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>3.8.1</version>
+     </dependency>
+     <dependency>
+       <groupId>fr.inria.jfresnel.fsl</groupId>
+       <artifactId>fsl-core</artifactId>
+       <version>0.6.5</version>
+     </dependency>
+     <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-simple</artifactId>
+       <version>1.3.0</version> 
+     </dependency>
+     <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>1.3.0</version> 
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-sail-api</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-sail-memory</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-sail-nativerdf</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-repository-api</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-repository-sail</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-api</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-rdfxml</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-ntriples</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-trix</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-turtle</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+     <dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-rio-n3</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+ 	<dependency>
+       <groupId>org.openrdf</groupId>
+       <artifactId>openrdf-queryparser-sparql</artifactId>
+-      <version>2.0-beta6</version>
++      <version>2.0.1</version>
+     </dependency>
+   </dependencies>
+  
+   <!-- Build -->
+   <build>
+     <plugins>
+       <plugin>
+         <groupId>org.codehaus.mojo</groupId>
+         <artifactId>dependency-maven-plugin</artifactId>
+         <executions>
+           <execution>
+             <id>copy-dependencies</id>
+             <phase>package</phase>
+             <goals>
+               <goal>copy-dependencies</goal>
+             </goals>
+             <configuration>
+               <outputDirectory>${project.build.directory}</outputDirectory>
+             </configuration>
+           </execution>
+         </executions>
+       </plugin>
+       <plugin>
+         <inherited>true</inherited>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-source-plugin</artifactId>
+         <executions>
+           <execution>
+             <id>attach-sources</id>
+             <goals>
+               <goal>jar</goal>
+             </goals>
+           </execution>
+         </executions>
+       </plugin>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <configuration>
+           <source>1.5</source>
+           <target>1.5</target>
+         </configuration>
+       </plugin>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-eclipse-plugin</artifactId>
+         <configuration>
+           <downloadSources>true</downloadSources>
+         </configuration>
+       </plugin>
+     </plugins>
+   </build>
+ </project>

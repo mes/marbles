@@ -1,0 +1,58 @@
+\section{Fresnel Selectors}
+\label{selectors}
+
+Selection in Fresnel occurs at different levels: when specifying what properties should be displayed or hidden (\rdf{fresnel:showProperties}, \rdf{fresnel:hidePrope\-rties}), and when specifying the domain of a lens or style (\rdf{fresnel:lensDomain}, \rdf{fresnel:styleDomain}). All four properties take as values expressions that identify elements of the RDF model to be presented, in other words specific nodes and arcs in the graph. Three languages can be used in Fresnel for specifying selection expressions, offering increasing levels of expressive power and complexity. 
+
+\subsection{Basic Selectors}
+
+The simplest selectors in Fresnel take the form of URI references. Depending on its context of use, a URI reference can identify a resource, a class of resources, or a type of property, as shown in the following examples.
+\begin{small}
+\begin{verbatim}:PersonLens a fresnel:Lens ;
+    fresnel:lensDomain foaf:Person ;
+    fresnel:showProperties ( foaf:name
+                             foaf:depiction ).
+\end{verbatim}
+\end{small}
+Property \rdf{fresnel:lensDomain} indicates that this lens should be used to display instances of class \rdf{foaf:Person}, i.e., resources that have an \rdf{rdf:type} property pointing at class (or at a subclass of \footnote{Subclass and subproperty relationships must be taken into account by the selection mechanism, provided that an RDF Schema or OWL ontology is available at runtime for the associated vocabulary.}) \rdf{foaf:Person}. Property \rdf{fresnel:show\-Properties} takes as its value a list of URIs referencing RDF property types. In this example, properties \rdf{foaf:name} and \rdf{foaf:depiction} of resources displayed by this lens should be shown.
+
+Basic selectors simply name the type of resources or properties that should be selected. They are easy to use but have a very limited expressive power. For instance, they cannot be used to specify that a lens should apply to all instances of class foaf:Person that are the subject of at least five \rdf{foaf:knows} statements (i.e., all resources representing persons that know more than five other persons). Such selectors, and more complex ones, can be expressed with the languages described in the next two sections.
+
+\subsection{Fresnel Selector Language}
+
+The Fresnel Selector Language (FSL) is a language for modeling traversal paths in RDF graphs, designed to address the specific requirements of a selector language for Fresnel. It does not pretend to be a full so-called RDFPath language, but tries to be as simple as possible. Still trying to avoid reinventing the wheel, FSL is strongly inspired by XPath, reusing many of its concepts and syntactic constructs while adapting them to RDF's graph-based data model. RDF models are considered as directed labeled graphs according to RDF Concepts and Abstract Syntax \cite{rdfcas04}. FSL is therefore fully independent from any serialization.
+
+An FSL expression represents a path from a node or arc to another node or arc, passing by an arbitrary number of other nodes and arcs. FSL paths explicitly represent both nodes and arcs as steps on the path, as it is desirable to be able to constrain the type of arcs a path should traverse (something that is not relevant in XPath as the only relation between the nodes of an XML tree is the parent-child relation which bears no explicit semantics).
+
+Each step on the path, called a location step, follows the XPath location step syntax and is made of a) an optional axis declaration specifying the traversal direction in the directed graph, b) a type test taking the form of a URI reference represented as an XML qualified name (QName), or a \rdf{*} when the type is left unconstrained, c) optional predicates that specify further conditions on the nodes and arcs to be matched by this step.
+
+The type test constrains property arcs to be labeled with the URI represented by the QName, or resource nodes to be instances of the class identified by this QName. In other words, type tests specify constraints on the types of properties and classes of resources to be traversed and selected by paths. Constraints on the URI of resources can be expressed as predicates associated with node location steps. A consequence of interpreting QName tests as type constraints is that FSL is syntactically and semantically compatible with Fresnel's basic selectors. The latter can therefore be considered a very limited subset of what can be expressed with FSL. Thus, any valid basic selector expression is a valid FSL expression.
+
+More information about the language, including its grammar, data model and semantics can be found on the Fresnel Web site \cite{fsl05}. In the following examples, literals containing FSL expressions should all declare \rdf{fresnel:selector} as their datatype. This declaration has been omitted here for clarity.
+
+\begin{small}
+\begin{verbatim}
+# A lens for foaf:Person resources that know at least five other resources
+:PersonLens a fresnel:Lens ;
+    fresnel:lensDomain "foaf:Person[count(foaf:knows) >= 5]".
+
+# Show the foaf:name property of all foaf:Person
+# instances known by the current resource.
+:PersonLens a fresnel:Lens ;
+    fresnel:showProperties ("foaf:knows/foaf:Person/foaf:name").
+\end{verbatim}
+\end{small}
+
+\subsection{SPARQL}
+
+The SPARQL RDF query language \cite{sparql05} offers the highest expressive power and can be used to specify lens and style domains. SPARQL queries used in this context must always return exactly one node set, meaning that only one variable is allowed in the query's SELECT clause. As with previous FSL examples, the literal's datatype declaration has been omitted.
+
+\begin{small}
+\begin{verbatim}
+# A lens for John Doe's mailboxes
+:PersonLens a fresnel:Lens ;
+    fresnel:lensDomain "SELECT ?mbox WHERE ( ?x foaf:name 'John Doe' )
+                                           ( ?x foaf:mbox ?mbox )".
+\end{verbatim}
+\end{small}
+
+

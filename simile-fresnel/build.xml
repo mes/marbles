@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<project name="maven">
+  <target name="init">
+
+    <!-- Set the timestamps -->
+    <tstamp/>
+
+    <!-- Detecting the current jvm -->
+    <property name="target.vm" value="1.5" />
+
+    <!-- Get the build properties from an external file -->
+    <property file="build.properties"/>
+
+    <filter token="Name"                value="${fullname}"/>
+    <filter token="name"                value="${fullname}"/>
+    <filter token="year"                value="${year}"/>
+    <filter token="version"             value="${version}"/>
+    <filter token="date"                value="${TODAY}"/>
+    <filter token="loglevel"            value="${build.webapp.loglevel}"/>
+
+    <!-- Alias for the loglevel -->
+    <property name="loglevel" value="${build.webapp.loglevel}"/>
+
+    <!-- Ant-Contrib tasks -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+    
+  </target>
+
+<!-- === Preparation Targets ============================================= -->
+
+  <target name="prepare" depends="init">
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build.dest}"/>
+    <mkdir dir="${vocabularies}"/>
+    <mkdir dir="${vocabularies.code}"/>
+    <mkdir dir="${vocabularies.bytecode}"/>
+    <mkdir dir="${vocabularies.code}/${vocabularies.package.path}"/>
+  </target>
+  
+  <target name="compile-schemagen" depends="prepare">
+    <javac sourcepath="" srcdir="${src.java}"
+           destdir="${build.dest}"
+           debug="${compiler.debug}"
+           optimize="${compiler.optimize}"
+           deprecation="${compiler.deprecation}"
+           nowarn="${compiler.nowarn}"
+           compiler="${compiler}"
+           classpathref="maven.plugin.classpath">
+	<include name="edu/mit/simile/fresnel/util/SchemaGenerator.java"/>
+    </javac>
+  </target>
+
+  <target name="compile-vocabularies" depends="compile-schemagen">
+      <if>
+        <and>
+          <uptodate targetfile="${vocabularies.code}/${vocabularies.package.path}/FresnelCore.java" srcfile="ontologies/core.owl.n3"/>
+          <uptodate targetfile="${vocabularies.code}/${vocabularies.package.path}/FresnelExtended.java" srcfile="ontologies/extended.owl.n3"/>
+          <uptodate targetfile="${vocabularies.code}/${vocabularies.package.path}/Namespaces.java" srcfile="ontologies/namespaces.owl.n3"/>
+          <uptodate targetfile="${vocabularies.code}/${vocabularies.package.path}/Facets.java" srcfile="ontologies/facets.owl.n3"/>
+        </and>
+        <then>
+          <echo message="Ontologies are up-to-date"/>
+        </then>
+        <else>
+          <echo message="Generating FresnelCore.java"/>
+          <java classname="edu.mit.simile.fresnel.util.SchemaGenerator" classpathref="maven.plugin.classpath" classpath="${build.dest}">
+            <arg line="-i file:./ontologies/core.owl --owl -e RDFXML -a 'http://www.w3.org/2004/09/fresnel#' --package ${vocabularies.package} -o ${vocabularies.code}/${vocabularies.package.path}/FresnelCore.java -n FresnelCore"/>
+          </java>
+          <echo message="Generating FresnelExtended.java"/>
+          <java classname="edu.mit.simile.fresnel.util.SchemaGenerator" classpathref="maven.plugin.classpath" classpath="${build.dest}">
+            <arg line="-i file:./ontologies/extended.owl --owl -e RDFXML -a 'http://www.w3.org/2004/09/fresnel#' --package ${vocabularies.package} -o ${vocabularies.code}/${vocabularies.package.path}/FresnelExtended.java -n FresnelExtended"/>
+          </java>
+          <echo message="Generating Namespaces.java"/>
+          <java classname="edu.mit.simile.fresnel.util.SchemaGenerator" classpathref="maven.plugin.classpath" classpath="${build.dest}">
+            <arg line="-i file:./ontologies/namespaces.owl --owl -e RDFXML -a 'http://simile.mit.edu/2006/01/ontologies/fsl-ns#' --package ${vocabularies.package} -o ${vocabularies.code}/${vocabularies.package.path}/Namespaces.java -n Namespaces"/>
+          </java>
+          <echo message="Generating Facets.java"/>
+          <java classname="edu.mit.simile.fresnel.util.SchemaGenerator" classpathref="maven.plugin.classpath" classpath="${build.dest}">
+            <arg line="-i file:./ontologies/facets.owl --owl -e RDFXML -a 'http://simile.mit.edu/2006/01/ontologies/fresnel-facets#' --package ${vocabularies.package} -o ${vocabularies.code}/${vocabularies.package.path}/Facets.java -n Facets"/>
+          </java>
+          <copy todir="${src.java}">
+            <fileset dir="${vocabularies.code}"/>
+          </copy>
+        </else>
+      </if>
+          <javac srcdir="${vocabularies.code}/${vocabularies.package.path}" destdir="${vocabularies.bytecode}" classpathref="maven.plugin.classpath"/>
+  </target>
+
+  <target name="package-vocabularies" depends="compile-vocabularies">
+    <jar jarfile="${build}/fresnel-vocabularies-${vocabularies.version}.jar" index="true">
+      <fileset dir="${vocabularies.bytecode}"/>
+    </jar>
+  </target>
+
+  <target name="compile" depends="prepare,compile-vocabularies">
+    <javac sourcepath="" srcdir="${src.java}"
+           destdir="${build.dest}"
+           debug="${compiler.debug}"
+           optimize="${compiler.optimize}"
+           deprecation="${compiler.deprecation}"
+           target="${target.vm}"
+           nowarn="${compiler.nowarn}"
+           compiler="${compiler}"
+           classpathref="maven.plugin.classpath"
+           classpath="${vocabularies.bytecode}">
+        <include name="**/*.java"/>
+    </javac>
+  </target>
+
+  <target name="package" depends="compile">
+    <delete file="${build}/${name}-${version}.jar"/>
+    <jar jarfile="${build}/${name}-${version}.jar" index="true">
+      <fileset dir="${build.dest}">
+        <exclude name="${vocabularies.package.path}/*.class"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="package-vocabularies-sources" depends="compile-vocabularies">
+    <jar jarfile="${build}/${name}-vocabularies-${vocabularies.version}-sources.jar" index="true">
+      <fileset dir="${src.java}">
+        <include name="${vocabularies.package.path}/*.java"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="package-sources" depends="init">
+    <delete file="${build}/${name}-${version}-sources.jar"/>
+    <jar jarfile="${build}/${name}-${version}-sources.jar" index="true">
+      <fileset dir="${src.java}">
+        <exclude name="**/package.html"/>
+        <exclude name="${vocabularies.package.path}"/>
+        <exclude name="${vocabularies.package.path}/*.java"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="clean-vocabularies" depends="init">
+    <delete dir="${src.java}/${vocabularies.package.path}"/>
+  </target>
+
+</project>

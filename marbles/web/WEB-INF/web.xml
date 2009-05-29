@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <servlet>
+    <servlet-name>Marbles</servlet-name>
+    <servlet-class>de.fuberlin.wiwiss.marbles.MarblesServlet</servlet-class>
+      <!-- Data Providers to activate -->
+      <init-param>
+        <param-name>dataProviders</param-name>
+        <param-value>de.fuberlin.wiwiss.marbles.dataproviders.RevyuProvider,de.fuberlin.wiwiss.marbles.dataproviders.SindiceProvider,de.fuberlin.wiwiss.marbles.dataproviders.FalconsProvider</param-value>
+      </init-param>    
+      <!-- Path to data directory with subdirectories for fresnel configuration ("fresnel"), built-in ontologies ("ontologies") and XSLT transformations ("xsl"), absolute or relative to the Marbles app directory -->
+      <init-param>
+        <param-name>dataRoot</param-name>
+        <param-value>WEB-INF/data</param-value>
+      </init-param>
+      <!-- Path for native store that holds built-in ontologies -->
+      <init-param>
+        <param-name>ontologyStore</param-name>
+        <param-value>WEB-INF/data/stores/ontologies</param-value>
+      </init-param>
+      <!-- Path for native store that holds cached data (when MySQL database is not used) -->
+      <init-param>
+        <param-name>cacheStore</param-name>
+        <param-value>WEB-INF/data/stores/cache</param-value>
+      </init-param>
+      <!-- Path for native store that holds metadata -->
+      <init-param>
+        <param-name>metadataStore</param-name>
+        <param-value>WEB-INF/data/stores/metadata</param-value>
+      </init-param>      
+      <!-- Full HTTP path to assets in the "web" directory; specify if reverse-proxied -->
+<!--      <init-param>
+        <param-name>assetsURL</param-name>
+        <param-value>http://localhost:8080/Marbles/</param-value>
+      </init-param>-->
+      <!-- HTTP URL of this service, specify if reverse-proxied -->
+<!--      <init-param>
+        <param-name>serviceURL</param-name>
+        <param-value>http://localhost:8080/Marbles/marbles</param-value>
+      </init-param>-->
+      <!-- Optional: HTTP URL of Virtuoso Sponger service to be used for further RDF Extraction -->
+<!--      <init-param>
+        <param-name>spongerServiceURL</param-name>
+        <param-value>http://localhost:8890/proxy</param-value>
+      </init-param>-->
+      <!-- Optional: MySQL connectivity -->
+<!--      <init-param>
+        <param-name>mysqlServer</param-name>
+        <param-value>127.0.0.1</param-value>
+      </init-param>
+      <init-param>
+        <param-name>mysqlDb</param-name>
+        <param-value>Marbles</param-value>
+      </init-param>
+      <init-param>
+        <param-name>mysqlUser</param-name>
+        <param-value>root</param-value>
+      </init-param>
+      <init-param>
+        <param-name>mysqlPass</param-name>
+        <param-value></param-value>
+      </init-param>-->
+   </servlet>
+   
+  <servlet-mapping>
+    <servlet-name>Marbles</servlet-name>
+    <url-pattern>/marbles</url-pattern>
+  </servlet-mapping>
+
+  <display-name>Marbles</display-name>
+
+  <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>/</url-pattern>
+  </servlet-mapping>
+   
+  <welcome-file-list>
+    <welcome-file>marbles</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>

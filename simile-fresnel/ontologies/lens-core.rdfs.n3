@@ -1,0 +1,109 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+
+# Lens Namespace
+@prefix :           <http://www.w3.org/2004/09/fresnel#> .
+
+## ------------------------------- ##
+## Please see core.owl.n3 instead. ##
+## ------------------------------- ##
+
+# -----------------------------------------------
+# About this document
+<> rdfs:comment     "Core Lens Vocabulary"@en^^dtype:string ;
+   dc:description   "Vocabulary for defining lenses on RDF resources."@en^^dtype:string ;
+   dc:date          "2005-03-24"^^dtype:date ;
+   dc:format        "RDF"@en^^dtype:string ;
+   dc:author        "Chris Bizer <chris@bizer.de>" ;
+   dc:author        "Ryan Lee <ryanlee@w3.org>" ;
+   dc:author        "Stefano Mazzocchi <stefanom@mit.edu>" ;
+   dc:author        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>" ;
+   dc:identifier    <http://www.w3.org/2004/09/fresnel/lens-core#>
+   .   
+
+# --------------------------------------------------------------   
+# Core Lens Vocabulary
+# --------------------------------------------------------------  
+#
+# The lens vocabulary is used for defining 
+#    - which properties of an RDF resources are displayed.
+#    - how they are ordered. 
+#
+# There are two variations of the vocabulary:
+#    - Simple core, which only supports the selection of nodes by name.
+#    - Extended core, which also supports the selection of nodes using FresnelSelectors or SPARQL. 
+#
+# Contents:
+#     1. Lens Vocabulary
+#     2. Purpose Vocabulary
+
+
+# -----------------------------------------------
+# 1. Lens Vocabulary 
+# -----------------------------------------------
+
+:Lens		rdf:type rdfs:Class ;
+			rdfs:label "Lens"@en^^dtype:string ;
+    		rdfs:comment "Lens for viewing RDF data."@en^^dtype:string 
+    		.		
+    		
+:lensDomain	rdf:type rdf:Property ;
+			rdfs:label "Lens Domain"@en^^dtype:string ;
+    		rdfs:comment "Specifies that the lens is usable for this class and its subclasses."@en^^dtype:string ;
+			rdfs:domain :Lens
+			# rdfs:range rdfs:Class or FSL or SPARQL.
+			.
+
+:instanceLensDomain	rdf:type rdf:Property ;
+			rdfs:label "Instance Lens Domain"@en^^dtype:string ;
+    		rdfs:comment "The lens is usable for the specified set of instances."@en^^dtype:string ;
+			rdfs:domain :Lens
+			# rdfs:range rdfs:Resource or FSL or SPARQL.
+			.			
+			
+:showProperties	rdf:type rdf:Property ;
+			rdfs:label "show properties"@en^^dtype:string ;
+      		rdfs:comment "Sequence of all properties which should be shown."@en^^dtype:string ;
+			rdfs:domain :Lens 
+			# rdfs:range rdf:Property, rdf:List
+            .
+
+:hideProperties	rdf:type rdf:Property ;
+			rdfs:label "hide properties"@en^^dtype:string ;
+      		rdfs:comment "Sequence of all properties which should be hidden.  Has to be used together with fresnel:showProperties fresnel:allProperties"@en^^dtype:string ;
+			rdfs:domain :Lens 
+			# rdfs:range rdf:Property, rdf:List, FresnelSelector or SPARQL
+			.		
+  
+:allProperties rdf:type rdf:Resource ;
+			rdfs:label "All Properties"@en^^dtype:string ;
+			rdfs:comment "Set of all properties of the current instance, which have not be explicitly named before. "@en^^dtype:string
+			.            
+            
+# -----------------------------------------------
+# 2. Purpose Vocabulary					
+# -----------------------------------------------
+
+:purpose	rdf:type rdf:Property ;
+			rdfs:label "purpose"@en^^dtype:string ;
+    		rdfs:comment "Specifies a purpose for which a lens or style might be appropriate."@en^^dtype:string ;
+			# rdfs:domain :Lens :Style or :StyleGroup ;
+			rdfs:range :Purpose 
+            .
+            
+:Purpose	rdf:type rdfs:Class ;
+			rdfs:label "Purpose"@en^^dtype:string ;
+    		rdfs:comment "Propose in which a specific lens might be appropriate."@en^^dtype:string
+    		.
+
+:defaultLens rdf:type :Purpose ;
+			rdfs:label "Default Lens"@en^^dtype:string ;
+			rdfs:comment "Provides the browser with a starting point which lens to show."@en^^dtype:string 
+			.
+
+:labelLens	rdf:type :Purpose ;
+			rdfs:label "Label Lens"@en^^dtype:string ;
+			rdfs:comment "Lens for providing a label for a resource."@en^^dtype:string 
+			.

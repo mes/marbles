@@ -1,0 +1,49 @@
+\section{Fresnel Selectors}
+\label{selectors}
+
+Selection in Fresnel occurs when specifying the domain of a lens or format and when specifying what properties of a resource a lens should show. Such selection expressions identify elements of the RDF model to be presented; in other words, specific nodes and arcs in the graph. As we expect selection conditions to be of varying complexity, we allow them to be expressed using three different languages in an attempt to balance expressive power against ease of use.
+
+The simplest selectors, called basic selectors, take the form of plain URI references as shown in section \ref{fresnelov}. Basic selectors simply name the type of resources or properties that should be selected. They are easy to use but have very limited expressive power. For instance, they cannot be used to specify that a lens should apply to all instances of class \rdf{foaf:Person} that are the subject of at least five \rdf{foaf:knows} statements. More powerful languages are required to express such selection constraints.
+
+The Fresnel Selector Language (FSL) is a language for modeling traversal paths in RDF graphs, designed to address the specific requirements of a selector language for Fresnel. It does not pretend to be a full so-called RDFPath language (contrary to XPR \cite{xpr06}, an extension of FSL) but tries to be as simple as possible, both from usability and implementation perspectives. FSL is strongly inspired by XPath, reusing many of its concepts and syntactic constructs while adapting them to RDF's graph-based data model. RDF models are considered directed labeled graphs according to RDF Concepts and Abstract Syntax \cite{rdfcas04}. FSL is therefore fully independent from any serialization.
+
+An FSL expression represents a path from a node or arc to another node or arc, passing by an arbitrary number of other nodes and arcs. FSL paths explicitly represent both nodes and arcs as steps on the path, as it is desirable to be able to constrain the type of arcs a path should traverse (something that is not relevant in XPath as the only relation between the nodes of an XML tree is the parent-child relation which bears no explicit semantics).
+
+A full description of FSL is outside the scope of this paper and will be the subject of future publications. In the meantime, more information about the language, including its grammar, data model and semantics is available in the FSL specification \cite{fsl05}. A lens definition using two FSL expressions follows:
+
+\begin{small}
+\begin{verbatim}
+# A lens for foaf:Person resources that know at least five other resources
+:PersonLens a fresnel:Lens ;
+       fresnel:instanceLensDomain "foaf:Person[count(foaf:knows) >= 5]" ;
+# and which shows the foaf:name property of all foaf:Person
+# instances known by the current resource.
+       fresnel:showProperties ("foaf:knows/foaf:Person/foaf:name") .
+\end{verbatim}
+\end{small}
+
+The SPARQL RDF query language \cite{sparql05} is the last alternative. SPARQL queries must always return exactly one result set, meaning that only one variable is allowed in the query's SELECT clause.
+
+\begin{small}
+\begin{verbatim}
+# A lens for John Doe's mailboxes
+:PersonLens a fresnel:Lens ;
+fresnel:instanceLensDomain "SELECT ?mbox WHERE ( ?x foaf:name 'John Doe' )
+                                               ( ?x foaf:mbox ?mbox )" .
+\end{verbatim}
+\end{small}
+
+FSL was designed as a compact and simpler alternative to SPARQL, but the two languages will probably show a significant overlap in expressive power. For instance, the above SPARQL lens domain could have been written in FSL as \rdf{*[in::foaf:mbox/*[foaf:name/text() = 'John Doe']]}. In such cases, one language might be more appropriate than the other with respect to the conciseness and legibility of expressions, and the choice of what language to use to write each selection expression should be left to Fresnel users. 
+
+Applications implementing Fresnel are required to support basic selectors, and we expect a reasonable share of them to support the two other languages: SPARQL is likely to gain momentum quickly as a W3C recommendation, and two open-source Java implementations of FSL, for IsaViz and HP's Jena, are already available\footnote{http://dev.w3.org/cvsweb/java/classes/org/w3c/IsaViz/fresnel/}, with a third being written for the Sesame RDF database (http://openrdf.org).
+
+
+
+
+
+
+
+
+
+
+

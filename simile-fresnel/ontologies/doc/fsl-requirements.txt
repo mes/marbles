@@ -1,0 +1,260 @@
+----------------------------------------
+Requirements for a Fresnel Selector Language
+----------------------------------------
+
+For now, and until we find a better name for this language (which we do not want to call RDFPath):
+- FSL = Fresnel Selector Language
+- FSE = Fresnel Selector Expression
+
+----------------------------------------------------
+1. Fresnel properties that can take an FSE as object
+----------------------------------------------------
+
+- styleDomain (style-core, extended version), for specifying what properties the style should be applied to
+- lensDomain (lens-core, extended version), for specifying what resources the lens should be applied to
+- showProperties (lens-core, extended version), for specifying what properties should be shown
+- hideProperties (lens-core, extended version), for specifying what properties should be hidden
+- Haystack-style searches for sublens (??? or job for SPARQL)
+
+[extended version basically means with support for FSL]
+
+If we decide to keep the concept of View (combination of lenses):
+- viewDomain (lens-context), for specifying the resources the view should be applied to
+- viewContext (lens-context), for specifying the context in which the view should be applied
+
+The last one is likely to survive View's removal (in this case it will be attached directly to lenses)
+
+----------------------------------------------------
+2. Expressiveness of FSEs
+----------------------------------------------------
+
+EmmanuelP: as opposed to XML trees, RDF graphs do not have a root. FSEs should be evaluated relative to
+           each resource that can potentially be selected for lensDomain. Same thing for viewContext
+           (which is stronly related to lensDomain anyway).
+
+	   For styleDomain, FSEs should be evaluated relative to each property that can potentially be styled.
+           
+           In the case of {show,hide}Properties, FSEs should be evaluated relative to the selected resources.
+
+StefanoM: we do not want XPath-like '//' (because of the cyclic nature of RDF graphs).
+
+What should an FSE be able to point at?
+- FSEs associated with {show,hide}Properties must point at properties
+  (the predicate of a statement, not its object) - usecase1 (UC1)
+- FSEs associated with lensDomain must point at resources - usecase 2 (UC2)
+- FSEs associated with styleDomain must point at properties - usecase 3 (UC3)
+
+So we need to be able to point at both resources and properties.
+
+- UC1 is the simplest case. We have FSEs that are evaluated relative to a resource R1,
+  and we only want to point at properties that have R1 as their subject or which can be
+  reached by walking forward from R1.
+  As we do not want '//'-like constructs, we will only be able to point at properties
+  that are the predicate of statements which have R1 as their subject, or properties
+  that are predicate of a statement that can be reached by following the directed path
+  leading from R1 to this predicate ONLY in the case where we know the number of steps
+  to get there (but not necessarily the name/URI of all arcs and nodes - use of wildcard *).
+
+- UC2 requires more expressiveness as we want to be able to capture constraints on both
+  a resource's "context" and its "content". I'm employing the XPath/XSLT terminology here,
+  though I am aware that it does not really apply to RDF graphs. By context I mean nodes
+  and arcs that can be reached by following directed paths backward from the current resource
+  (called contextual node in XSLT). By content I mean nodes and arcs that can be reached by
+  following directed paths forward. As an aside, considering cyclic graphs, a node or arc might
+  actually be reached either by exploring the current resource's context or its content. That
+  might seem a little weird, but I don't think this is actually a problem here.
+
+- UC3 is basically the same as UC2 except that the starting point for the FSE's evaluation
+  is a property, not a resource, and that we select properties, not resources.
+
+As in XPath, we want to be able to express conditions (called predicates in XPath)
+on any element traversed by the path. We will call these "conditions" instead of "predicates"
+as "predicate" has a different meaning in RDF.
+
+As mentioned yesterday by TimBL, Notation3 has a traversal mechanism and syntax for walking
+a graph forward (using !) and backward (using ^) - see section Paths in [1].
+Do we want to use the same syntax ? It does not seem possible to point at properties
+(again here I mean predicates of statements). For instance :joe!fam:mother points at 
+joe's mother (a resource, a node), not at joe's mother property (an arc). That's not compatible
+with what we need here. So it might not be wise to use the same syntax.
+Addendum: after playing a little bit with it in our context, it's barely readable. Added to the
+above-mentioned problem, we decide to drop this option.
+
+An alternative would be to use / for forward traversal, and \ for backward traversal, but this
+does not look too good to me. I don't really like it.
+
+So we are probably going to stick to the XPath general syntax using axes  (axis::name-test[predicates]).
+We will also consider adding abbreviations for a shorthand syntax.
+
+[1] http://www.w3.org/DesignIssues/Notation3.html
+
+---------------------------------------------------------------------
+3. Examples
+---------------------------------------------------------------------
+
+Examples are developped using the general syntax.(axis::name-test[predicates]).
+One abbreviation we can readily adopt is that when the axis is ommited, we default to the 'out' axis.
+
+Note: out:: and in:: are only relevant for arc/property location steps. We could actually have them for node/resource
+locations steps, but it does not make much sense, as when we are reaching an arc, there is little chance we want to
+change the traversal direction (it just makes no sense, I think).
+
+Additionnaly, for UC2 and UC3, we might want to make the enclosing .[] optional, but then it is not obvious that 
+the FSEs return properties or resources.
+
+In the following I give the full general syntax and then an attempt at abbreviating it.
+
+###THIS IS WRONG ; FIX w.r.t what we discussed with ChrisB
+We decided that FSEs should always return the same thing, a node set. This means that FSEs that actually point at
+predicates/properties should actually return the objects of the statements the properties are involved in. Syntactically,
+this means that FSEs pointing at properties are allowed, but that /* is automatically appended at the end.
+###
+
+UC1: [returns a node set consisting of property values that have to be displayed] for a given resource,
+
+INPUT context node, query
+
+OUT Nodeset
+
+a) show property rdf:type:
+
+  out::rdf:type
+  rdf:type
+  
+
+b) show the rdf:type of the foaf:depict property value:
+
+  out::foaf:depict/*/out::rdf:type
+  foaf:depict/*/rdf:type 
+
+
+c) show property foaf:depict only if it is an image:
+
+  ./out::foaf:depict/*[out::rdf:type/foaf:Image]
+  foaf:depict/*[rdf:type/foaf:Image]
+
+
+UC2: [returns a node set] apply lens to resources which 
+
+
+a) are of rdf:type foaf:Person:
+
+  *[rdf:type/out::foaf:Person]
+  *[rdf:type/foaf:Person]
+
+
+b) are the object of at least one foaf:knows statement (i.e. to
+   people who are known by at least one person or whatever thing
+   is the subject of a foaf:knows statement):
+
+  *[in::foaf:knows]
+  *[in::foaf:knows]
+
+
+c) same as b), but must be the object of exactly two foaf:knows statements:
+
+  *[count(in::foaf:knows) = 2]
+
+
+d) same as b) but in addition check that the foaf:knows statement's subject is a foaf:Person
+
+  *[in::foaf:knows/*/out::rdf:type/foaf:Person]
+  *[in::foaf:knows/*/rdf:type/foaf:Person]
+
+
+e) are foaf:Person and know at least 4 other 'things': 
+
+  *[out::rdf:type/foaf:Person and count(out::foaf:knows) >= 4]
+  *[rdf:type/foaf:Person and count(foaf:knows) >= 4]
+
+
+f) are foaf:Person and know at least 4 other foaf:Person:
+
+  *[out::rdf:type/foaf:Person and count(out::foaf:knows/*/out::rdf:type/foaf:Person) >= 4]
+  *[rdf:type/foaf:Person and count(foaf:knows/*/rdf:type/foaf:Person) >= 4]
+
+g) are foaf:Person and have a foo:age of "47":
+
+  *[out::rdf:type/foaf:Person and out::foo:age/"47"]
+  *[out::rdf:type/foaf:Person and literal-value(out::foo:age/*) = "47"]
+  *[rdf:type/foaf:Person and foo:age/"47"]
+
+
+h) have exactly the following URI: http://example.org/foo.bar
+
+  uri() is somewhat equivalent to XPath's name() function, returning a string:
+
+  *[uri(self) = 'http://example.org/foo.bar']
+  *[uri(.) = 'http://example.org/foo.bar']
+
+
+i) have a URI which starts with http://example.org/
+
+  *[starts-with(uri(self), 'http://example.org/')]
+  *[starts-with(uri(.), 'http://example.org/')]
+
+UC3: [returns a property set] apply style to properties which
+
+a) are rdf:type
+
+  *[uri(self) = rdf:type]  
+
+b) are predicates of statements whose subjects are resources of type foaf:Organization
+
+Issue: here the context entity is an arc ; I earlier said that I don't want to specify
+       in:: and out:: axes for node/resource location steps, as it did not make much sense
+       in UC1 and UC2. But here we actually need, for the first location step, to say
+       whether we are interested in the subject or object of the statement. Maybe we could
+       introduce subject: and object: axes that would be used here, with an ommited axis
+       being considered as the object:: axis. We finally decide to stick to the in:: and out::
+       axes. If the axis is ommited it is considered to be out::
+
+  *[in::*/out::rdf:type/foaf:Organization]
+  *[in::*/rdf:type/foaf:Organization]
+
+c) are predicates of statements which have an explicitely declared rdf:type
+
+  *[count(out::*/out:rdf:type) = 1]
+  *[out::*/out:rdf:type]
+  *[*/rdf:type]
+
+d) are predicates foo:age with a literal value of "28"
+
+  *[uri(self) = foo:age and out::* = "28"]
+  *[uri(self) = foo:age and * = "28"] 
+
+We also want to specifiy conditions on literals' lang and datatype?
+for instance we could say for UC2/g) .[rdf:type/foaf:Person and foo:age/"47"^^xsd:positiveInteger]
+
+other example wih lang:
+*[rdf:type/foaf:Person and foo:occupation/"Chargé de recherche"@fr^^xsd:string]
+
+a wildcard can be used for the language:
+*[rdf:type/foaf:Person and foo:occupation/"Chargé de recherche"@*^^xsd:string]
+
+---------------------------------------------------------------------
+4. Computing the weight/specificity of an FSE for conflict resolution
+---------------------------------------------------------------------
+
+TBD.
+
+- we need to define a weight for expressions that do not use FSL, such as simple
+  rdfs:Class declarations. It should be fairly easy to assign a weight to such
+  expressions once we have defined the more general specificity computation method,
+  as simple rdfs:Class declarations can be considered as a shorthand syntax for an
+  FSE selecting resources that have rdf:type foo.
+- But what about SPARQL expressions? At first thought it seems hard to compare the
+  specificity of a SPARQL query w.r.t an FSE. One easy but absolutely not elegant
+  solution would be to consider any SPARQL quey to be more specific than a FSE (even
+  if it is not actually the case).
+- another problem is that of computing the weight/specificity of two conflicting
+  SPARQL queries.
+- somebody mentioned yesterday that FSL expressions might actually be converted to
+  SPARQL queries ; this would address part of the problem
+- as in CSS, we should also have some kind of priority mechanism that says that
+  lenses and styles specified "locally" should take precedence over lenses and styles
+  specified "externally", even if the externally-defined ones have a higher specificity
+  than the local ones (like in CSS instructions in HTML style attributes have higher
+  precedence than instructions declared in the head/style element which themselves have
+  higher precedence than instructions declared in external stylesheets).
+

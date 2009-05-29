@@ -1,0 +1,116 @@
+\begin{thebibliography}{10}
+
+\bibitem{isaviz}
+W3C:
+\newblock {I}sa{V}iz: {A} {V}isual {A}uthoring {T}ool for {RDF} (2001-2005)
+  http://www.w3.org/2001/11/IsaViz/.
+
+\bibitem{Welkin}
+SIMILE:
+\newblock Welkin (2004-2005) http://simile.mit.edu/welkin/.
+
+\bibitem{simile}
+SIMILE:
+\newblock {L}ongwell {RDF} {B}rowser (2003-2005)
+  http://simile.mit.edu/longwell/.
+
+\bibitem{Steer03}
+Steer, D.:
+\newblock {B}rown{S}auce: {A}n {RDF} {B}rowser.
+\newblock {XML}.com (2003) http://www.xml.com/pub/a/2003/02/05/brownsauce.html.
+
+\bibitem{Rutledge05}
+Rutledge, L., van Ossenbruggen, J., Hardman, L.:
+\newblock Making {RDF} {P}resentable: {S}election, {S}tructure and
+  {S}urfability for the {S}emantic {W}eb.
+\newblock In: Proceedings of the 14th international conference on World Wide
+  Web. (2005)
+
+\bibitem{MindSwap05}
+Kalyanpur, A., Parsia, B., Hendler, J.:
+\newblock A {T}ool for {W}orking with {W}eb {O}ntologies.
+\newblock In: Proceedings of Extreme Markup Languages. (2004)
+
+\bibitem{Quan04}
+Quan, D., Karger, D.:
+\newblock {H}ow to {M}ake a {S}emantic {W}eb {B}rowser.
+\newblock In: Proceedings of the 13th international conference on World Wide
+  Web. (2004)  255--265
+
+\bibitem{mspace2005}
+mc~schraefel, Smith, D., Owens, A., Russell, A., Harris, C.:
+\newblock The evolving m{S}pace platform: leveraging the {S}emantic {W}eb on
+  the {T}rail of the {M}emex.
+\newblock In: 16th ACM Conference on Hypertext and Hypermedia. (2005)
+
+\bibitem{cocoon05}
+ASF:
+\newblock The {A}pache {C}ocoon {P}roject (2005) http://cocoon.apache.org.
+
+\bibitem{Carroll04}
+Carroll, J.J., Stickler, P.:
+\newblock {T}rix : {R}df triples in {X}ml.
+\newblock In: In the International Journal on Semantic Web and Information
+  Systems, Vol.1, No.1, Jan-Mar 2005. (2005)
+
+\bibitem{quan05}
+Quan, D., Karger, D.:
+\newblock Xenon: {A}n {RDF} {S}tylesheet {O}ntology (2005) Submitted to the
+  World Wide Web Conference.
+
+\bibitem{HaystackUI03}
+Huynh, D.:
+\newblock Haystack's user interface framework: Tutorial and reference (2003)
+  http://haystack.lcs.mit.edu/documentation/ui.pdf.
+
+\bibitem{gss03}
+Pietriga, E.:
+\newblock {S}tyling {RDF} {G}raphs with {GSS}.
+\newblock {XML}.com (2003) http://www.xml.com/pub/a/2003/12/03/gss.html.
+
+\bibitem{Isakowitz:1995:RMS}
+Isakowitz, T., Stohr, E.A., Balasubramanian, P.:
+\newblock {RMM}: {A} {M}ethodology for {S}tructured {H}ypermedia {D}esign.
+\newblock Communications of the ACM \textbf{38} (1995)  34--44
+
+\bibitem{fresnel05}
+Bizer, C., Lee, R., Pietriga, E.:
+\newblock {F}resnel - {D}isplay {V}ocabulary for {RDF} (2005)
+  http://www.w3.org/2005/04/fresnel-info/manual-20050726/.
+
+\bibitem{foaf}
+{FOAF}ers:
+\newblock {F}riend-of-a-{F}riend ({FOAF}) (2001) http://www.foaf-project.org/.
+
+\bibitem{horus}
+Erdmann, T.I.:
+\newblock {Horus RDF Browser} (2005)
+  http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/.
+
+\bibitem{N3}
+Berners-Lee, T.:
+\newblock {P}rimer: {G}etting into {RDF} \& {S}emantic {W}eb using {N3} (2005)
+  http://www.w3.org/2000/10/swap/Primer.html.
+
+\bibitem{xpr06}
+Cohen-Boulakia, S., Froidevaux, C., Pietriga, E.:
+\newblock {S}electing {B}iological {D}ata {S}ources and {T}ools with {XPR}, a
+  {P}ath {L}anguage for {RDF}.
+\newblock In: Pacific Symposium on Biocomputing ({PSB}), Maui, Hawaii. (2006)
+
+\bibitem{rdfcas04}
+W3C:
+\newblock Resource description framework ({RDF}): {C}oncepts and {A}bstract
+  {S}yntax (2004) http://www.w3.org/TR/rdf-concepts/.
+
+\bibitem{fsl05}
+Pietriga, E.:
+\newblock {F}resnel {S}elector {L}anguage for {RDF} (2005)
+  http://www.w3.org/2005/04/fresnel-info/fsl-20050726/.
+
+\bibitem{sparql05}
+Prud'hommeaux, E., Seaborne, A.:
+\newblock {SPARQL} {Q}uery {L}anguage for {RDF} (2005)
+  http://www.w3.org/TR/rdf-sparql-query/.
+
+\end{thebibliography}

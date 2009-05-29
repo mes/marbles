@@ -1,0 +1,125 @@
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <owl:Ontology rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets">
+        <dc:creator>Ryan Lee &#60;ryanlee@w3.org&#62;</dc:creator>
+        <dc:date rdf:datatype="http://www.w3.og/2001/XMLSchema#date">2006-01-27</dc:date>
+        <dc:description xml:lang="en">Expressing facets in Fresnel, for SIMILE tools.</dc:description>
+        <dc:format>RDF</dc:format>
+        <dc:identifier rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#"/>
+        <dc:title xml:lang="en">Fresnel Facets Ontology</dc:title>
+    </owl:Ontology>
+
+    <owl:Class rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#Facet">
+        <comment xml:lang="en">Resources to be used as facets.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">Facet</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetList">
+        <comment xml:lang="en">This is a convenience class for an ordered list of facets.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">Facet List</label>
+        <subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#Facet"/>
+            <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:parseType="Resource">
+                <owl:unionOf rdf:parseType="Resource">
+                    <rdf:first rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetList"/>
+                    <rdf:rest rdf:parseType="Resource">
+                        <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:rest>
+                </owl:unionOf>
+            </owl:allValuesFrom>
+            <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+        </subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetSet">
+        <comment xml:lang="en">Set of facets per class.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">Facet Set</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#TypeList"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.og/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#types"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetList"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.og/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#facets"/>
+        </subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#TypeList">
+        <comment xml:lang="en">This is a convenience class for a list of types; order is irrelevant.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">Type List</label>
+        <subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+            <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+        </subClassOf>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:parseType="Resource">
+                <owl:unionOf rdf:parseType="Resource">
+                    <rdf:first rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#TypeList"/>
+                    <rdf:rest rdf:parseType="Resource">
+                        <rdf:first rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:rest>
+                </owl:unionOf>
+            </owl:allValuesFrom>
+            <owl:onProperty rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+        </subClassOf>
+    </owl:Class>
+
+    <Resource rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#allTypes">
+        <comment xml:lang="en">A special symbol used to indicate the facets are to be used for any and all types.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">All Types</label>
+    </Resource>
+
+    <owl:ObjectProperty rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#facets">
+        <comment xml:lang="en">An ordered list of facets in a FacetSet.</comment>
+        <domain rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetSet"/>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">facets</label>
+        <range rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetList"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#hides">
+        <comment xml:lang="en">A list of facets in a FacetSet to avoid displaying at all.</comment>
+        <domain rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetSet"/>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">hides</label>
+        <range rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetList"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#types">
+        <comment xml:lang="en">A list of classes that a FacetSet applies to.</comment>
+        <domain rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#FacetSet"/>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets"/>
+        <label xml:lang="en">types</label>
+        <range rdf:resource="http://simile.mit.edu/2006/01/ontologies/fresnel-facets#TypeList"/>
+    </owl:ObjectProperty>
+</rdf:RDF>

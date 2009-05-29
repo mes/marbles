@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="lib" path="target/fresnel-2.0-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-collections-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-concurrent-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-io-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-iteration-1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-lang-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-net-1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-text-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/aduna-xml-1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/commons-collections-3.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-query-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-queryalgebra-evaluation-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-queryalgebra-model-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-queryparser-api-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-queryparser-sparql-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-repository-api-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-repository-sail-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-api-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-n3-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-ntriples-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-rdfxml-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-trix-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-rio-turtle-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-sail-api-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-sail-inferencer-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-sail-memory-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-sail-nativerdf-2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/slf4j-api-1.3.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/slf4j-log4j12-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/slf4j-simple-1.3.0.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/velocity-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/openrdf-model-2.0.jar" sourcepath="/Users/Christian/Sites/DBpediaMobile/FresnelView/web/WEB-INF/lib/openrdf-sesame-2.0-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/fsl-core-0.6.5.jar"/>
+	<classpathentry kind="lib" path="/Users/Christian/Sites/DBpediaMobile/simile-fresnel/target/fresnel-vocabularies-1.2-alpha-SNAPSHOT.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/isaviz-fsl"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

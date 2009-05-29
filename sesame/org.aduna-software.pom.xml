@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.aduna-software</groupId>
+	<artifactId>aduna-opensource-root-pom</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+
+	<name>Aduna Open Source root pom</name>
+	<description>Aduna Open Source root pom</description>
+	<url>http://www.aduna-software.org/</url>
+
+	<organization>
+		<name>Aduna</name>
+		<url>http://www.aduna-software.com/</url>
+	</organization>
+
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>aduna-opensource.releases</id>
+			<name>Aduna Open Source - Maven releases</name>
+			<url>http://repo.aduna-software.org/maven2/releases</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>aduna-opensource.ext</id>
+			<name>Aduna Open Source - Maven external releases</name>
+			<url>http://repo.aduna-software.org/maven2/ext</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>aduna-opensource.snapshots</id>
+			<name>Aduna Open Source - Maven snapshots</name>
+			<url>http://repo.aduna-software.org/maven2/snapshots</url>
+		</repository>
+
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>aduna-repo</id>
+			<name>Aduna Open Source - Maven repository (archive)</name>
+			<url>http://repository.aduna-software.org/maven2</url>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>aduna-snapshot-repo</id>
+			<name>Aduna Open Source - Maven snapshot repository (archive)</name>
+			<url>http://repository.aduna-software.org/maven2-snapshots</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>aduna-opensource.releases</id>
+			<name>Aduna Open Source - Maven releases</name>
+			<url>scp://repo.aduna-software.org:2222/home/aduna/hosts/repo.aduna-software.org/htdocs/maven2/releases</url>
+			<uniqueVersion>false</uniqueVersion>
+		</repository>
+		<snapshotRepository>
+			<id>aduna-opensource.snapshots</id>
+			<name>Aduna Open Source - Maven snapshots</name>
+			<url>scp://repo.aduna-software.org:2222/home/aduna/hosts/repo.aduna-software.org/htdocs/maven2/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<profiles>
+		<profile>
+			<id>continuous-integration</id>
+			<distributionManagement>
+				<repository>
+					<id>aduna-opensource.releases</id>
+					<name>Aduna Open Source - Maven releases</name>
+					<url>file:/home/aduna/hosts/repo.aduna-software.org/htdocs/maven2/releases</url>
+					<uniqueVersion>false</uniqueVersion>
+				</repository>
+				<snapshotRepository>
+					<id>aduna-opensource.snapshots</id>
+					<name>Aduna Open Source - Maven snapshots</name>
+					<url>file:/home/aduna/hosts/repo.aduna-software.org/htdocs/maven2/snapshots</url>
+					<uniqueVersion>false</uniqueVersion>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
+	<properties>
+		<organization.logo>http://www.aduna-software.com/images/logo.png</organization.logo>
+	</properties>
+
+	<scm>
+		<connection>scm:svn:http://repo.aduna-software.org/svn/</connection>
+		<developerConnection>scm:svn:https://repo.aduna-software.org/svn/</developerConnection>
+		<url>http://repo.aduna-software.org/viewvc/</url>
+	</scm>
+
+</project>

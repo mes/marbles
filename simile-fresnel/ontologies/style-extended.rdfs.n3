@@ -1,0 +1,182 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+
+# Style namespace
+@prefix :           <http://www.w3.org/2004/09/fresnel#> .
+
+# -----------------------------------------------
+# About this document
+<> rdfs:comment     "Style - Additional Content Vocabulary"@en^^dtype:string ;
+   dc:date          "2005-03-10"^^dtype:date ;
+   dc:format        "RDF"^^dtype:string ;
+   dc:author        "Chris Bizer <chris@bizer.de>"^^dtype:string ;
+   dc:author        "Ryan Lee <ryanlee@w3.org>"^^dtype:string ;
+   dc:author        "Stefano Mazzocchi <stefanom@mit.edu>"^^dtype:string ;
+   dc:author        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>"^^dtype:string ;
+   dc:identifier    <http://www.w3.org/2004/09/fresnel/style-extended#> 
+   .
+
+# --------------------------------------------------------------   
+# Extended Style Vocabulary 
+# --------------------------------------------------------------  
+#
+# Contents:
+#     1. Class and Instance Styles
+#     2. Additional Style Description Properties
+#     3. Additional Property Value Styles for Media Types
+#     4. Style Purposes
+
+
+# -------------------------------------------------------------- 
+# 1. Class and Instance Styles
+# --------------------------------------------------------------
+
+# Class and instance styles allow you to define styles for specific classes of instances or specific instances.
+# The style specificity function considers styling instructions in the following order
+# 1. Instance styling instructions
+# 2. Property styling instructions
+# 3. Class styling instructions
+		
+:classStyleDomain rdf:type rdf:Property ;
+			rdfs:label "class style domain"@en^^dtype:string ;
+			rdfs:comment "The style should be applied to instances of this class ."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			# rdfs:range :LabellingStyle or Literal 
+			.
+			
+			
+:displayAs	rdf:type rdf:Property ;
+			rdfs:label "displayAs"@en^^dtype:string ;
+			rdfs:comment "Specifies how the class is displayed (e.g. image, video)."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			# rdfs:range :LabellingStyle or Literal 
+			.
+
+:instanceStyleDomain rdf:type rdf:Property ;
+			rdfs:label "instance style domain"@en^^dtype:string ;
+			rdfs:comment "The style should be applied to this set of instances."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			# rdfs:range :LabellingStyle or Literal 
+			.
+			
+# -------------------------------------------------------------- 
+# 1. Additional Style Description Properties
+# -------------------------------------------------------------- 
+
+:contentReplace rdf:type rdf:Property ;
+			rdfs:label "contentReplace"@en^^dtype:string ;
+    		rdfs:comment "Replaces the content of the current box with the specified content."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            .
+
+# The following properties emmulate CSS pseudo-class in fresnel.
+
+:link	 	rdf:type rdf:Property ;
+			rdfs:label "hover"@en^^dtype:string ;
+    		rdfs:comment "The :link pseudo-class applies to all links."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            .
+
+:visited	rdf:type rdf:Property ;
+			rdfs:label "visited"@en^^dtype:string ;
+    		rdfs:comment "The :visited pseudo-class applies to all visited links."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            . 
+
+:firstLetter rdf:type rdf:Property ;
+			rdfs:label "first letter"@en^^dtype:string ;
+    		rdfs:comment "The :firstLetter pseudo-class allows you to style the first letter of a text."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            .            
+            
+:active	 	rdf:type rdf:Property ;
+			rdfs:label "active"@en^^dtype:string ;
+    		rdfs:comment "The active pseudo-class applies while an element is being activated by the user. For example, between the times the user presses the mouse button and releases it."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            . 
+
+:hover	 	rdf:type rdf:Property ;
+			rdfs:label "hover"@en^^dtype:string ;
+    		rdfs:comment "The :hover pseudo-class applies while the user designates an element (with some pointing device), but does not activate it."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            .             
+
+:focus 	 	rdf:type rdf:Property ;
+			rdfs:label "focus"@en^^dtype:string ;
+    		rdfs:comment "The :focus pseudo-class applies while an element has the focus (accepts keyboard or mouse events, or other forms of input)."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal
+            .            
+            
+:labelOfParent rdf:type rdf:Resource ;
+			rdfs:label "label of parent"@en^^dtype:string ;
+    		rdfs:comment "Displayes the label of the partent resource, if lenses are related using the sublens property.  fresnel:labelOfParent can be used as property value for fresnel:before, fresnel:after, fresnel:first, fresnel:last.  This might be useful when rendering large graphs."@en^^dtype:string
+    		.
+			            
+            
+# --------------------------------------------------------------   
+# 2. Additional Property Value Styles for Media Types
+# --------------------------------------------------------------  
+
+# This section provides property value styles in addition to the styles defined in style-core
+
+:video		rdf:type :PropertyValueStyle ;
+			rdfs:label "video"@en^^dtype:string ;
+			rdfs:comment "Retrieve the resource named by the property value and play it as an video clip."@en^^dtype:string
+			.			
+
+:audio		rdf:type :PropertyValueStyle ;
+			rdfs:label "audio"@en^^dtype:string ;
+			rdfs:comment "Retrieve the resource named by the property value and play it as an audio clip."@en^^dtype:string
+			.	
+
+:animation	rdf:type :PropertyValueStyle ;
+			rdfs:label "animation"@en^^dtype:string ;
+			rdfs:comment "Retrieve the resource named by the property value and display it as animated vector graphics or other animated format."@en^^dtype:string
+			.			
+
+:text		rdf:type :PropertyValueStyle ;
+			rdfs:label "animation"@en^^dtype:string ;
+			rdfs:comment "Retrieve the resource named by the property value and display it as text format, such as pdf or MS word using an appropriate viewer."@en^^dtype:string
+			.
+
+:textstream	rdf:type :PropertyValueStyle ;
+			rdfs:label "animation"@en^^dtype:string ;
+			rdfs:comment "Retrieve the resource named by the property value and display it as textstream using an appropriate viewer."@en^^dtype:string
+			.			
+
+:html		rdf:type :PropertyValueStyle ;
+			rdfs:label "animation"@en^^dtype:string ;
+			rdfs:comment "Retrieve an html document and display its BODY inside the rendered output document."@en^^dtype:string
+			.
+			
+
+# -------------------------------------------------------------- 
+# 3. Style Purposes
+# --------------------------------------------------------------
+
+# Todo: Should we replicate the terms or use the CSS terms in CSS Namespace?
+# Todo: If replication, copy the other terms from CSS.
+
+:screen 	rdf:type :Purpose ;
+			rdfs:label "screen"@en^^dtype:string ;
+			rdfs:comment "Intended primarily for color computer screens."@en^^dtype:string 
+			.
+
+:projection	rdf:type :Purpose ;
+			rdfs:label "Label Lens"@en^^dtype:string ;
+			rdfs:comment "Intended for projected presentations, for example projectors or print to transparencies."@en^^dtype:string 
+			.
+
+:print		rdf:type :Purpose ;
+			rdfs:label "Label Lens"@en^^dtype:string ;
+			rdfs:comment "Intended for paged, opaque material and for documents viewed on screen in print preview mode."@en^^dtype:string 
+			.					

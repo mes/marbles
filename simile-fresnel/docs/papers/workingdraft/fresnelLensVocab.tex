@@ -1,0 +1,44 @@
+%--------------------------------------------------------------------
+\section{Fresnel Lens Vocabulary}
+
+Fresnel lenses describe which properties of RDF resources are shown and how these properties are ordered. For example, a summary lens for a class representing people such as \rdf{foaf:Person} might display the name and the email address properties of each person. 
+
+The \rdf{fresnel:lensDomain} property specifies the set of instances to which a lens is applicable. A lens domain can be defined by one or more classes, in which case the lens is applicable to instances of these classes. A domain can also be defined by a set of instances using an FSL or SPARQL selector (see section \ref{selectors}). Such selectors are used to specify a lens domain in terms of the existence (or lack) of properties and values associated with the resources that constitute the domain. They thus make it possible to associate lenses with untyped RDF resources, which can and do occur in real-world models as \rdf{rdf:type} properties are not mandatory. 
+
+In a distributed and open environment, browsers confronted with unknown RDF vocabularies for which no stylesheet is available locally can query repositories for appropriate lenses. Queries are made on the \rdf{fresnel:lensDomain} property of available lenses in order to evaluate their ability to handle the resources to be presented. Queries can also make use of the \rdf{fresnel:purpose} property, which encodes metadata about lenses, more specifically their intended use and characteristics. The purpose property can state that a lens is the default lens for a given class, or that it gives a good one-line summary (e.g. a label) of resources, etc. The following example shows a lens applicable to resources identifying persons, as defined by the Friend-of-a-Friend (FOAF) vocabulary \cite{foaf}.
+% try to make sure this example stays on one page
+\begin{small}
+\begin{verbatim}
+:PersonLens a fresnel:Lens ;
+    fresnel:lensDomain foaf:Person ;
+    fresnel:purpose fresnel:defaultLens ;
+    fresnel:showProperties ( 
+        foaf:name
+        foaf:mbox
+        [ a fresnel:PropertyDescription ;
+          fresnel:property foaf:knows ;
+          fresnel:depth "2"^^xsd:nonNegativeInteger ;
+          fresnel:sublens :PersonLens ]
+        fresnel:allProperties ) ;
+    fresnel:hideProperties ( 
+        rdfs:label 
+        dc:title ) .
+\end{verbatim}
+\end{small}
+
+
+\subsection{Property Selection and Ordering}
+
+In the previous example\footnote{All examples in this paper use the Notation 3 syntax for RDF \cite{N3}.}, \rdf{fresnel:showProperties} and \rdf{fresnel:hideProperties} define which properties must be shown or hidden when the lens is used to display resources of type \rdf{foaf:Person}. The value of \rdf{showProperty} and \rdf{hideProperties} can either be a single URI reference identifying the property to show or hide, or a list of such URI references. Properties to show are displayed according to their order of appearance in the list that is the value of \rdf{fresnel:showProperties}.
+
+Special value \rdf{fresnel:allProperties} can be used to avoid having to explicitly name each property that should be displayed. This value is also useful when the list of properties that can potentially be associated with resources handled by a lens is unknown to the lens' author but should nevertheless be displayed. When it appears as a member of the list of properties to be shown by a lens, \rdf{fresnel:allProperties} designates the set of properties that are not explicitly designated by other property URI references in the list, except for properties that appear in the list of properties to hide (\rdf{fresnel:hideProperties}). These unnamed properties are displayed according to the position of \rdf{fresnel:allProperties} in the list. In the previous example, \rdf{foaf:name}, \rdf{foaf:mbox} and \rdf{foaf:knows} properties are displayed in this order, before all other properties, which appear next as indicated by the presence of \rdf{fresnel:allProperties} at the end of the list of properties to be shown. Properties \rdf{rdfs:label} and \rdf{dc:title} will not be displayed even if they exist, as they are explicitly declared as hidden.
+
+Fresnel provides two additional constructs for specifying what properties of resources to display. The first one handles the potential irregularity of RDF data coming from the fact that different authors might use similar terms coming from different vocabularies to make equivalent statements. Sets of such similar properties can be grouped in ordered lists and said to be \rdf{fresnel:alternateProperties}. For instance, \rdf{foaf:name}, \rdf{dc:title}, \rdf{rdfs:label} can be considered by a lens as giving the same information about resources. A browser using this lens will then try to display the resource's \rdf{foaf:name}. If the latter does not exist, the browser will look for \rdf{dc:title} and \rdf{rdfs:label} in this order. The second Fresnel construct, \rdf{fresnel:mergeProperties}, is used to merge the values of related properties (e.g. \rdf{foaf:homepage} and \rdf{foaf:workHomepage}) into one single set of values for presentation purposes.
+
+\subsection{Lenses and Sublenses}
+
+It is often desirable to display cohesive parts of RDF graphs involving a group of related resources, such as a person together with her projects and papers. Cohesive parts of graphs are defined by relating lenses using the \rdf{fresnel:sublens} property. In the previous example, a sublens is used to display persons that are known by the current person. The \rdf{fresnel:sublens} property states that lens \rdf{:PersonLens} should be used to display the value of \rdf{foaf:knows} properties. As this introduces recursiveness in the lens definition, property \rdf{fresnel:depth} is used to specify the closure value. In the end, this example lens will display persons together with her friends and the persons known by her friends.
+
+As shown in this example, lens URIs are used to explicitly identify what lens to use as sublenses for presenting property values. Appropriate sublenses can also be identified by expressing constraints on lens definitions (domain, purpose, etc.) using a Fresnel Selector Expression or a SPARQL query evaluated against the set of lenses available to the browser.
+
+%Naming the properties to show ultimately results in an output of statements with a lens-matched resource as the subject of each statement.  The objects of the output statements may also be resources; to describe how to display statement objects, a {\em sublens} may be used.

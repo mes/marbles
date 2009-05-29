@@ -1,0 +1,30 @@
+<rdf:RDF
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+			xmlns:foaf="http://xmlns.com/foaf/0.1/"
+			xmlns="http://www.uni-koblenz.de/people#"
+			xml:base="http://xmlns.com/foaf/0.1/">
+<foaf:Person rdf:about="http://xmlns.com/foaf/0.1/#Thomas">
+	<foaf:name>Thomas Franz</foaf:name>
+	<foaf:title>Mr</foaf:title>
+	<foaf:givenname>Thomas</foaf:givenname>
+	<foaf:family_name>Franz</foaf:family_name>
+	<foaf:mbox>mailto:franz@uni-koblenz.de</foaf:mbox>
+	<foaf:nick>Tom</foaf:nick>
+	<foaf:mbox_sha1sum>27f1e7f317c18fc89398acdfae1e9427de5d477e</foaf:mbox_sha1sum>
+	<foaf:homepage rdf:resource="thomas-franz.de"/>
+	<foaf:img rdf:resource="http://isweb.uni-koblenz.de/People/Franz/thomas"/>
+	<foaf:knows rdf:resource="#Joerg"/>
+</foaf:Person>
+<foaf:Person rdf:about="http://xmlns.com/foaf/0.1/#Joerg">
+	<foaf:name>Jörg Koch</foaf:name>
+	<foaf:title>Mr</foaf:title>
+	<foaf:givenname>Jörg</foaf:givenname>
+	<foaf:family_name>Koch</foaf:family_name>
+	<foaf:mbox>mailto:jmkoch@uni-koblenz.de</foaf:mbox>
+	<foaf:nick>mj</foaf:nick>
+	<foaf:mbox_sha1sum>39f1e7f317c18fc89398acdfae1e9427de5d477e</foaf:mbox_sha1sum>
+	<foaf:homepage rdf:resource="test.com"/>
+	<foaf:knows rdf:resource="#Thomas"/>
+</foaf:Person>
+</rdf:RDF>

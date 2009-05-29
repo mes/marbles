@@ -1,0 +1,245 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix ex:         <http://example.org/ex#> .
+
+@prefix fresnel:    <http://www.w3.org/2004/09/fresnel#> .
+
+@prefix :           <http://example.org/foaf#> .
+
+# -----------------------------------------------------
+# About this document
+# ------------------------------------------------------
+<> rdfs:comment     "Fresnel Lenses and Styles for the FOAF vocabulary."@en^^dtype:string ;
+   dc:date          "2005-04-19"^^dtype:date ;
+   dc:format        "RDF" ;
+   dc:creator        "Chris Bizer <chris@bizer.de>"^^dtype:string ;
+   dc:creator        "Ryan Lee <ryanlee@w3.org>"^^dtype:string ;
+   dc:creator        "Stefano Mazzocchi <stefanom@mit.edu>"^^dtype:string ;
+   dc:creator        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>"^^dtype:string ;
+   dc:identifier    <> 
+   .
+  
+   
+# ------------------------------------------------------
+# Fresnel FOAF Example
+# ------------------------------------------------------   
+#
+# This example defines lenses and styles for displaying
+# foaf:Persons together with her projects and documents.
+#
+# Contents:
+#
+# 1. Standard and Label Lenses
+# 2. Using lens inheritance
+# 3. Using lens groups for persons and papers/projects
+# 4. Using propertyMerges and alternativeProperties
+# 5. Styles for foaf:Person
+
+
+# -----------------------------------------------
+# 1.1. Standard and Label Lenses
+# -----------------------------------------------
+
+# FOAF Person
+:foafPersonDefaultLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:defaultLens ;
+      fresnel:classLensDomain foaf:Person ;
+      fresnel:showProperties ( foaf:name 
+			                         foaf:surname 
+			                         foaf:depiction ) .
+
+:foafPersonLabelLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:labelLens ;
+			fresnel:classLensDomain foaf:Person ;
+			fresnel:showProperties foaf:name .
+
+# FOAF Project
+:foafProjectDefaultLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:defaultLens ;
+      fresnel:classLensDomain foaf:Project ;
+      fresnel:showProperties ( foaf:name 
+			                         foaf:homepage 
+			                         foaf:fundedBy ) .
+
+:foafProjectLabelLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:labelLens ;
+			fresnel:classLensDomain foaf:Project ;
+			fresnel:showProperties foaf:name .
+
+# FOAF Document
+:foafDocumentDefaultLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:defaultLens ;
+      fresnel:classLensDomain foaf:Document ;
+      fresnel:showProperties ( dc:title 
+			                         dc:author 
+			                         dc:date ) .
+
+:foafDocumentLabelLens rdf:type fresnel:Lens ;
+      fresnel:purpose fresnel:labelLens ;
+			fresnel:classLensDomain foaf:Document ;
+			fresnel:showProperties dc:title .	
+			
+# -----------------------------------------------
+# 2. Using lens inheritance
+# -----------------------------------------------
+
+:identificationLens	rdf:type fresnel:Lens ;
+			rdfs:label "Identification and Type Lens for FOAF Persons"@en^^dtype:string ;
+			fresnel:classLensDomain foaf:Person ; 
+			fresnel:extends :foafPersonDefaultLens ; 
+			fresnel:showProperties ( fresnel:super
+			                         foaf:mbox
+			                         foaf:homepage  
+			                         foaf:depiction 
+			                         rdf:type
+			                         owl:sameAs ) ;
+			fresnel:hideProperties foaf:mbox_sha1sum .
+
+
+# -----------------------------------------------
+# 3. Using lens groups for persons and papers/projects
+# -----------------------------------------------
+
+# foaf:knows Sublens
+
+:personsKnowsLens rdf:type fresnel:Lens ;
+			rdfs:label "Displays persons together with people they know."@en ;
+			fresnel:classLensDomain foaf:Person ; 
+			fresnel:extends :foafPersonDefaultLens ;
+			fresnel:showProperties ( foaf:mbox 
+			                         foaf:homepage  
+			                         [ rdf:type fresnel:PropertyDescription ; 
+			                           fresnel:property foaf:knows ;
+			                           fresnel:sublens :foafPersonDefaultLens ] ) .
+
+
+# Recursive foaf:knows Sublensing
+		                        
+:knowsHierarchyLens rdf:type fresnel:Lens ;
+          fresnel:classLensDomain foaf:Person ;
+          fresnel:showProperties ( foaf:name
+          		           foaf:mbox 
+			           foaf:homepage 
+                                   [ rdf:type fresnel:PropertyDescription ;
+                                     fresnel:property foaf:knows ;
+                                     fresnel:sublens :knowsHierarchyLens ;
+                                     fresnel:depth "3"^^dtype:nonNegativeInteger ] ) .
+
+
+# foaf:publications and foaf:currentProject Sublens
+
+:personsPublicationsProjectsLens rdf:type fresnel:Lens ;
+			rdfs:label "Displays persons together with people they know."@en^^dtype:string ;
+			fresnel:classLensDomain foaf:Person ; 
+			fresnel:extends :foafPersonDefaultLens ;
+			fresnel:showProperties ( foaf:mbox 
+			                         foaf:homepage  
+			                         [ rdf:type fresnel:PropertyDescription ; 
+			                           fresnel:property foaf:currentProject ;
+			                           fresnel:sublens :foafProjectDefaultLens ]
+			                         [ rdf:type fresnel:PropertyDescription ; 
+			                           fresnel:property foaf:publications ;
+			                           fresnel:sublens :foafDocumentLabelLens ] ) .
+
+
+      
+# Haystack-style Sublens Search
+
+:recursivepersonsKnowsLens rdf:type fresnel:Lens ;
+			rdfs:label "Displays persons together with people they know."@en^^dtype:string ;
+			fresnel:classLensDomain foaf:Person ; 
+			fresnel:extends :foafPersonDefaultLens ;
+			fresnel:showProperties ( foaf:mbox 
+			                         foaf:mbox_sha1sum 
+			                         [ fresnel:property foaf:knows ;
+			                           fresnel:sublens """PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+			                                            PREFIX fresnel: <http://www.w3.org/2004/09/fresnel#>
+			                                            PREFIX ex: <http://example.org/ex>
+			                                            *[rdf:type/fresnel:Lens and fresnel:purpose/ex:writeEmail]"""^^fresnel:selector ] ) .
+
+
+			                                            
+# -------------------------------------------------
+# 4. Using PropertyMerges and AlternativeProperties
+# -------------------------------------------------
+
+
+:contactLens rdf:type fresnel:Lens ;
+			rdfs:label "Contact Information Lens"@en^^dtype:string ;
+			fresnel:classLensDomain foaf:Person ;
+			fresnel:showProperties ( [ rdf:type fresnel:propertyDescription ;
+			                           fresnel:alternateProperties ( foaf:name
+			                                                         rdfs:label
+			                                                         dc:title ) ]  
+			                          foaf:mbox 
+			                          [ rdf:type fresnel:PropertyDescription ;
+			                            fresnel:mergeProperties ( foaf:homepage
+			                                                      foaf:workplaceHomepage 
+			                                                      foaf:workInfoHomepage
+			                                                      foaf:schoolHomepage  ) ;
+			                            fresnel:use :styleMergeHomepage ] ) .
+
+
+
+# -----------------------------------------------
+# 5. Styles
+# -----------------------------------------------
+
+:foafGroup rdf:type fresnel:group ;
+		    fresnel:purpose ex:screen ;
+		    fresnel:stylesheetLink <http://www.example.org/example.css> ;
+        fresnel:containerStyle "RootContainerStlye"^^fresnel:styleClass .
+
+:rootStyle	rdf:type fresnel:Format ;
+			rdfs:comment "Root style for all properties. Used if nothing else is specified."@en^^dtype:string ;
+			fresnel:propertyFormatDomain fresnel:allProperties ; 
+			fresnel:propertyStyle "RootPropertyStlye"^^fresnel:styleClass ;
+			fresnel:labelStyle "RootLabelCssStlye"^^fresnel:styleClass ;
+			fresnel:valueStyle "RootValueCssStlye"^^fresnel:styleClass ;
+			fresnel:group :foafGroup .
+
+
+# -----------------------------------------------
+# Styles for several specific FOAF properties
+# -----------------------------------------------
+
+:depictStyle rdf:type fresnel:Format ;
+			rdfs:comment "Style for the FOAF depict property."@en^^dtype:string ;
+			fresnel:propertyFormatDomain foaf:depict ;
+			fresnel:label fresnel:none ;
+			fresnel:value fresnel:image ;
+			fresnel:propertyStyle "border: thick silver solid;"^^fresnel:stylingInstructions ;
+			fresnel:group :foafGroup .
+					
+:urlStyle rdf:type fresnel:Format ;
+			fresnel:propertyFormatDomain foaf:mbox ;
+			fresnel:propertyFormatDomain foaf:homepage ;
+			fresnel:propertyFormatDomain foaf:workplaceHomepage ;
+			fresnel:propertyFormatDomain foaf:workInfoHomepage ; 
+			fresnel:propertyFormatDomain foaf:schoolHomepage ;
+			fresnel:value fresnel:uri ;
+			fresnel:valueStyle "text-decoration: underline;"^^fresnel:stylingInstructions  ;
+			fresnel:group :foafGroup .
+
+:styleMergeHomepage	  rdf:type fresnel:Style ;
+                        fresnel:propertyFormatDomain foaf:homepage ;
+			fresnel:label "Homepages of the guy: " ; 
+			fresnel:valueFormat [ fresnel:contentAfter ", " ; 
+								           fresnel:contentLast "." ] ;
+			fresnel:group :foafGroup .					 
+					                   
+			
+# -----------------------------------------------
+# FOAF Person Class Style
+# -----------------------------------------------
+
+# commenting out extended style use for now		
+:personClassStyle rdf:type fresnel:Format ;
+        rdfs:comment "Defines a border around the whole area used to display a person."@en ;
+        fresnel:classFormatDomain foaf:Person  ;
+        fresnel:resourceStyle "border: 1px solid black"^^fresnel:stylingInstructions ;
+        fresnel:group :foafGroup .

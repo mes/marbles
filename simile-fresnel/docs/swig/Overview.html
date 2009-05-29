@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+<title>Fresnel - Display Vocabulary for RDF </title>
+<meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st October 2002), see www.w3.org" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/StyleSheets/base" rel="stylesheet" type="text/css" />
+<meta content="-i -ascii -asxml" name="tidy:flags" />
+<style type="text/css">
+/*<![CDATA[*/
+BODY {
+        COLOR: #000000; BACKGROUND-COLOR: #ffffff
+}
+H1.c1 {
+        TEXT-ALIGN: center
+}
+/*]]>*/
+</style>
+</head>
+
+
+<body>
+<h1><br />
+Fresnel - Display Vocabulary for RDF </h1>
+<div class="nav">
+<p><strong>Contents:</strong> <a href="#intro">Introduction</a>
+| <a href="#docs">Documentation</a>
+| <a href="#implementation">Implementations</a>  
+| <a href="#apps">Discussion</a> 
+| <a href="#contributors">Contributors</a> 
+| <a href="#timeline">Timeline</a> 
+</p>
+</div>
+<div class="nav">
+<p><strong>Nearby:</strong> <a href="http://www.w3.org/2001/sw/">Semantic Web</a> | <a href="http://www.w3.org/2001/sw/interest/">Semantic Web Interest
+Group</a> | <a href="http://www.w3.org/RDF/">RDF</a> | <a href="http://www.w3.org/Style/CSS/">CSS</a></p>
+</div>
+<p>This site provides an overview of the Fresnel display vocabulary being
+developed by  participants of the Semantic Web Interest
+Group. Fresnel is a simple, browser-independent vocabulary for specifying how RDF graphs are presented.</p>
+<p>&nbsp;</p>
+<h2><a id="intro" name="intro"></a>
+Introduction</h2>
+<p>Presenting Semantic Web content in a human-readable way consists in addressing two issues: specifying <em>what</em> information contained in an RDF graph should be presented and <em>how</em> this information should be presented. Each RDF browser or visualization tool currently relies on its own ad hoc mechanisms and vocabularies for addressing these issues, making it impossible to share RDF presentation knowledge across applications. Recognizing the general need for displaying RDF content and wanting to avoid reinventing the wheel with each new tool,  we developed Fresnel  as a browser-independent vocabulary of core RDF display concepts applicable across different representation paradigms and output formats.</p>
+<p>Fresnel's two foundational concepts are lenses and formats. Lenses define which properties of an RDF resource, or group of related resources, are displayed and how those properties are ordered. Formats determine how resources and properties are rendered and provide hooks to  existing styling languages such as CSS.</p>
+<p>Like CSS, Fresnel is designed as a purely declarative language. The Fresnel vocabulary is split into modules for allowing browsers to support limited but well-defined subsets of the language. </p>
+<p>Fresnel is licensed under the terms of the 
+
+
+<a href="http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231">World Wide Web Consortium (W3C) license</a>.</p>
+<p>&nbsp;</p>
+<h2><a id="docs" name="docs"></a>Vocabulary and Documentation</h2>
+<p>Fresnel documentation: </p>
+<ul>
+  <li><a href="manual/">Fresnel Vocabulary Manual</a> </li>
+  <li><a href="fsl/">Fresnel Selector Language Manual</a> </li>
+</ul>
+<p>The Fresnel vocabulary is split into four modules defined by:</p>
+<ul>
+  <li><strong>Fresnel Core Vocabulary</strong>: <a href="../../../2004/09/fresnel">core</a> (OWL/XML), containing
+  <ul>
+    <li>Lens-Core, the basic vocabulary for defining and relating lenses.</li>
+    <li>Format-Core, the basic  vocabulary for specifying formats.</li>
+  </ul></li>
+  <li> <strong>Fresnel Extended Vocabulary</strong>: <a href="../../../2004/09/fresnel-extended">extended</a> (OWL/XML) containing
+  <ul>
+    <li>Lens-Extended, additional terms for relating lenses and for  using lens inheritance.</li>
+    <li>Format-Extended, advanced format selector, media type and format purpose vocabularies.</li>
+  </ul></li>
+</ul>
+<p>There are also informative versions of the vocabularies using N3 syntax: <a href="../../../2004/09/fresnel-ns/core.owl.n3">core.owl.n3</a>, <a href="../../../2004/09/fresnel-ns/extended.owl.n3">extended.owl.n3</a>.</p>
+<p>The extended vocabularies require additional datatypes as defined in <a href="../../../2004/09/fresnel-ns/fresnel-datatypes.xsd">fresnel-datatypes.xsd</a>.</p>
+<p>For a brief, informative introduction to Fresnel, see the <a href="http://dig.csail.mit.edu/2006/Talks/0724-fresnel/">presentation</a> given in July 2006.</p>
+<p>&nbsp;</p>
+<h2><a id="implementation" name="implementation"></a>Implementations</h2>
+<p>Fresnel is being implemented by the following RDF browsers: </p>
+<ul>
+  <li><a href="../../../2001/11/IsaViz/">IsaViz</a> (W3C/INRIA)</li>
+  <li><a href="http://simile.mit.edu/longwell/">Longwell</a> / <a href="http://simile.mit.edu/piggy-bank/">Piggy Bank</a> (SIMILE/W3C/MIT) </li>
+  <li><a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/tutorial/horus/index.htm">Horus</a> (Freie Universit&auml;t Berlin)</li>
+  <li><a href="http://isweb.uni-koblenz.de/Research/lena">LENA</a> browser (Universit&auml;t Koblenz-Landau)</li>
+  <li><a href="http://sourceforge.net/projects/oat">OAT</a>: OpenLink AJAX Toolkit (OpenLink Software)</li>
+</ul>
+
+<p>Low-level Fresnel APIs for implementing Fresnel-aware applications are also available:</p>
+<ul>
+  <li><a href="http://jfresnel.gforge.inria.fr/">JFresnel</a>, a Fresnel API in Java that works with <a href="http://jena.sourceforge.net/">Jena</a> or <a href="http://openrdf.org/">Sesame</a> (INRIA)</li>
+</ul>
+
+<p>&nbsp;</p>
+<h2><a id="apps" name="apps"></a> How to contribute? </h2>
+<p> Fresnel  is  open for everybody to participate and contribute. The primary discussion forum for Fresnel is the <a href="http://simile.mit.edu/mail.html">Fresnel mailing list</a> (<a href="http://simile.mit.edu/mail/SummarizeList?listId=12">archives</a>). You can contribute to Fresnel by</p>
+<ul>
+  <li>taking part in the discussions on the list about the vocabularies,</li>
+<li>writing Fresnel lenses and formats for your preferred RDF vocabulary,</li>
+<li>implementing Fresnel for your  preferred RDF browser,</li>
+<li> developing additional  vocabularies on top of Fresnel fulfilling special needs, <br /> 
+  e.g. a editing vocab or a improved purpose vocab. </li>
+</ul>
+<p>You may also find some of us for real time chat on the IRC server irc.w3.org:6665 in <strong><a href="irc://irc.w3.org:6665/simile">#simile</a></strong>.</p>
+
+<p>&nbsp;</p>
+<h2><a id="contributors" name="contributors"></a> Contributors </h2>
+<ul>
+  <li>Chris Bizer (Freie Universit&auml;t Berlin, Germany) </li>
+  <li>Mark Butler (HP Labs, United Kingdom)</li>
+  <li>Stephen Garland (MIT, United States)</li>
+  <li>David Huynh (MIT, United States)</li>
+  <li>David Karger (MIT, United States)</li>
+  <li>Ryan Lee (W3C/MIT CSAIL, United States)</li>
+  <li>Stefano Mazzocchi (MIT, United States)</li>
+  <li>Emmanuel Pietriga (INRIA, France)</li>
+  <li>Dennis Quan (IBM, United States)</li>
+  <li>Karun Bakshi (MIT, United States)</li>
+</ul>
+<p>&nbsp;</p>
+<h2><a id="timeline" name="timeline"></a> Timeline: Events,
+Discussions and Publications</h2>
+<ul>
+<li><strong>November 2006</strong> Fresnel presentation at <a href="http://iswc2006.semanticweb.org/">ISWC2006</a></li>
+<li><strong>July 2005</strong> Fresnel vocabulary and selector language specifications published.</li> 
+<li><strong>May 2005</strong> Creation of the <a href="http://simile.mit.edu/mail.html">Fresnel mailing list</a>. </li>
+<li><strong>March 2005</strong> Joint work on Fresnel by Chris Bizer, Stephen Garland, David Huynh, David Karger, Ryan Lee, Stefano Mazzocchi, Emmanuel Pietriga, Dennis Quan, and Karun Bakshi hosted by W3C/MIT CSAIL.</li>
+<li><strong>October 2004</strong> Initial vocabulary draft<a href="http://lists.w3.org/Archives/Public/www-rdf-interest/2004Feb/thread.html"></a>.</li>
+<li><strong>Spetember 2004</strong> Initial Requirements discussion on <a href="http://simile.mit.edu/mail/BrowseList?listName=General&amp;by=thread&amp;from=1424">simile-general</a>.</li>
+</ul>
+<p>&nbsp;</p>
+<hr />
+<address class="footer">
+Page
+Maintainer <a href="mailto:ryanlee@w3.org">Ryan Lee</a> W3C/MIT CSAIL.<br />
+$Id$
+</address>
+</body></html>

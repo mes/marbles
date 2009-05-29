@@ -1,0 +1,295 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:         <http://purl.org/dc/elements/1.1/> .
+@prefix dtype:      <http://www.w3.org/2001/XMLSchema#> . 
+
+# Style namespace
+@prefix :           <http://www.w3.org/2004/09/fresnel#> .
+
+## ------------------------------- ##
+## Please see core.owl.n3 instead. ##
+## ------------------------------- ##
+
+# -----------------------------------------------
+# About this document
+<> rdfs:comment     "Style Vocabulary" ;
+   dc:date          "2005-03-24"^^dtype:date ;
+   dc:format        "RDF" ;
+   dc:author        "Chris Bizer <chris@bizer.de>" ;
+   dc:author        "Ryan Lee <ryanlee@w3.org>" ;
+   dc:author        "Stefano Mazzocchi <stefanom@mit.edu>" ;
+   dc:author        "Emmanuel Pietriga <emmanuel.pietriga@inria.fr>" ;
+   dc:identifier    <http://www.w3.org/2004/09/fresnel/style-core#> 
+   .
+
+
+# --------------------------------------------------------------   
+# Core Style Vocabulary 
+# --------------------------------------------------------------  
+#
+# The style vocabulary is used to specify how properties are displayed.
+#
+# The basic idea is to 
+# - use fersnel terms for covering things that cann't be expressed with CSS or the SVG styling vocabulary 
+# - provide hooks to CSS and the SVG styling vocabulary for specifying details (e.g. fonts, colors, borders and strokes)
+#
+# There are two variations of the vocabulary:
+#    - Simple core, 
+#           - which only supports the selection of nodes by name.
+#           - which doesn't support cascading style definitions.
+#    - Extended core, 
+#           - which also supports the selection of nodes using FresnelSelectors or SPARQL. 
+#           - which supports cascading style definitions.
+#
+# Contents:
+# 1. Style class definition 
+# 2. Style property definitions
+#    2.1 Labelling Properties (RDF Predicates)
+#    2.2 Displaying Property Values (RDF Objects)
+# 3. Referring to CSS and SVG
+# 4. Style Descriptions and Additional Content
+# 5. Group Vocabulary
+
+# -----------------------------------------------
+# 1. Style Class Definition 
+# -----------------------------------------------
+
+:Style		rdf:type rdfs:Class ;
+			rdfs:label "Style Class"@en^^dtype:string ;
+			rdfs:comment "A Fresnel style class for styling RDF properties."@en^^dtype:string 
+			.
+			
+:styleDomain rdf:type rdf:Property ;
+			rdfs:label "style domain"@en^^dtype:string ;
+			rdfs:comment "The style should be used for the specified properties, instances or classes."@en^^dtype:string ;
+			rdfs:domain :Style ;
+        	# rdfs:range rdf:Property or rdf:Class or FresnelSelector or SPARQL expression
+			.
+
+:allProperties rdf:type rdf:Resource ;
+			rdfs:label "all properties"@en^^dtype:string ;
+			rdfs:comment "Placeholder for all properties to be used in fresnel:styleDomain."@en^^dtype:string 
+			.			
+			
+			
+# -----------------------------------------------
+# 2. Style Property Definitions 
+# -----------------------------------------------
+
+# -----------------------------------------------
+# 2.1 Labelling Properties (RDF Predicates)
+# -----------------------------------------------
+
+# Options
+# 1. Show label + object value: :Show (Default)
+# 2. Just show the object value: :DoNotShow
+# 3. Show custom label: "Literal"
+
+:label		rdf:type rdf:Property ;
+			rdfs:label "label"@en^^dtype:string ;
+			rdfs:comment "Specifies how a property is labelled."@en^^dtype:string ;
+			rdfs:domain :PropertyStyle ;
+			# rdfs:range :LabellingStyle or Literal 
+			.
+
+:LabellingStyle	rdf:type rdfs:Class ;
+			rdfs:label "Labelling Style"@en^^dtype:string ;
+			rdfs:comment "Abstract superclass of all labelling styles."@en^^dtype:string
+			.
+
+:show		rdf:type :LabellingStyle ;
+			rdfs:label "Show Label"@en^^dtype:string ;
+			rdfs:comment "Show the RDFS Label of the property. This is the default and doesn't have to be declared."@en^^dtype:string
+			.	
+
+:none		rdf:type :LabellingStyle ;
+			rdfs:label "none"@en^^dtype:string ;
+			rdfs:comment "Do not show any label for the property."@en^^dtype:string
+			.
+
+# -----------------------------------------------
+# 2.2 Styling Property Value (RDF Objects)
+# -----------------------------------------------
+#
+# Options
+# 1: Use the StandardLens for an Resource or show Literals as text (Default)
+# 2: Show the URI of the object
+# 3: Show a retrievable medium like an image, video or audio
+# 4: Show literals as text
+#
+# Browser MUST implement the following behavior for displaying property values:
+#        1. If the value is a literal then display it
+#        2. Check if the resource has an rdf:type and the class is styled using an :propertyValueStyle
+#        3. Check if the property is styled using an :propertyValueStyle
+#        4. Look for :labelLens for the class with the highest specificity
+#        5. If there is no :labelLens try rdfs:label, dc:title
+#        6. otherwise display the URI
+#	
+#        If a resource if styled using :propertyValueStyle and there are additional lenses which
+#        fit the resource, then a browser SHOULD allow the user to switch to the lenses and back.
+
+:value		rdf:type rdf:Property ;
+			rdfs:label "property value"@en^^dtype:string ;
+			rdfs:comment "Specifies how a property value is displayed."@en^^dtype:string ;
+			rdfs:domain :PropertyStyle ;
+			rdfs:range :PropertyValueStyle
+			.
+				
+:PropertyValueStyle	rdf:type rdfs:Class ;
+			rdfs:label "Property value display style"@en^^dtype:string ;
+			rdfs:comment "Abstract superclass of all property value display styles."@en^^dtype:string
+			.
+
+:uri		rdf:type :PropertyValueStyle ;
+			rdfs:label "URI"@en^^dtype:string ;
+			rdfs:comment "Show the property value as an URI."@en^^dtype:string
+			.
+
+:replacedResource rdf:type :PropertyValueStyle ;
+			rdfs:label "Replaced Resource"@en^^dtype:string ;
+			rdfs:comment "Any kind of retrievable resource like an image, audio or video that should be displayed as property value.  The browser should try retrieve the resource and show it instead of the property value URI.  The browser has to negotiate an appropriate media type with the server using HTTP content negotiation."@en^^dtype:string
+			.
+						
+:image		rdf:type :PropertyValueStyle ;
+			rdfs:label "Image"@en^^dtype:string ;
+			rdfs:comment "Show the property value as an image, such as PNG or JPEG ."@en^^dtype:string
+			.
+
+			
+# -----------------------------------------------
+# 3. Referring to CSS and SVG
+# -----------------------------------------------
+#
+# -----------------
+# Fresnel box model
+# -----------------
+#
+# The fresnel box model consists of 5 types of boxes containing each other:
+#
+# 1. Container Box
+#      The container surrounding all displayed resources. A container box contains a set of resource boxes. 
+# 2. Resource Box
+#      The resource box surrounds all properties of a single resources. The box contains a set of property boxes.
+# 3. Property Box
+#      The property box surrounds the area that is used to display a single property. It contains one label box and a set of value boxes. 
+# 4. Label Box
+#      The label box contains the label of a property.
+# 5. Value Box
+#      The value box contains one property value. 
+#      If several lenses are used together (fresnel:sublens) then a value box can contain another complete Fresnel box model.
+#
+# --------------------
+# Styling instructions
+# --------------------
+# 
+# Fresnel provides two ways for referring to styling instructions:
+# 1. Styling instructions in an external stylesheet can be referenced by the stylesheet URL and the ID of the stlye class.
+#    Example: fresnel:labelStyle <http://www.example.org/example.css#RootLabelCssStlye>
+# 2. Styling instructions from other languages can be integrated directly into the fresnel style
+#    Example: fresnel:valueStyle "font-weight: bold" ;
+
+
+:containerStyle rdf:type rdf:Property ;
+			rdfs:label "container style"@en^^dtype:string ;
+			rdfs:comment "Styling instruction hook for styling the container surrounding all displayed resources.  Usage example: Specifying the background color of a page."@en^^dtype:string ;
+			rdfs:domain :Group ;
+			#rdfs:range StyleDescription or "Literal" 
+			.		
+
+:resourceStyle rdf:type rdf:Property ;
+			rdfs:label "resource style"@en^^dtype:string ;
+			rdfs:comment "Styling instruction hook for styling the container surrounding a single instance.   ResourceStyle is ignored, if the :styleDomain isn't a rdf:Class.  Usage example: Specifying different background colors for instances of different classes."@en^^dtype:string ;
+			# rdfs:domain :Group or :Style ;
+			# rdfs:range StyleDescription or "Literal" 
+			.			
+			
+:propertyStyle rdf:type rdf:Property ;
+			rdfs:label "container style"@en^^dtype:string ;
+			rdfs:comment "Styling instruction hook for styling the container surrounding a property.  Usage example: Specifying the background color of whole area that representing a property."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			#rdfs:range StyleDescription or "Literal" 
+			.	
+			
+:labelStyle rdf:type rdf:Property ;
+			rdfs:label "container style"@en^^dtype:string ;
+			rdfs:comment "Styling instruction hook for styling the label of a property."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			#rdfs:range StyleDescription or "Literal" 
+			.	
+
+:valueStyle rdf:type rdf:Property ;
+			rdfs:label "container style"@en^^dtype:string ;
+			rdfs:comment "Styling instruction hook for styling the values of a property."@en^^dtype:string ;
+			rdfs:domain :Style ;
+			#rdfs:range StyleDescription or "Literal" 
+			.
+			
+# -----------------------------------------------
+# 4. Style Descriptions and Additional Content
+# -----------------------------------------------
+
+# The style description vocabulary is used for styling Fresnel boxes using Fresnel styling instructions.
+# Example: Add ',' between property values and a '.' at the end of the list.
+
+:StyleDescription rdf:type rdfs:Class ;
+			rdfs:label "Style Details"@en^^dtype:string ;
+			rdfs:comment "Description of a fresnel:Style using Fresnel styling instructions."@en^^dtype:string
+			.
+			
+:contentBefore rdf:type rdf:Property ;
+			rdfs:label "content before"@en^^dtype:string ;
+    		rdfs:comment "Content that should be displayed before the content of the current box."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal or rdf:Resource (style-extended:labelOfPatent)
+            .
+
+:contentAfter rdf:type rdf:Property ;
+			rdfs:label "content after"@en^^dtype:string ;
+    		rdfs:comment "Content that should be displayed before the content of the current box."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal or rdf:Resource
+            .
+            
+:contentFirst rdf:type rdf:Property ;
+			rdfs:label "content first"@en^^dtype:string ;
+    		rdfs:comment "Content that should be displayed before the content of the first element in a list of boxes."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:literal or rdf:Resource
+            .
+
+:contentLast rdf:type rdf:Property ;
+			rdfs:label "content last"@en^^dtype:string ;
+    		rdfs:comment "Content that should be displayed behind the content of the last element in a list of boxes."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:Literal or rdf:Resource
+            . 
+
+:contentNoValue rdf:type rdf:Property ;
+			rdfs:label "content no value"@en^^dtype:string ;
+    		rdfs:comment "Content that should be displayed if the current property is missing."@en^^dtype:string  ;
+			rdfs:domain :styleDescription ;
+            # rdfs:range rdf:Literal or rdf:Resource
+            .             
+            
+# -----------------------------------------------
+# 5. Group Vocabulary
+# -----------------------------------------------            
+
+# Fresnel styles and lenses can be grouped in order to make it easyer for a browser to
+#    - select default and label lenses
+#    - determine the specificity of styles
+# Groups also provide the hook for specifiying 
+#    - links to external CSS stylesheets
+#    - namespace prefixes for the Fresnel Selector Language  
+
+:Group	    rdf:type rdfs:Class ;
+			rdfs:label "Group"@en^^dtype:string ;
+			rdfs:comment "A Fresnel Group is used for grouping styles and lenses together."@en^^dtype:string 
+			.
+			
+:group rdf:type rdf:Property ;
+			rdfs:label "group"@en^^dtype:string ;
+			rdfs:comment "Specifies the Fresnel group to which a style or a lens belongs."@en^^dtype:string ;
+			# rdfs:domain :Style or :Lens ;
+        	rdfs:range :Group
+			.

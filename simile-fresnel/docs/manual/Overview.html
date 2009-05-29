@@ -1,0 +1,1477 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+  <title>Fresnel - Display Vocabulary for RDF - User Manual</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" type="text/css" href="/StyleSheets/TR/W3C-WD.css" />
+  <style type="text/css">
+/*<![CDATA[*/
+.maybe		  { color: #999; background-color: #ccc; }
+.small		  { font-size: x-small; }
+Xdiv.exampleInner pre { margin-left: 1em;
+                       margin-top: 0em; margin-bottom: 0em}
+Xdiv.exampleOuter { border: 4px double gray;
+                   margin: 0em; padding: 0em}
+Xdiv.exampleInner { background-color: #d5dee3;
+                   border-top-width: 4px;
+                   border-top-style: double;
+                   border-top-color: #d3d3d3;
+                   border-bottom-width: 4px;
+                   border-bottom-style: double;
+                   border-bottom-color: #d3d3d3;
+                   padding: 4px; margin: 0em }
+Xdiv.exampleWrapper { margin: 4px }
+Xdiv.exampleHeader { font-weight: bold;
+                    margin: 4px}
+
+.issue          { color: #ff3f3f }
+ul.issue        {}
+.note           { margin-left: 2.5em; margin-right: 4ex ; font-size: 85% ; font-style: italic ; }
+p.note {}       /* Makes it appear in FrontPage style list */
+
+ .todo          { font-size: 95% ; font-style: italic ; color: #777 ; }
+ .defn          { /*border: double 1px #888888; *//* Buggy */
+                  border: 2px solid #888888;
+                  padding: 1ex;
+                                  margin: 1em 5em 1em 3.5em ; 
+                                  page-break-inside: avoid ;
+                  background-color: #F0F8F8 ; }
+p.defn {}
+
+.query          { background-color:#f7f8ff;
+                  font-family: monospace; }
+
+.doctitle       { font-size: 120%; 
+                  font-weight: bold;
+                  text-align: center; } /* hmm, center no-worky */
+
+pre { font-family: monospace; 
+      margin: 1em 4em 1em 2.5em ; /* Top Right Bottom Left */
+      padding: 1ex;
+      font-size: 88% ;
+      page-break-inside: avoid ;
+     }
+
+pre.data
+           { border: 1px solid #88AA88;
+             background-color: #E8F0E8;
+             margin: 1em 4em 1em 0em ; }
+
+pre.query
+                 { border:1px solid #8888aa; margin: 1em 4em 1em 0em ; }
+
+pre.result
+           { border: 1px solid  #888888 ;
+             background-color: #F0F0F0; 
+             margin: 1em 4em 1em 0em ; 
+             }
+             
+pre.box { border:           1px solid ;
+          background-color: #E8E8E8; 
+          }
+
+div.result { font-family: monospace;
+                         background-color: #F0F0F0; 
+             margin:  1em 4em 1em 0em ;
+             padding: 1ex ;
+             font-size: 88% ;
+             border: 1px solid  #888888 ; }
+             
+table.result {
+    border-collapse: collapse; }
+        /* cellspacing: 0 ; cellpadding: 0 */
+                
+table.result td {border-width: thin ;
+  border-color : black ; 
+  font-family: monospace ; font-size: 88% ;
+  empty-cells: show;
+  padding-left: 1ex ; padding-right: 1ex ;
+  vertical-align:top;
+  text-align:center ;
+} 
+/*  spacing: 0 ;*/
+
+table.result th {
+  border-width: thin ;
+  font-family: monospace ; font-size: 88% ;
+  border-color: black ;
+  empty-cells: show;
+  padding-left: 1ex ; padding-right: 1ex ;
+  vertical-align:top;
+  text-align:center;
+} 
+
+
+/* From previous grammar production - to be cleared up
+.grammar { text-align: left ; vertical-align: top ; 
+           font-family: monospace ; font-size:10pt ;}
+.token { color: #3f3f5f; font-size: 88%; text-transform: uppercase; }
+.production { font-family: monospace ; font-style: italic; }
+.term { color: #3f3f5f; font-size: 88%; }
+a.grammarRef:link { text-decoration: none; }
+a.grammarRef:visited { text-decoration: none; }
+a.grammarRef:hover { text-decoration: none; }
+a.grammarRef:active { text-decoration: none; }
+*/
+
+.operator { color: #3f3f5f; font-size: 88%; text-transform: uppercase; }
+
+.grammar     { text-align: left ; vertical-align: top ; }
+.token       { color: #3f3f5f; text-transform: uppercase; }
+.gRuleHead   { font-style: italic ; font-family: monospace ; }
+.gRuleBody   { font-family: monospace ; }
+.gRuleLabel  { font-family: monospace ; }
+
+span.code { font-family: monospace; font-size: 105%;}
+
+span.query-caption { 
+           font-size: 88%;
+           font-weight: bold; 
+           width:58%; 
+           margin-left: 2.75em;}
+Xspan.accept { text-decoration: underline; text-transform:  uppercase} 
+
+span.cvs-id     {color: gray; font-size:80%}
+Xspan.definedTerm  {text-decoration : underline;}
+span.definedTerm  {font-weight: bold;}
+
+/* Modification for printing */
+@media print
+{
+}
+
+.alt1           {background-color: #ffdfdf;}
+.alt2           {background-color: #dfffdf;}
+.alt3           {background-color: #dfdfff;}
+.alt4           {background-color: #ffffdf;}
+.alt5           {background-color: #ffdfff;}
+.alt6           {background-color: #dfffff;}
+
+.imgset         {
+    float: none ;
+    margin: 0 0 10px 10px;
+}
+
+.img    {
+    background-color: #ddd; 
+    padding: 10px; 
+    border: 1px solid #666;
+}
+
+.imgleft        {
+    float:left;
+    background-color: #e8f0e8 ;
+    padding: 10px;
+    border: 1px solid #666;
+}
+
+.imgright       {
+    float:right; 
+    background-color: #ddd; 
+    padding: 10px; 
+    border: 1px solid #666;
+}
+
+.imgBottom      {
+    float:left; 
+    background-color: #ddd; 
+    padding: 10px; 
+    border: 1px solid #666;
+}
+
+.imgref         {
+    font-weight: bold;
+}
+
+.imgCaption     {
+    font-weight: bold;
+}
+
+.toc {
+    text-indent: 0;
+}
+DIV.toc UL UL, DIV.toc OL OL {margin-left: 0}
+DIV.toc UL UL UL, DIV.toc OL OL OL {margin-left: 1em}
+DIV.toc UL UL UL UL, DIV.toc OL OL OL OL {margin-left: 0}
+LI.tocline1 {font-weight: bold}
+LI.tocline2 {font-weight: normal}
+LI.tocline4 {font-style: italic}
+/* DIV.subtoc UL, DIV.subtoc OL {list-style: none} */
+/* The border in the following rule crashes NN4 on fonts.html :-(
+DIV.subtoc {padding: 1em; border: solid black thin; margin: 1em 0;
+    background: #ddd}
+*/
+DIV.toc, UL.index, DT {
+    text-align: left
+}
+
+/* .orig	{ border-style: double; border-color: blue; border-width; 1px; }
+   .opt1	{ border-style: double; border-color: yellow; border-width; 1px; } */
+
+/* originally fromthw webarch stylesheet */
+
+.label { background: #005a9c; color: #fff; }
+
+/* Make sure the relative spacing stuff only applies to 'screen'
+   because IE has bugs when it comes to printing relative things. */
+@media screen {
+  .label {
+   position: relative;
+   padding: 0 0.5em;
+   top: -1.5em;
+ }
+}
+
+
+table.casting    { font-size: x-small;
+                 }
+
+td.castY         { background-color: #7FFF7F;
+                   color: black;
+                 }
+
+td.castN         { background-color: #FF7F7F;
+                   color: black;
+                 }
+
+td.castM         { background-color: white;
+                   color: black;
+                 }
+
+td.castOther     { background-color: yellow;
+                   color: black;
+                 }
+
+span.cancast:hover { background-color: #ffa;
+                   color: black;
+                 }
+span.rdfDM	{ color: #11d; }
+
+
+body {
+  background-image: none;
+}
+/*]]>*/
+  .Stil2 {font-weight: bold; color: #FF0000; }
+  </style>
+        </head>
+
+<body>
+  <div class="head">
+    <p>&nbsp;</p>
+
+    <h1 id="main">Fresnel - Display Vocabulary for RDF</h1>
+
+    <h2 id="main_what">User Manual, 30 June 2005</h2>
+
+    <dl>
+
+      <dt>This version:</dt>
+        <dd><a href="http://www.w3.org/2005/04/fresnel-info/manual-20050726/">http://www.w3.org/2005/04/fresnel-info/manual-20050726/</a></dd>
+      <dt>&nbsp;</dt>
+      <dt>Latest version:</dt>
+        <dd><a href="http://www.w3.org/2005/04/fresnel-info/manual/">http://www.w3.org/2005/04/fresnel-info/manual/</a></dd>
+
+      <dt>Editors:</dt>
+        <dd>Chris Bizer, Freie Universit&auml;t Berlin  &lt;<a href="mailto:chris@bizer.de">chris@bizer.de</a>&gt;</dd>
+        <dd>Ryan Lee, MIT/CSAIL W3C &lt;<a href="mailto:ryanlee@w3.org">ryanlee@w3.org</a>&gt;</dd>
+        <dd>Emmanuel Pietriga, INRIA &lt;<a href="mailto:emmanuel.pietriga@inria.fr">emmanuel.pietriga@inria.fr</a>&gt;</dd>
+    </dl>
+
+<!--    <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> Â©
+    2005 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>Â®</sup> ( <a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.org/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>,
+    <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a>,
+    and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a>
+    rules apply.</p>
+ -->
+  </div>
+  <hr title="Separator for header" />
+<div>
+    <h2 class="notoc"><a id="abstract" name="abstract">Abstract</a></h2>
+
+    <p>Fresnel is a simple, browser-independent vocabulary for specifying how to display RDF models. </p>
+</div>
+
+  <hr />
+
+  <div class="toc">
+    <h2><a id="contents" name="contents">Table of Contents</a></h2>
+
+<ul class="toc">
+  <li class="tocline1"><a href="#introduction" class="tocxref">1 Introduction</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#foafExample">1.1 FOAF Example</a></li>
+      <li class="tocline2"><a href="#vocModules">1.2 Vocabulary Modules</a></li>
+      <li class="tocline2"><a href="#selectors">1.3 Selector Languages</a></li>
+      <li class="tocline2"><a href="#namespace">1.4 Fresnel Namespace</a></li>
+    </ul>
+  </li>
+  <li class="tocline1"><a href="#lenscore" class="tocxref">2 Core Lens Vocabulary</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#lensdomain" class="tocxref">2.1  Lens and LensDomain</a></li>
+      <li class="tocline2"><a href="#propertyselection" class="tocxref">2.2 Property Selection and Ordering</a></li>
+      <li class="tocline2"><a href="#lenspurposes">2.3 Lens Purposes</a></li>
+      <li class="tocline2"><a href="#lensspecific">2.4 Conflicts Between Lenses</a></li>
+      <li class="tocline2"><a href="#sublenses" class="tocxref">2.5 Using Sublenses</a></li>
+    </ul>
+  </li>
+  <li class="tocline1"><a href="#stylecore" class="tocxref">3 Core Format Vocabulary</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#styleDomain" class="tocxref">3.1  Applying Formats</a></li>
+      <li class="tocline2"><a href="#labelling">3.2 Labelling Properties</a></li>
+      <li class="tocline2"><a href="#displayingValues">3.3 Displaying Property Values</a></li>
+      <li class="tocline2"><a href="#constraints" class="tocxref">3.4</a><a href="#csshooking" class="tocxref"> Referring to CSS Classes </a></li>
+      <li class="tocline2"><a href="#additionalcontent">3.5 Additional Content</a></li>
+    </ul>
+  </li>
+ <li class="tocline1"><a href="#groupvocab">4 Group Vocabulary</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#grouping">4.1 Grouping Formats and Lenses</a></li>
+      <li class="tocline2"><a href="#primary">4.2 Defining Primary Classes</a></li>
+    </ul>
+  </li>
+  <li class="tocline1"><a href="#lensextended">5 Extended Lens Vocabulary</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#alternateandmerged">5.1 Alternate and Merged Properties</a></li>
+      <li class="tocline2"><a href="#inheritance">5.2 Lens Inheritance</a></li>
+      <li class="tocline2"><a href="#searchsl">5.3 Searching for Sublenses</a></li>
+    </ul>
+  </li>
+  <li class="tocline1"><a href="#optionals">6</a><a href="#styleextended" class="tocxref"> Extended Format Vocabulary</a>
+    <ul class="toc">
+      <li class="tocline2"><a href="#pseudo">6.1 Selector Pseudo-Classes</a></li>
+      <li class="tocline2"><a href="#externalmedia">6.2 Including external Media Files</a></li>
+      <li class="tocline2"><a href="#linkingToCSS">6.3 Linking directly to a CSS stylesheet</a></li>
+      <li class="tocline2"><a href="#MultipleOutputs">6.4 Supporting different Output Media</a></li>
+      <li class="tocline2"><a href="#includingCSS">6.5 Including CSS/SVG Styling Instructions</a></li>
+    </ul>
+  </li>
+</ul>
+</div>
+
+  <h3><a id="appendices" name="appendices">Appendices</a></h3>
+
+  <ul>
+    <li class="tocline1"><a href="#owl">A Formal Specification</a></li>
+    <li class="tocline1"><a href="#references">B References</a></li>
+    <li class="tocline1"><a href="#chlog">C Change Log</a></li>
+</ul>
+
+  <hr />
+
+  <h2>1. <a id="introduction" name="introduction">Introduction</a></h2>
+
+  <p>Fresnel is a simple, browser-independent vocabulary for specifying how to display an <acronym title="Resource Description Framework">RDF</acronym> model <a href="#rdf">[1]</a>  and how to style it  using existing style languages such as <acronym title="Cascading StyleSheets">CSS</acronym> <a href="#css">[2]</a>. </p>
+
+  <p>Displaying RDF in a human-friendly manner by way of an RDF display vocabulary is done differently in every application <a href="#hs">[5-11]</a> <a href="#Pietriga">[16-17]</a> <a href="#welkin">[19]</a>.  Recognizing the general need for displaying RDF and wanting to avoid reinventing the wheel with each new application, the authors jointly developed Fresnel as an extensible ontology of core RDF display concepts. </p>
+  <p>Fresnel's design goals are to create an ontology that is:</p>
+  <ul>
+    <li>useful for rendering different output formats like HTML, SVG, PDF, plain text, and others,</li>
+    <li>applicable across different RDF display paradigms, (nested box-based textual representation à la XHTML+CSS, node-link diagram, etc.),</li>
+    <li>built on existing Web technology,</li>
+    <li>extensible for more specialized needs,</li>
+    <li>easy to learn and use.</li>
+  </ul>
+  <p>Fresnel's two foundational concepts are <em>lenses</em> and <em>formats</em>. Lenses define which properties of an RDF resource are displayed and how these properties are ordered. Fresnel <em>formats</em> determine how the selected properties are rendered by specifying RDF-specific formatting attributes and by  providing hooks to CSS <a href="#css">[2]</a>, which is used to specify fonts, colors, margins, borders, and other decorative elements.</p>
+  <p style="text-align:center"><img src="overview.gif" width="556" height="297" alt="Fresnel concepts"/></p>
+  <p>Fresnel adheres to a strict separation between data selection and formatting. The Fresnel rendering process can be decomposed in three steps: </p>
+  <ol>
+    <li><span class="imgCaption">Selection:</span> the parts of the RDF graph to be displayed are selected and ordered using Fresnel lenses. The result of the selection step is an ordered tree of RDF nodes, not containing any formatting information yet.</li>
+  <li><span class="imgCaption">Formatting:</span> Fresnel formats are then applied to the tree, adding formatting information and hooks to CSS classes to nodes of the tree.</li>
+  <li><span class="imgCaption">Output Generation:</span> the result of the second step is rendered into the appropriate output format.</li>
+  </ol>
+  <p>Possible output formats include:</p>
+  <ul>
+    <li>HTML documents including inline CSS styling instructions or referencing external stylesheets (for use e.g. in Longwell <a href="#lw">[6]</a>),</li>
+    <li>SVG documents including inline CSS styling instructions or referencing external stylesheets (for use e.g. in IsaViz <a href="#iv">[7]</a>),</li>
+    <li>XML trees referencing external CSS stylesheets (e.g. for being  transformed further using XSLT as part of a Cocoon <a href="#cocoon">[18]</a> pipeline),</li>
+    <li>PDF documents,</li>
+    <li>plain text documents,</li>
+    <li>interactive rich clients such as Haystack <a href="#hs">[5]</a>.</li>
+  </ul>
+
+  <p>The choice of what output format to support, and how to interpret the formatted tree produced by the second step to produce the actual output (i.e., the third step), is a prerogative of each application. Fresnel expresses RDF presentation knowledge in a declarative way; Fresnel applications should take all formatting information into account, but are free to interpret and adapt them in a way that is appropriate w.r.t their fundamental representation paradigm (e.g. nested box-based textual representation à la XHTML+CSS, node-link diagram, etc.). In other words, Fresnel does not dictate how to transform the tree resulting from the formatting step into an actual target document of the chosen output format.</p>
+
+  <h4>Terminology</h4>
+  <p>Fresnel takes an ontology-centric view on RDF models. RDF models are described in terms of <em>resources</em> which are <em>instances</em> of <em>classes</em>. Instances have <em>properties</em>, and properties have <em>property values</em>.</p>
+  <h3>1.1<a id="foafExample" name="foafExample"></a> FOAF Example</h3>
+  <p>The following example shows how Fresnel can be used to render FOAF <a href="#foaf">[4]</a> persons. All examples use the Notation 3 syntax for RDF.</p>
+
+  <div class="exampleOuter exampleInner">
+<pre class="query">@prefix fresnel:  &lt;http://www.w3.org/2004/09/fresnel#&gt; .
+@prefix foaf:     &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix rdf:      &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix xsd:      &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix :         &lt;#&gt;
+
+# -----------------------------------------------
+# 1.Fresnel Lenses for FOAF Person
+# -----------------------------------------------
+
+:foafPersonDefaultLens rdf:type fresnel:Lens ;
+                       fresnel:purpose fresnel:defaultLens ;
+                       fresnel:classLensDomain foaf:Person ;
+                       fresnel:group :foafGroup ;
+                       fresnel:showProperties ( foaf:name 
+                                                foaf:surname 
+                                                foaf:depiction ) .
+
+:knowsLens rdf:type fresnel:Lens ;
+           fresnel:classLensDomain foaf:Person ;
+           fresnel:group :foafGroup ;
+           fresnel:showProperties ( foaf:name 
+                                    foaf:surname
+                                    foaf:mbox 
+                                    [ rdf:type fresnel:PropertyDescription ;
+                                      fresnel:property foaf:knows ;
+                                      fresnel:sublens :foafPersonDefaultLens ] ) .
+			                      
+# -----------------------------------------------
+# 2. Fresnel Formats
+# -----------------------------------------------
+
+:foafGroup rdf:type fresnel:Group ;
+           fresnel:stylesheetLink &lt;http://www.example.org/example.css&gt; . 
+
+:depictFormat rdf:type fresnel:Format ;
+              fresnel:propertyFormatDomain foaf:depiction ;
+              fresnel:label fresnel:none ;
+              fresnel:value fresnel:image ;
+              fresnel:valueStyle "imageWithThickBorder"^^fresnel:styleClass ; 
+              fresnel:group :foafGroup .
+	
+:urlFormat rdf:type fresnel:Format ;
+           fresnel:propertyFormatDomain foaf:homepage ;
+           fresnel:propertyFormatDomain foaf:mbox ;
+           fresnel:value fresnel:externalLink ;
+           fresnel:labelStyle "basicLabel"^^fresnel:styleClass ;
+           fresnel:valueStyle "basicUrl"^^fresnel:styleClass ;
+           fresnel:group :foafGroup .</pre>
+</div>
+  <p>This Fresnel example declares two lenses which apply to instances of class <span class="code">foaf:Person</span> as specified by property <span class="code">fresnel:lensDomain</span>. The first lens defines a view on <span class="code">foaf:Person</span> containing three properties: <span class="code">foaf:name</span>, <span class="code">foaf:surname</span>, and <span class="code">foaf:depiction</span>. A Fresnel browser would start with displaying this lens because it is marked with the purpose <span class="code">fresnel:defaultLens</span>. The second lens displays a person together with all other persons she knows. The <span class="code">fresnel:sublens</span> property specifies that the <span class="code">:foafPersonDefaultLens</span> should be used to display known people.</p>
+  <p>The second part of the stylesheet contains formatting declarations. The first declaration is a reference to an external CSS stylesheet. <span class="code">:depictFormat</span> specifies that all values of property <span class="code">foaf:depiction</span> should be displayed as images with solid borders. <span class="code">:urlFormat</span> specifies that values of <span class="code">foaf:homepage</span> and <span class="code">foaf:mbox</span> should be rendered as external links using CSS styling instructions associated with CSS classes <span class="code">basicLabel</span> and <span class="code">basicUri</span> (defined in the external stylesheet referenced earlier).</p>
+
+  <h3>1.2 <a id="vocModules" name="vocModules">Vocabulary Modules </a></h3>
+  <p>In order to make it easier for developers to implement, Fresnel is modularized along two axes:</p>
+  <ul>
+    <li><span class="imgCaption">Vocabulary Modules</span>: Fresnel is split into two core and two extended vocabularies.
+  <ul>
+    <li><strong>Lens-Core</strong>, contains the basic vocabulary elements for defining lenses.</li>
+    <li><strong>Format-Core</strong>, contains the basic vocabulary elements for specifying formats.</li>
+    <li><strong>Lens-Extended</strong>, contains additional terms for relating lenses and sublenses, declaring lens inheritance, and advanced lens purposes.</li>
+    <li><strong>Format-Extended</strong>, contains additional formatting instructions and support for various media.</li>
+  </ul>
+ The core vocabulary contains Fresnel's main concepts and must be implemented by all browsers aiming at supporting Fresnel. The extended vocabulary contains additional functionality. Browsers should try to implement this extended functionality or parts of it. </li>
+    <li> <span class="imgCaption">Selector Languages</span>: Fresnel selectors are used to specify which lenses and formats apply to which sets of RDF instances and properties. There are three types of selectors: simple selectors based on RDF names (URI references), FSL (Fresnel Selector Language) <a href="#fsl">[13]</a> selectors, and SPARQL <a href="#sparql">[12]</a> selectors. A Fresnel-aware browser is only required to support simple selectors, but is strongly encouraged to support FSL and SPARQL selectors. </li>
+  </ul>
+
+  <h3>1.3<a id="selectors" name="selectors"> Selector Languages </a></h3>
+  <p>Selectors are used within Fresnel to specify which RDF instances and properties should be displayed or formatted. Fresnel includes three different selector languages offering increasing expressiveness:</p>
+  <h4>1.3.1 Simple Selectors</h4>
+  <p>Simple selectors are the easiest but least expressive way to point at elements of RDF models. A simple selector is a URI reference represented as a QName (qualified name), which is interpreted as an instance, a class, or a property depending on the context (lens domain selector, format domain selector, property selector).</p>
+
+<div class="exampleOuter exampleInner">
+<pre class="query">:foafPersonLens rdf:type fresnel:Lens ;
+                fresnel:classLensDomain <strong>foaf:Person</strong> .</pre>
+</div>
+
+  <h4>1.3.2 <a name="Fsl" id="Fsl"></a>FSL Selectors </h4>
+    <p>Selectors can also be specified using the Fresnel Selector Language (FSL) <a href="#fsl">[13]</a>. FSL is strongly inspired by <a href="http://www.w3.org/TR/xpath">XPath</a>, and was created by adapting the XPath syntax and concepts to RDF's graph-based model and by deriving pieces from different RDFPath proposals.</p>
+    <p>Example: the following format applies only to persons that are exactly 30 years old.</p>
+    <div class="exampleOuter exampleInner">
+      <pre class="query">:foafPersonFormat rdf:type fresnel:Format ;
+                  fresnel:instanceFormatDomain <strong>"foaf:Person[ex:age/'30']"^^fresnel:fslSelector</strong>.</pre>
+    </div>
+  <div>More information about FSL can be found in the <a href="../fsl/">Fresnel Selector Language Manual</a>.</div>
+
+  <p>Note that when considered as literal values, simple selectors are also valid FSL expressions (see below and <a href="#fsl">[13]</a>).</p>
+
+  <h4>1.3.3 SPARQL Selectors</h4>
+  <p>In addition to FSL, some browsers might also want to take advantage of the full expressive power of SPARQL <a href="#sparql">[12]</a>.</p>
+  <div class="exampleOuter exampleInner">
+<pre class="query">:foafPersonFormat rdf:type fresnel:Format ;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fresnel:instanceFormatDomain <strong>"SELECT ?person 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE { ?person rdf:type foaf:Person .
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?person foo:age ?age . FILTER ?age &lt; 30 }"^^fresnel:sparqlSelector</strong> .
+</pre>
+</div>
+  <p>SPARQL queries used within Fresnel must always return exactly one node set, meaning that only one variable is allowed in the query's SELECT clause.</p>
+
+  <h3>1.4<a id="namespace" name="namespace"> Fresnel Namespace </a></h3>
+  <p>The shared namespace of all Fresnel vocabulary modules is :</p>
+  <p><span class="code">http://www.w3.org/2004/09/fresnel#</span></p>
+
+
+  <h2>2. <a id="lenscore" name="lenscore">The Core Lens Vocabulary </a></h2>
+
+  <div style="clear: both;">
+    <p>Fresnel lenses specify which properties of an instance (i.e., a resource) are shown.  For example, a 'short summary' lens for FOAF persons might display the name and the email address of a person. The result of applying a lens or a group of  lenses  to an RDF graph is an ordered tree of RDF nodes. This tree doesn't contain any formatting information yet. Formatting instructions are added as a seperate step using <a href="#stylecore">Fresnel formats</a>. </p>
+    <p>The core lens vocabulary is used to define:</p>
+    <ul>
+    <li><a href="#lensdomain">the set of instances to which a lens applies</a>,</li>
+    <li><a href="#propertyselection">the properties to be displayed</a>, </li>
+    <li><a href="#propertyselection">the ordering of these properties</a><!-- and the order of their values-->,</li>
+    <li><a href="#lenspurposes">the purpose of a lens</a>,</li>
+    <li><a href="#sublenses">how to display related instances using lenses and sublenses</a> (e.g. a person with her publications). </li>
+    </ul>
+  </div>
+
+  <h3>2.1 <a id="lensdomain" name="lensdomain">Lens Domain</a></h3>
+
+  <p>A lens domain is declared with property <span class="code">fresnel:instanceLensDomain</span> and specifies the set of instances to which a lens applies. The value of <span class="code">fresnel:instanceLensDomain</span> can be a selector expressed with any of the three languages introduced above (simple selectors, FSL expressions, SPARQL queries).</p>
+
+  <h4>Simple Selectors</h4>
+
+  <p>When defining a lens domain, a simple selector can either be interpreted in two ways:</p>
+  <ul>
+    <li>as a constraint on the resource's URI; in which case the lens will apply to the single resource whose URI is that given in the selector,</li>
+    <li>as a constraint on the class of resources to be selected; in which case the lens will apply to all instance resources that have an <span class="code">rdf:type</span> property whose value is the class resource whose URI is that given in the selector (i.e., members of the class identified by the selector, or its subclasses)</li>
+  </ul>
+
+  <p>The simple selector expression being a URI reference, it does not by itself give any indication of how the selector should be interpreted. Two different Fresnel lens domain properties are therefore used to unambiguously indicate how the selector should be interpreted:</p>
+  <ul>
+    <li><span class="code">fresnel:instanceLensDomain</span> when the selector should be interpreted as a constraint on the resource's URI,</li>
+    <li><span class="code">fresnel:classLensDomain</span> when the selector should be interpreted as a constraint on the class of resources to be selected.</li>
+  </ul>
+
+<div class="exampleOuter exampleInner">
+<pre class="query"># a lens applying to resource http://example.org#foo
+:exLens rdf:type fresnel:Lens ;
+                 <strong>fresnel:instanceLensDomain &lt;http://example.org#foo&gt;</strong> .
+
+# a lens applying to all instances of class foaf:Person
+:foafPersonLens rdf:type fresnel:Lens ;
+                <strong>fresnel:classLensDomain foaf:Person</strong> .
+
+# a lens applying to resource foaf:Person (defined in the FOAF RDF Schema)
+:foafPersonClassLens rdf:type fresnel:Lens ;
+                     <strong>fresnel:instanceLensDomain foaf:Person</strong> .
+</pre>
+</div>
+
+  <h4>FSL Expressions and SPARQL Queries</h4>
+
+  <p>Selectors expressed with FSL or SPARQL are always used in conjunction with property <span class="code">fresnel:instanceLensDomain</span> and never with property <span class="code">fresnel:classLensDomain</span>, as the above ambiguity problem does not arise in the context of FSL- and SPARQL-based selectors.</p>
+
+<div class="exampleOuter exampleInner">
+<pre class="query"># a lens applying to resource http://example.org#foo
+:exLens rdf:type fresnel:Lens ;
+                 <strong>fresnel:instanceLensDomain "*[uri(.) = 'http://example.org#foo']"</strong>^^fresnel:fslSelector .
+
+# a lens applying to all instances of class foaf:Person that are younger than 12
+:childrenLens rdf:type fresnel:Lens ;
+              <strong>fresnel:instanceLensDomain "foaf:Person[ex:age/text() &lt; 12]"</strong>^^fresnel:fslSelector .
+
+# a lens applying to all instances of class foaf:Person that know at least 5 other persons
+:knowsManyPersonLens rdf:type fresnel:Lens ;
+                     <strong>fresnel:instanceLensDomain "foaf:Person[count(foaf:knows/foaf:Person) &gt;= 5]"</strong>^^fresnel:fslSelector .
+
+# a lens applying to all resources (no matter what class they belong to)
+# that have an ex:rating property equal to 100
+:exLens2 rdf:type fresnel:Lens ;
+                  <strong>fresnel:instanceLensDomain "*[ex:rating/'100']"</strong>^^fresnel:fslSelector .
+</pre>
+</div>
+
+  <p>FSL expressions take the form of paths in the RDF graph. The FSL specification as well as many examples are available at <a href="#fsl">[13]</a>. More information about SPARQL is also available <a href="#sparql">[12]</a>.</p>
+
+  <h3>2.2<a id="propertyselection" name="propertyselection"> Property Selection and Ordering</a> </h3>
+
+  <p>Lenses use <span class="code">fresnel:showProperties</span> and <span class="code">fresnel:hideProperties</span> to define which properties are displayed. The value of showProperties and hideProperties can be either a single property selector or an ordered list of property selectors. These selectors can be simple selectors (RDF property URIs), or FSL expressions returning RDF properties (i.e. ending by an arc location step, see <a href="#fsl">[13]</a>).</p>
+
+  <p>Example: the following lens shows property <span class="code">foaf:name</span> first, followed by properties <span class="code">foaf:mbox</span> and <span class="code">foaf:homepage</span>.</p>
+  <div class="exampleOuter exampleInner">
+<pre class="query">:foafPersonShortLens rdf:type fresnel:Lens ;
+                     fresnel:classLensDomain foaf:Person ;
+                     <strong>fresnel:showProperties</strong> ( foaf:name
+                                              foaf:mbox
+                                              foaf:homepage ) .</pre>
+</div>
+  <p>Example: the following lens shows property <span class="code">foaf:name</span> first, followed by the <span class="code">foaf:name</span> property of resources known by the resource selected by the lens.</p>
+  <div class="exampleOuter exampleInner">
+
+<pre class="query">:foafPersonShortLens rdf:type fresnel:Lens ;
+                              fresnel:classLensDomain foaf:Person ;
+                              <strong>fresnel:showProperties</strong> ( foaf:name
+                                                       "foaf:knows/*/foaf:name"^^fresnel:fslSelector ) .</pre>
+  </div>
+    <div class="exampleOuter exampleInner"> </div>
+  <h4>Unknown Property Sets </h4>
+  <p>RDF's flexible data model allows arbitrary properties from any vocabulary to be associated with resources. Lens authors cannot expect to know in advance all properties that instances to be displayed might use. This case can be handled using <span class="code">fresnel:allProperties</span>.  <span class="code">fresnel:allProperties</span> is a placeholder for the names of all properties of the current instance that haven't already been explicitly named in the property list. </p>
+  <p>Example: The following lens shows the <span class="code">foaf:name</span> property first, followed by the <span class="code">foaf:mbox</span> and <span class="code">foaf:homepage</span> properties.  Afterwards, it displays all other properties of the current person but hides the <span class="code">dc:creator</span> and <span class="code">dc:date</span> properties. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:foafPersonShortLens rdf:type fresnel:Lens ;
+                     fresnel:classLensDomain foaf:Person ;
+                     fresnel:showProperties ( foaf:name
+                                              foaf:mbox
+                                              foaf:homepage
+                                              <span class="imgCaption">fresnel:allProperties</span> );
+                     <span class="imgCaption">fresnel:hideProperties</span> ( dc:creator
+                                              dc:date ) .
+</pre>
+    <h4>Displaying RDF Collections and RDF Containers</h4>
+  </div>
+  <p>The values of <span class="code">rdf:List</span>, <span class="code">rdf:Bag</span>, <span class="code">rdf:Seq</span>, or <span class="code">rdf:Alt</span> can be displayed using the  <span class="code">fresnel:member</span> pseudo-property. <span class="code">fresnel:member</span> is a placeholder for <span class="code">rdf:_1, rdf:_2, ... </span> and for  the members of a <span class="code">rdf:List</span>.</p>
+  <p>The following example shows how <span class="code">fresnel:member</span> is used to display all members of a <span class="code">rdf:Bag</span>. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:bagLens rdf:type fresnel:Lens ;
+               fresnel:classLensDomain rdf:Bag ;
+               fresnel:showProperties <span class="imgCaption">fresnel:member</span> .
+  </pre>
+  </div>
+
+  <h3>2.3<a id="lenspurposes" name="lenspurposes"> Lens Purpose Vocabulary</a> </h3>
+  <p>The idea behind the lens purpose vocabulary is to help the browser decide which lens to use in situations where more than one lens could apply, causing a conflict. Lens purposes depend on the application domain and the browser's display paradigm. Therefore, Fresnel provides an open interface for using domain- or browser-specific purposes and defines only two general purposes that might be useful across all browsers.</p>
+
+  <p>The <span class="code">fresnel:defaultLens</span> purpose is intended to indicate a default lens for a specific class.  Browsers might decide to show a lens with purpose <span class="code">fresnel:defaultLens</span> in situations where there are several applicable lenses.</p>
+  <p>The <span class="code">fresnel:labelLens</span> purpose indicates a lens that provides a short, human-readable label for an instance of a specific class. Browsers in need of labelling an instance (see <a href="#displayingValues"><span class="code">fresnel:value</span></a>) should implement the following behavior:</p>
+  <ol>
+  <li>Display an instance lens with the purpose <span class="code">fresnel:labelLens</span> for the resource.</li>
+  <li>If there is no instance label lens,  display a class lens with the purpose <span class="code">fresnel:labelLens</span> for the resource's class type.</li>
+  <li>If there is no class label lens, display the browser's default label lens. Browsers might want to provide a default label lens which could for example specify that <span class="code">rdfs:label</span> or <span class="code">dc:title</span> values should be used for all resources.</li>
+  <li>If the browser doesn't provide a default lens, display the URI of the resource.</li>
+  </ol>
+  <p>Purposes are specified using the <span class="code">fresnel:purpose</span> property. </p>
+
+  <p>Example: a <span class="code">fresnel:labelLens</span> purpose for <span class="code">foaf:Person</span> displaying only the person's name. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:foafPersonLabelLens rdf:type fresnel:Lens ;
+                     <strong>fresnel:purpose fresnel:labelLens ;</strong>
+                     fresnel:classLensDomain foaf:Person ;
+                     fresnel:showProperties foaf:name .</pre>
+  </div>
+
+  <h3>2.4<a id="lensspecific" name="lensspecific"> </a> Conflicts Between Lenses</h3>
+  <p>If there is more than one lens applicable to an instance and the browser has not specified a particular one to use, through whatever mechanism it might use to do so, conflicts between lenses are resolved by implementing the following lens selection policy (each step refines the set of lenses to be considered, keeping only the most specific lenses):</p>
+  <ol>
+    <li>If the set of applicable lenses contains both lenses whose domain is a <span class="code">classLensDomain</span> and lenses whose domain is an <span class="code">instanceLensDomain</span>, remove lenses whose domain is a <span class="code">classLensDomain</span>.</li>
+    <li>If the set of applicable lenses contains lenses whose domain is expressed with a SPARQL query, only keep those (provided that the browser supports domains expressed with SPARQL).</li>
+    <li>Else, if the set of applicable lenses contains lenses whose domain is expressed with an FSL expression, only keep those (provided that the browser supports domains expressed with FSL).</li>
+  </ol>
+
+  <p>At this point, the set of applicable lenses is made of lenses that have all of their domains defined either as <span class="code">classLensDomain</span> or <span class="code">instanceLensDomain</span>. If the domain is a <span class="code">classLensDomain</span>, selectors are necessarily simple selectors. If the domain is an <span class="code">instanceLensDomain</span>, selectors are either all SPARQL queries or all FSL expressions, or all simple selectors. In all cases, if the set contains more than one lens, the following steps are used to select the lens to apply:</p>
+
+  <ul>
+    <li>If domains are <span class="code">classLensDomain</span>s and there exists subclass relationships between classes pointed at by selectors, select the lens that defines the most specific subclass. If there is no subclass relationship between classes pointed at by selector, select the lens whose purpose if <span class="code">fresnel:defaultLens</span>. If there is no such lens, the conflict cannot be resolved. Browsers should select one of the lenses and issue a warning.</li>
+    <li>If domains are <span class="code">instanceLensDomain</span>s and:
+      <ul>
+        <li>selection expressions are <strong>simple selectors</strong>,select the lens whose purpose if <span class="code">fresnel:defaultLens</span>. If there is no such lens, the conflict cannot be resolved. Browsers should select one of the lenses and issue a warning.</li>
+        <li>selection expressions are <strong>FSL expressions</strong>, select the lens associated with the most specific FSL expression (specificity computation algorithm defined in <a href="#fsl">[13]</a>).</li>
+        <li>selection expressions are <strong>SPARQL queries</strong>, select the lens associated with the most specific SPARQL query (specificity computation algorithm not yet defined).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2.5. <a id="sublenses" name="sublenses"> </a> Using Sublenses</h3>
+  <p>It is often beneficial to display instances together with related instances. For example, a browser might display a person together with her publications, projects or friends. This is accomplished by relating a lens to sublenses using property <span class="code">fresnel:sublens</span>.</p>
+  <p>Example: the following lens uses a sublens to display a person together with her friends. It also specifies that the <span class="code">:foafPersonDefaultLens</span> must be used to display this person's friends (i.e., <span class="code">foaf:knows</span> property values). </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:knowsLens rdf:type fresnel:Lens ;
+           fresnel:classLensDomain foaf:Person ;
+           fresnel:showProperties ( foaf:name 
+                                    foaf:surname
+                                    foaf:mbox 
+                                    [ rdf:type fresnel:PropertyDescription ;
+                                      <strong>fresnel:property foaf:knows</strong> ;
+                                      <strong>fresnel:sublens :foafPersonDefaultLens</strong> ] ) .</pre>
+  </div>
+
+  <h4>Multiple Sublenses for Mixed Content</h4>
+
+  <p>For handling properties whose values might belong to various classes, it is possible to specify multiple sublenses. The appropriate lens is chosen based on the domain of lenses declared as possible sublenses.</p>
+
+  <p>Example: the <span class="code">ex:activity</span> property might contain a person's projects and hobbies. The following lens specifies that 
+<span class="code">ex:activity</span> values can be displayed either with lens <span class="code">:projectDefaultLens</span> or lens <span class="code">:hobbyDefaultLens</span>. What lens gets chosen depends on each value's type.</p>
+
+<div class="exampleOuter exampleInner">
+<pre class="query">:activitiesLens rdf:type fresnel:Lens ;
+                fresnel:classLensDomain foaf:Person ;
+	        fresnel:showProperties ( foaf:name
+                                         [ fresnel:property ex:activity ;
+                                           <span class="imgCaption">fresnel:sublens :projectDefaultLens ;
+                                           fresnel:sublens :hobbyDefaultLens</span> ] ) .
+
+:projectDefaultLens rdf:type fresnel:Lens ;
+                    fresnel:classLensDomain ex:Project.
+
+:hobbyDefaultLens rdf:type fresnel:Lens ;
+                  fresnel:classLensDomain ex:Hobby.
+</pre>
+</div>
+
+  <h4>Recursive Sublensing </h4>
+
+  <p>Recursive sublens relationships can cause infinite loops. This problem can be addressed by specifying a maximum recursion depth.</p>
+
+  <p>Example: the following lens will display a hierarchy of <span class="code">foaf:knows</span> relationships with a maximum path length of 5. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query"><strong>:knowsHierarchyLens</strong> rdf:type fresnel:Lens ;
+          fresnel:classLensDomain foaf:Person ;
+          fresnel:showProperties ( foaf:name
+                                   [ rdf:type fresnel:PropertyDescription ;
+                                     fresnel:property foaf:knows ;
+                                     <strong>fresnel:sublens :knowsHierarchyLens</strong> ;
+                                     <strong>fresnel:depth &quot;5&quot;^^xsd:nonNegativeInteger</strong> ] ) .</pre>
+  </div>
+
+  <h4>fresnel:use</h4>
+  <p>Using the <span class="code">fresnel:use</span> property together with <span class="code">fresnel:sublens</span>  specifies a specific <span class="code">fresnel:Group</span> of lenses and formats which should be used to render the sublens. This allows the usage of multiple <span class="code">fresnel:Group</span>s for rendering different parts of the output. An example of how multiple groups are used to display  the content of a sublens as a table is found <a href="http://simile.mit.edu/repository/fresnel/trunk/examples/foaf-table-example.n3">here</a>. </p>
+  <div class="exampleOuter exampleInner">
+
+<pre class="query">:foafPersonDefaultLens rdf:type fresnel:Lens ;
+                       fresnel:classLensDomain foaf:Person ;
+                       fresnel:showProperties ( foaf:name
+                                                foaf:surname
+                                                [ rdf:type fresnel:PropertyDescription ;
+                                                  fresnel:property foaf:knows ;
+                                                  fresnel:sublens :friendsLens ;
+                                                  <strong>fresnel:use :tableGroup</strong> ]
+                                              ) .</pre>
+</div>
+
+
+  <h2>3.<a id="stylecore" name="stylecore"> The Core Format Vocabulary </a></h2>
+  <p> Fresnel lenses specify <span class="imgCaption">what</span> information is displayed. The format vocabulary is used to specify <span class="imgCaption">how</span> information is displayed. The format vocabulary also provides a bridge between RDF and styling languages such as CSS <a href="#css">[2]</a> and the styling part of SVG <a href="#svg">[3]</a>, which are used to specify styling attributes like colors, fonts and borders through external stylesheets.</p>
+  <p>The core format vocabulary is used to  format RDF properties  by defining:</p>
+  <ul>
+    <li>how a property is labelled,</li>
+    <li>how the property values are displayed,</li>
+    <li>which additional content, like commas and periods, is displayed between and after property values, </li>
+    <li>references to  CSS classes  which define fonts, colors, borders and other styling attributes.</li>
+</ul>
+
+  <p>Formats are usually grouped together using a Fresnel group. See <a href="#grouping">Section 4</a> for details about Fresnel groups. </p>
+
+  <h3>3.1 <a id="styleDomain" name="styleDomain">Applying  Formats</a></h3>
+
+  <p>Formats for RDF properties and instances are defined by a <span class="code">fresnel:Format</span>.</p>
+
+  <h4>Formatting Properties</h4>
+
+  <p>The <span class="code">fresnel:propertyFormatDomain</span> property specifies the set of properties to which a format is applicable. A format can have more than one format domain.</p>
+  <p>Some use cases for formatting properties are:</p>
+  <ul>
+    <li>displaying all values of the <span class="code">foaf:depiction</span> property as an image without a label,</li>
+    <li>displaying the label of the <span class="code">foaf:name</span> property using the Arial font in 12pt size,</li>
+    <li>displaying values of <span class="code">foaf:knows</span> with the custom label &quot;Friends of this person: &quot;. </li>
+  </ul>
+  <p>Example: The following format applies to the <span class="code">foaf:depiction</span> property: </p>
+
+<div class="exampleOuter exampleInner">
+<pre class="query">:depictFormat rdf:type fresnel:Format ;
+              <span class="imgCaption">fresnel:propertyFormatDomain foaf:depiction</span> .</pre>
+</div>
+
+  <p>The value of a <span class="code">fresnel:propertyFormatDomain</span> property can be an FSL expression returning properties (i.e. whose last step is an arc location step, see <a href="#fsl">[13]</a>).</p>
+
+  <h4><a name="formatingInstances" id="formatingInstances"></a>Formatting Resources</h4>
+
+  <p>In a similar way to lens domains, <span class="code">fresnel:classFormatDomain</span> or <span class="code">fresnel:instanceFormatDomain</span> are used to apply formats to instances identified either by their class or by other constraints. FSL expressions can be used as values of <span class="code">fresnel:instanceFormatDomain</span>.</p>
+
+  <p>Some use cases for formatting instances are:</p>
+  <ul>
+    <li>Drawing a border around the area used to display an instance.</li>
+    <li>Specifying formats that only apply to a custom set of instances. Example: display all persons that are younger than 21 using a special color. </li>
+    <li>Handling mixed content, where a specific format should be applied depending on the <span class="code">rdf:type</span> of a property value. Example: in a calendar, private activities should be displayed with a green background, work activities with a red background. </li>
+  </ul>
+
+  <p>Example: draw a border around the area used to display instances of the class <span class="code">foaf:Person</span>, by combining a class format with the <span class="code"><a href="#hookproperties">fresnel:resourceStyle</a></span> property. </p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:nameFormat rdf:type fresnel:Format ;
+            <span class="imgCaption">fresnel:classFormatDomain</span> foaf:Person ;
+            fresnel:resourceStyle &quot;withBorder&quot;^^fresnel:styleClass .</pre>
+</div>
+
+  <p>Example: Display all persons that are younger than 21 using a special color (uses an FSL path expression). </p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:nameFormat rdf:type fresnel:Format ;
+            <span class="imgCaption">fresnel:instanceFormatDomain</span> &quot;foaf:Person[foaf:age/text() &lt; 21]&quot;^^fresnel:fslSelector ;
+            fresnel:resourceStyle &quot;greenBackground&quot;^^fresnel:styleClass  .</pre>
+<p class="imgCaption">Explicitly linking a Lens and a Format</p>
+<p>Besides the loose coupling of lenses and formats through format domains, it is also possible to explicitly link a lens and a format with <span class="code">fresnel:use</span> as shown in the example below.</p>
+<div class="exampleOuter exampleInner">
+  <pre class="query">:foafPersonLabelLens fresnel:showProperties (
+                       foaf:name [ rdf:type fresnel:PropertyDescription ;
+                                   fresnel:property foaf:mbox ;
+                                   <strong>fresnel:use :mboxFormat</strong> ]
+                     ) .
+
+:mboxFormat rdf:type fresnel:Format ;
+            fresnel:valueFormat [fresnel:contentBefore "(" ;
+                                 fresnel:contentAfter  ")" ] .</pre>
+</div>
+<div class="exampleOuter exampleInner"></div>
+</div>
+
+  <h3>3.2<a id="labelling" name="labelling"> Labelling Properties </a></h3>
+
+  <p>Fresnel's default behavior for labelling properties is to use the property's <span class="code">rdfs:label</span> as defined by the corresponding RDF schema. If there is no <span class="code">rdfs:label</span> for a property type then the property's URI is displayed instead. It is possible to customize this default behavior using <span class="code">fresnel:label</span>.</p>
+
+  <p><span class="code">fresnel:label</span> is used to define whether a property label is displayed (<span class="code">fresnel:show</span>, the default) or not (<span class="code">fresnel:none</span>). A literal as the value of <span class="code">fresnel:label</span> will be interpreted as a custom label for the property.</p>
+
+  <p>Example: do not show the label of the <span class="code">foaf:depiction</span> property: </p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:depictFormat rdf:type fresnel:Format ;
+              fresnel:propertyFormatDomain foaf:depiction ;
+              <span class="imgCaption">fresnel:label fresnel:none</span> .
+</pre>
+</div>
+
+  <p>Example: use a custom label for property <span class="code">foaf:knows</span>: </p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:knowsFormat rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:knows ;
+            <strong>fresnel:label &quot;This person knows the following people: &quot;^^xsd:string</strong> .
+</pre>
+</div>
+
+  <p><strong>Note: </strong><span class="code">fresnel:label</span> requires a <span class="code">fresnel:propertyFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>.</p>
+
+  <h3>3.3<a id="displayingValues" name="displayingValues"> Displaying Property Values </a></h3>
+
+  <p>The default behavior for displaying property values is:</p>
+
+  <ol>
+    <li>If the value is a literal, display it as text.</li>
+    <li>If the current lens specifies a <a href="#sublenses">sublens</a> for this property, display the value using the sublens.</li>
+    <li>If the value is a resource or bNode, check if the default procedure is overridden by a format for this instance and apply it. If several formats apply, resolve conflicts between formats as described section <strong>Conflicts Between Formats</strong>.</li>
+    <li>If the value is a resource or bNode, check if there is a <a href="#lenspurposes">label</a> instance lens for this resource or bNode and display it.</li>
+    <li>Else display the browser's default label lens. Browsers might want to provide a default label lens which could for instance specify that <span class="code">rdfs:label</span> or <span class="code">dc:title</span> values should be used by default.</li>
+    <li>If there is no such lens, display the URI of the resource or the ID of the bNode. 
+    </li>
+  </ol>
+
+  <p>This default behaviour can be overridden using property <span class="code">fresnel:value</span> property, which specifies that all values of a property should be displayed:</p>
+  <ul>
+    <li>as images (it is usually desirable to see the image rather than metadata about this image)</li>
+    <li>as clickable external links, meaning that you can click on the label/URI or image to navigate to the resource on the Web</li>
+    <li>as Uniform Resource Identifier (URIs). Reason: For some properties like mailboxes or homepages it is preferable to display the URI instead of the metadata about the mailbox or site.</li>
+  </ul>
+  <p>Example: display values of the <span class="code">foaf:depiction</span> property as images.</p>
+
+  <div class="exampleOuter exampleInner">
+<pre class="query">:depictFormat rdf:type fresnel:Format ;
+              fresnel:propertyFormatDomain foaf:depiction ;
+              <strong>fresnel:value fresnel:image</strong> .
+</pre>
+</div>
+
+  <p>Example: display values of the <span class="code">foaf:homepage</span> property as external links.</p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:knowsFormat rdf:type fresnel:Format ;
+             fresnel:propertyFormatDomain foaf:homepage ;
+             <strong>fresnel:value fresnel:externalLink</strong> .</pre>
+</div>
+
+  <p>Example: display values of the <span class="code">foaf:mbox</span> property as URIs.</p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:knowsFormat rdf:type fresnel:Format ;
+             fresnel:propertyFormatDomain foaf:mbox ;
+             <strong>fresnel:value fresnel:uri</strong> .</pre>
+</div>
+
+  <p><strong>Note: </strong><span class="code">fresnel:value</span> requires a <span class="code">fresnel:propertyFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>.</p>
+  <p>In the case that the default behaviour is overridden, browsers might want to give the user the option to switch back to the default behaviour or to manually select the lens which he likes to use. </p>
+  <h4>Conflicts Between Formats</h4>
+
+  <p>If there is more than one format applicable to an instance and the browser has not specified a particular one to use, through whatever mechanism it might use to do so, conflicts between formats are resolved by implementing the following format selection policy (each step refines the set of formats to be considered, keeping only the most specific formats):</p>
+  <ol>
+    <li>If the set of applicable formats contains both formats whose domain is a <span class="code">classFormatDomain</span> and formats whose domain is an <span class="code">instanceFormatDomain</span>, remove formats whose domain is a <span class="code">classFormatDomain</span>.</li>
+    <li>If the set of applicable formats contains formats whose domain is expressed with an FSL expression, only keep those (provided that the browser supports domains expressed with FSL).</li>
+  </ol>
+
+  <p>At this point, the set of applicable formats is made of formats that have all of their domains defined either as <span class="code">classFormatDomain</span> or <span class="code">instanceFormatDomain</span>. If the domain is a <span class="code">classFormatDomain</span>, selectors are necessarily simple selectors. If the domain is an <span class="code">instanceFormatDomain</span>, selectors are either all FSL expressions, or all simple selectors. In all cases, if the set contains more than one format, the following steps are used to select the format to apply:</p>
+
+  <ul>
+    <li>If domains are <span class="code">classFormatDomain</span>s and there exists subclass relationships between classes pointed at by selectors, select the format that defines the most specific subclass. If there is no subclass relationship between classes pointed at by selector, the conflict cannot be resolved. Browsers should select one of the formats and issue a warning.</li>
+    <li>If domains are <span class="code">instanceFormatDomain</span>s and:
+      <ul>
+        <li>selection expressions are <strong>simple selectors</strong>, the conflict cannot be resolved. Browsers should select one of the formates and issue a warning.</li>
+        <li>selection expressions are <strong>FSL expressions</strong>, select the format associated with the most specific FSL expression (specificity computation algorithm defined in <a href="#fsl">[13]</a>).</li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <h3>3.4<a id="csshooking" name="csshooking"> </a>Referring to CSS Classes </h3>
+  <p>Fresnel relies on external CSS <a href="#css">[2]</a> stylesheets for defining colors, margins, fonts, borders, and other decorative elements. Stylesheets can also contain SVG <a href="#svg">[3]</a> styling instructions such as strokes and brushes, that could typically be used by visual tools such as IsaViz <a href="#iv">[7]</a> which represents RDF models as node-link diagrams.</p>
+
+  <p><strong>Fresnel Abstract Box Model</strong></p>
+
+  <p>Colors, margins, fonts and borders are defined as styling rules in stylesheets. The selectors (left-hand side) of these rules are standard CSS class names, which can be referred to from Fresnel by associating them with elements of the Fresnel abstract box model. This box model is a logical abstraction over different display paradigms RDF browsers might use, based on the RDF abstract syntax. The box model is interpreted depending on the display paradigm. E.g. when considering node-link diagrams like in IsaViz, the property box is interpreted as an arc, which can be styled using the SVG <a href="#svg">[3]</a> brush styling instructions. In XHTML/CSS-based, text-oriented browsers like LongWell <a href="#lw">[6]</a>, it is interpreted as a rectangular shape.</p>
+
+  <p>The following table lists the various elements defined by the abstract box model. These elements all represent abstract regions of the representation space that Fresnel implementations must instantiate. How these abstract elements map to actual elements of the representation is browser-dependant and is to be decided by each browser implementor's. The only requirement is that the constraints expressed in the following table are met.</p>
+
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Abstract Box Model Element </th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td>Resource Box </td>
+      <td>The resource box is a region that surrounds all properties of a single resource.<br />
+    Usage example: specifying a border around the region that surrounds all properties of an instance.</td>
+    </tr>
+    <tr>
+      <td>Property Box</td>
+      <td>The property box is a region that surrounds the area used to display a single property.<br />
+    Usage example: Specifying the background color of the whole area that represents a property.</td>
+    </tr>
+    <tr>
+      <td>Label Box</td>
+      <td>The label box contains the label of a property.</td>
+    </tr>
+    <tr>
+      <td>Value Box</td>
+      <td>The value box contains one property value. <br />
+If the property value is displayed using a sublens, the value box will contain the resource box associated with the value.</td>
+    </tr>
+    <tr>
+      <td>Container Box </td>
+      <td><em>The container box is not part of core but of the extended format vocabulary. It is listed here only for the sake of completeness.</em><br />
+        The container box surrounds all instances that are currently displayed.<br />
+        Usage example: Specifying the background color of the whole representation (e.g. of an HTML page, or SVG diagram).<br />
+      A container box contains a set of resource boxes. </td>
+    </tr>
+  </table>
+
+  <p><strong>Example Instantiation of the Box Model</strong></p>
+
+  <p>The following figure gives an example instantiation of the abstract box model, as might define a browser whose fundamental representation/layout paradigm would be based on nested boxes. Different instantiations are possible.</p>
+
+  <div style="text-align:center">
+    <img src="boxmodel.gif" width="366" height="228" alt="Fresnel abstract representation model"/>
+    <div>Example instantiation of the Fresnel abstract box model</div>
+  </div>
+
+  <p>&nbsp;</p>
+
+  <p><strong>Associating CSS Styling Rules with Elements of the Box Model</strong></p>
+
+  <p><a name="hookproperties" id="hookproperties"></a>The CSS instructions found in a styling rule of an external stylesheet can be applied to elements of the box model by associating the CSS class name that defines the selector of this rule with the element of the box model. This association is based on the definition of styling hooks that can be declared using the following Fresnel properties.</p>
+
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Styling Hook </th>
+      <th scope="col">Applicable to </th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:resourceStyle</span></td>
+      <td><span class="code">fresnel:Group</span> instances, class formats and instance formats (see <a href="#formatingInstances">Formatting Instances </a>) </td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:propertyStyle</span></td>
+      <td><span class="code">fresnel:Format</span> and <span class="code">fresnel:Group</span> instances (see <a href="#styleDomain">Format Domain</a>) </td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:labelStyle</span></td>
+      <td><span class="code">fresnel:Format</span> and <span class="code">fresnel:Group</span> instances</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:valueStyle</span></td>
+      <td><span class="code">fresnel:Format</span> and <span class="code">fresnel:Group</span> instances</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:containerStyle</span></td>
+      <td><em>The container box is not part of Fresnel Core but of the Extended Format Vocabulary. It is listed here only for the sake of completeness.</em><br />
+        <span class="code">fresnel:Group</span> instances (see <a href="#grouping">Grouping Lenses and Formats</a>) </td>
+    </tr>
+  </table>
+  <p>As several CSS classes can be declared on one XML element, styles are accumulated.  For instance, a style associated with a <span class="code">fresnel:Group</span> and another style associated with a <span class="code">fresnel:Format</span> will both be used in assigning styles to matching selections.</p>
+  <p>CSS classes are assigned typed literals (datatype = <span class="code">fresnel:styleClass</span>). </p>
+  <p>Example: In the following example, the CSS classes are used by <span class="code">:uriFormat</span> to format the label and the value of property <span class="code">foaf:homepage</span>.</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">
+:foafGroup rdf:type fresnel:Group .
+	
+:uriFormat rdf:type fresnel:Format ;
+           fresnel:propertyFormatDomain foaf:homepage ;
+           fresnel:labelStyle <span class="imgCaption">"basicLabel"^^fresnel:styleClass</span> ;
+           fresnel:valueStyle <span class="imgCaption">"basicUri"^^fresnel:styleClass</span> ;
+           fresnel:group :foafGroup .</pre>
+</div>
+
+  <p><strong>Note: </strong><span class="code">fresnel:propertyStyle</span>, <span class="code">fresnel:labelStyle</span> and <span class="code">fresnel:valueStyle</span> require a <span class="code">fresnel:propertyFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>. <span class="code">fresnel:resourceStyle</span> requires a <span class="code">fresnel:classFormatDomain</span> or <span class="code">fresnel:instanceFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>.</p>
+
+  <h3>3.5<a id="additionalcontent" name="additionalcontent"> </a>Additional Content</h3>
+  <p>Fresnel provides facilities for adding fixed content at various locations in the abstract box model.  An example usage scenario is adding commas to a list of property values. It is also possible to  specify additional content which is displayed if a property is missing. </p>
+  <p>Additional content is added by using the following Fresnel properties:</p>
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Property</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:contentBefore</span></td>
+      <td>Add content before the current box.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:contentAfter</span></td>
+      <td>Add content after the current box.<br />
+      Usage example: Add a comma between values of a list.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:contentFirst</span></td>
+      <td>Add content before the first box (of a list of boxes).<br />
+        Usage example: Add fixed headings.<br />
+        If specified, replaces what is produced by <span class="code">fresnel:contentBefore</span> for the first list element.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:contentLast</span></td>
+      <td>Add content after the last box (of a list of boxes).<br />
+        If specified, replaces what is produced by <span class="code">fresnel:contentAfter</span> for the last list element.<br />
+        Usage example: put a dot ('.') at the end of a list of property values. If the same set of CSS styling instructions declares a comma (',') as the value of <span class="code">fresnel:contentAfter</span>, the dot replaces the comma after the last list element.<br /></td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:contentNoValue</span></td>
+      <td>Specify content that is displayed if a property is missing.  Only valid in conjunction with <span class="code">fresnel:propertyFormat</span> and <span class="code">fresnel:labelFormat</span>.<br />
+      Usage Example: &quot;This person has no email adress&quot;. </td>
+    </tr>
+  </table>
+  <p> fresnel:content{First,Last} has priority when a collision with fresnel:content{Before,After} occurs, meaning for the first example below that only a &quot;.&quot; will appear at the end of the list and not the &quot;, .&quot; combination. </p>
+  <p>Additional content is added by using formatting hooks.  All formatting hooks can be applied to a <span class="code">fresnel:Group</span> and are also subject to the following constraints on applicability when used with a <span class="code">fresnel:Format</span>: <span class="code">fresnel:propertyFormat</span>, <span class="code">fresnel:valueFormat</span>, and <span class="code">fresnel:valueFormat</span> require a <span class="code">fresnel:propertyFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>. <span class="code">fresnel:resourceFormat</span> requires a <span class="code">fresnel:classFormatDomain</span> or <span class="code">fresnel:instanceFormatDomain</span> to be associated to the <span class="code">fresnel:Format</span>.</p>
+<p>The following table summarizes Fresnel properties used to declare formatting hook:</p>
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Format Hook </th>
+      <th scope="col">Explanation</th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:valueFormat</span></td>
+      <td>Adds additional content before or after the property values.<br />
+        Example: Commas between a list of values.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:labelFormat</span></td>
+      <td>Adds additional content before or after the area used to display a property's label.<br />
+Example: Add a ':' character after the label.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:propertyFormat</span></td>
+      <td>Adds additional content before or after the area used to display a property and its values. <br />
+Example: Add an explanation to a property.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:resourceFormat</span></td>
+      <td>Adds additional content before or after the area used to display an instance. <br />
+Example: Add a disclaimer to resources shown by the browser.</td>
+    </tr>
+  </table>
+  <p>Example: add commas between property values and a period to the end of a list of homepages.</p>
+  <div class="exampleOuter exampleInner">
+
+<pre class="query">:formatHomepage rdf:type fresnel:Format ;
+                fresnel:propertyFormatDomain foaf:homepage ;
+                <strong>fresnel:valueFormat [ fresnel:contentAfter &quot;, &quot;^^xsd:string ;</strong>
+                                      <strong>fresnel:contentLast &quot;.&quot;^^xsd:string ]</strong> ;
+                fresnel:valueStyle "basicLabel"^^fresnel:styleClass .</pre>
+
+</div>
+  <p>Example: display a missing value message if a <span class="code">foaf:Person</span> has no email address.</p>
+<div class="exampleOuter exampleInner">
+
+<pre class="query">:formatMbox rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:mbox ;
+            <strong>fresnel:valueFormat [ fresnel:contentNoValue &quot;This person has no email address.&quot;^^xsd:string ]</strong> .</pre>
+
+</div>
+  <p>Example: display an explanation for the knows property.</p>
+  <div class="exampleOuter exampleInner">
+<pre class="query">:formatMbox rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:knows ;
+            <strong>fresnel:propertyFormat [ fresnel:contentAfter &quot;That a person knows somebody does mean
+                                                              that the other person also knows her.&quot;^^xsd:string ]</strong> .</pre>
+</div>
+  <p>Example: display a disclaimer behind  all person instances, if the information was found on ex:CrappyWebsite.</p>
+  <div class="exampleOuter exampleInner">
+<pre class="query">:formatMbox rdf:type fresnel:Format ;
+            <strong>fresnel:instanceFormatDomain</strong> &quot;foaf:Person[dc:author/ex:CrappyWebsite]&quot;^^fresnel:fslSelector ;<strong>
+            fresnel:resourceFormat [ fresnel:contentAfter &quot;This information hasn't been verified by us
+                                                                  and we don't take any warranty.&quot;^^xsd:string ]</strong> .</pre>
+</div>
+
+  <h2>4.<a id="groupvocab" name="groupvocab"></a> The Group Vocabulary </h2>
+
+  <div class="exampleOuter exampleInner"> </div> 
+
+
+  <h3>4.1<a id="grouping" name="grouping"></a> Grouping Formats and Lenses </h3>
+
+  <p> Fresnel allows lenses and formats to be grouped so that browsers can easily determine which lenses and formats work together.</p>
+
+  <p>A browser should consider Fresnel groups when: </p>
+  <ul>
+    <li>selecting default and label lenses</li>
+  <li>determining the specificity of formats and lenses </li>
+  </ul>
+  <p>Groups also provide hooks for declaring: </p>
+  <ul>
+  <li>namespace prefix bindings for <a href="fsl.html#prefixres">QName expansion in Fresnel Selector Language expressions</a>,</li>
+  <li>hooks to CSS classes which apply to all resources, properties, labels or values within the group.</li>
+  <li>hooks to CSS classes which  apply to the area surrounding the displayed RDF data (<a href="#csshooking">Container Box</a>).</li>
+  </ul>
+  <p>Example: the following group says that CSS class <span class="code">globalResource</span> should be used to style all instances generated by lenses of this group.  Also, all labels should be followed by a colon character.</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:foafGroup rdf:type <strong>fresnel:Group</strong> ;
+           fresnel:resourceStyle "globalResource"^^fresnel:stlyeClass ;<br />           fresnel:propertyStyle "globalProperty"^^fresnel:stlyeClass ;<br />           fresnel:labelFormat [ :contentAfter ":"  ] . </pre>
+</div>
+  <p>Lenses and formats are put into a group using the <span class="code">fresnel:group</span> property.</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:depictFormat rdf:type fresnel:Format ;
+              <strong>fresnel:group</strong> :foafGroup .</pre>
+</div>
+
+  <h3><a name="primary" id="primary"></a>4.2. Defining Primary Classes</h3>
+  <p>In datasets with several classes of resources, certain classes might be more useful as starting points, or <em>primaries</em>. Or it might be interesting to provide different angles for viewing the data by defining a different presentation for each primary class. Primary classes should be returned as first-class results; secondary classes not listed as primaries should only be shown by sublenses.</p>
+  <p>Example: the person and project classes are considered as primaries. All unlisted classes are considered as secondaries.</p>
+  <div class="exampleOuter exampleInner">
+<pre class="query">:foafGroup rdf:type fresnel:Group ;
+           <strong>fresnel:primaryClasses</strong> ( foaf:Person 
+                                    foaf:Project ) .</pre>
+  </div>
+  <p>Declaring some classes of the ontology as primaries also indicates to a browser that these classes are important and might therefore be included in content summaries or navigational structures.</p>
+
+  <h2>5.<a id="lensextended" name="lensextended"></a> Extended Lens Vocabulary </h2>
+  <p>The extended lens vocabulary contains additional terms for </p>
+  <ul>
+    <li><a href="#alternateandmerged">specifying alternate and merged properties</a>,</li>
+  <li><a href="#inheritance">lens inheritance</a>.</li>
+  <li>and <a href="#searchsl">searching for sublenses</a>. </li>
+  </ul>
+  <p>Browsers should implement this functionality or parts of it. If a lens contains terms from the extended vocabulary that a browser doesn't support then it should not use this lens. </p>
+
+  <h3>5.1. <a id="alternateandmerged" name="alternateandmerged"> </a>Alternate and Merged Properties</h3>
+
+  <h4>Merged Properties </h4>
+
+  <p>It is sometimes beneficial to merge the values of similar properties into one set of values for display purposes.  For example, a browser might display all values of <span class="code">foaf:homepage</span> and <span class="code">foaf:workHomepage</span> together as a single property.  This is accomplished using <span class="code">fresnel:mergeProperties</span> and an RDF list of the properties to be merged.  Note: using <span class="code">fresnel:use</span>, it is possible to refer to a Fresnel format which contains an appropriate label for the merged properties. </p>
+
+  <h4>Alternate Properties</h4>
+
+  <p>There are often properties missing in instance data found on the Semantic Web because the author uses a similar term from another vocabulary to state the information. This  case can be handled by specifying a list of alternate properties in a Fresnel lens. The browser will try to display the first property in the list. If there are no values found, then the browser will try the subsequent values in order.  A sequence of alternate properties is specified using <span class="code">fresnel:alternateProperties</span> and an <span class="code">rdf:List</span>.</p>
+  <p>Example: The  lens below uses a sequence of alternate properties  to display the name of a person (name, label, title). It also merges the values of <span class="code">foaf:homepage</span>, <span class="code">foaf:workplaceHomepage</span>, <span class="code">foaf:schoolHomepage</span> into a virtual property. This virtual property is labelled using the <span class="code">:formatMergeHomepage</span> format. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">
+:smartPersonLens rdf:type fresnel:Lens ;
+                 fresnel:classLensDomain foaf:Person ;
+                 fresnel:showProperties (
+                     [rdf:type fresnel:PropertyDescription
+                      <span class="imgCaption">fresnel:alternateProperties</span> ( foaf:name
+                                                    rdfs:label
+                                                    dc:title )
+                     ]
+                     [rdf:type fresnel:PropertyDescription ;
+                      <span class="imgCaption">fresnel:mergeProperties</span> ( foaf:homepage
+                                                foaf:workplaceHomepage
+                                                foaf:schoolHomepage ) ;
+                      fresnel:use :formatMergeHomepage ] ) .
+
+:formatMergeHomepage rdf:type fresnel:Format ;
+                     fresnel:label &quot;This person has the following homepages: &quot;^^xsd:string .</pre>
+</div>
+
+  <h3>5.2. <a id="inheritance" name="inheritance"> </a> Lens Inheritance</h3>
+
+  <p>Experience from Haystack shows that people often want to reuse an existing lens but with minor changes.  Fresnel supports this requirement through lens inheritance.</p>
+  <p>A lens A which is related to another lens B using <span class="code">fresnel:extends</span> inherits all properties and the order of these properties from lens B. </p>
+  <p>The properties from lens B are added to the beginning of the property list of lens A.  It is also possible to add the properties at another position of the list by using the <span class="code">fresnel:super</span> operator. </p>
+  <p>Multiple inheritance is not allowed.  The browser should detect inheritance loops and stop the inheriting process when a loop is detected.</p>
+  <p>Example: The following example contains two lenses. The <span class="code">:identificationLens</span> inherits the <span class="code">foaf:name</span> and <span class="code">foaf:surname</span> properties from the <span class="code">:foafPersonLens</span>. These properties are added to the property list of <span class="code">:identificationLens</span> between <span class="code">owl:sameAs</span> and <span class="code">foaf:depiction</span>. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">
+:foafPersonLens rdf:type fresnel:Lens ;
+                fresnel:classLensDomain foaf:Person ;
+                fresnel:showProperties ( foaf:name
+                                         foaf:surname ) .
+
+
+:identificationLens rdf:type fresnel:Lens ;
+                    fresnel:classLensDomain foaf:Person ;
+                    <strong>fresnel:extends</strong><strong> :foafPersonLens ;</strong> 
+                    fresnel:showProperties ( rdf:type 
+                                             owl:sameAs
+                                             <strong>fresnel:super</strong>
+                                             foaf:depiction ) .</pre>
+</div>
+
+  <h3>5.3. <a id="searchsl" name="searchsl"> </a> Searching for Sublenses </h3>
+  <p>It is also possible to select an appropriate lens using a <a href="#Fsl">Fresnel Selector Expression</a> or a SPARQL query. </p>
+  <p>Example: the following lens searches for a sublens that is applicable to <span class="code">foaf:Person</span>s and has a <span class="code">fresnel:purpose</span> of <span class="code">ex:writeEmail</span> using an FSL expression. </p>
+<div class="exampleOuter exampleInner">
+<pre class="query">:emailLens rdf:type fresnel:Lens ;
+           fresnel:classLensDomain foaf:Person ;
+           fresnel:showProperties (
+              foaf:name [fresnel:property foaf:knows ;
+                         <strong>fresnel:sublens &quot;fresnel:Lens[fresnel:lensDomain/foaf:Person
+                                                         and fresnel:purpose/ex:writeEmail]&quot;^^fresnel:fslSelector</strong>
+                        ]
+                                  ) .</pre>
+</div>
+
+  <h2>6.<a id="styleextended" name="styleextended"></a> Extended Format Vocabulary</h2>
+  <p>The extended format vocabulary provides for:</p>
+  <ul>
+  <li><a href="#pseudo">Selector pseudo-classes</a> like :link, :visited, or :hover</li>
+  <li><a href="#externalmedia">Including external media files</a> like videos and audios</li>
+  <li><a href="#linkingToCSS">Linking directly to a CSS stylesheet</a></li>
+  <li><a href="#MultipleOutputs">Supporting formats for different output media</a></li>
+  <li><a href="#includingCSS">Including CSS/SVG styling instructions</a> directly into a Fresnel stylesheet. </li>
+  </ul>
+  <p>Browsers should implement this functionality or parts of it. If a format contains terms from the extended vocabulary that a browser doesn't support, then it should not use this format.</p>
+
+  <h3>6.1. <a id="pseudo" name="pseudo"> </a> Selector Pseudo-Classes </h3>
+  <p>Fresnel supports the same pseudo class selectors as CSS. The selectors can be used to specify 'behavioral' formats. </p>
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Property</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:link</span></td>
+      <td>The :link pseudo-class applies to all links.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:visited</span></td>
+      <td>The :visited pseudo-class applies to all visited links.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:active</span></td>
+      <td>The active pseudo-class applies while an element is being activated by the user. For example, between the times the user presses the mouse button and releases it.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:hover</span></td>
+      <td>The :hover pseudo-class applies while the user designates an element (with some pointing device), but does not activate it.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:firstLetter</span></td>
+      <td>The :firstLetter pseudo-class allows you to format the first letter of a text.</td>
+    </tr>
+  </table>
+  <p>Example: Highlight the value box of <span class="code">foaf:mbox</span> values while the user designates it.</p>
+<div class="exampleOuter exampleInner">
+    <pre class="query">:mboxFormat rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:mbox ;
+            fresnel:valueStyle [ <strong>fresnel:hover</strong> &quot;background-color: red&quot;^^fresnel:stylingInstructions ].</pre>
+    <h3>6.2. <a id="externalmedia" name="externalmedia"> </a> Including External Media Files </h3>
+</div>
+
+    <p>The extended formatting vocabulary features terms for specifying that property values should be replaced with external media files. The formatting mechanism is the same as when <a href="#displayingValues">displaying an image as a property value</a> (like <span class="code">fresnel:value fresnel:image</span>) in the core vocabulary. </p>
+  <p>The additional terms are:</p>
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Property</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:video</span></td>
+      <td>Retrieve the resource referenced by the property value and play it as a video clip.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:audio</span></td>
+      <td>Retrieve the resource referenced by the property value and play it as an audio clip.<br />
+        If a lens tries to play several audios at once, then the browser should provide for letting the user switch between them. </td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:animation</span></td>
+      <td>Retrieve the resource named by the property value and display it as animated vector graphics or other animated format.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:html</span></td>
+      <td>Retrieve an HTML document and display its body element inside the rendered output document.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:text</span></td>
+      <td>Retrieve the resource named by the property value and display it as text format, such as pdf or MS word using an appropriate viewer.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:textstream</span></td>
+      <td>Retrieve the resource named by the property value and display it as textstream using an appropriate viewer.</td>
+    </tr>
+  </table>
+
+  <h3><a name="linkingToCSS" id="linkingToCSS"></a>6.3. Linking directly to a CSS stylesheet</h3>
+  <p>References to external stylesheets are declared by adding <span class="code">fresnel:stylesheetLink</span> properties to the <span class="code">fresnel:Group</span>s to which the <span class="code">fresnel:Format</span>s belong. <span class="code">fresnel:stylesheetLink</span> property values are the URLs of the external stylesheets. A browser might allow the user to switch between different external styesheets, if a <span class="code">fresnel:Group</span> contains several <span class="code">fresnel:stylesheetLink</span>s.</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:foafGroup rdf:type fresnel:Group ;
+           <strong>fresnel:stylesheetLink &lt;http://www.example.org/example.css&gt;</strong> ;
+           fresnel:resourceStyle "globalResource"^^fresnel:stlyeClass ;<br />           fresnel:propertyStyle "globalProperty"^^fresnel:stlyeClass . </pre>
+</div>
+
+  <h3>6.4. <a id="MultipleOutputs" name="MultipleOutputs"> </a> Supporting Different Output Media </h3>
+  <p>Different sets of formats for different output media can be specified by using the <span class="code">fresnel:purpose</span> property on a Fresnel format or Fresnel format group.</p>
+  <p>Fresnel specifies format purposes for the following output media:</p>
+  <table width="100%"  border="1">
+    <tr>
+      <th scope="col">Resource</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:screen</span></td>
+      <td>Intended primarily for color computer screens.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:projection</span></td>
+      <td>Intended for projected presentations, for example projectors or print to transparencies.</td>
+    </tr>
+    <tr>
+      <td><span class="code">fresnel:print</span></td>
+      <td>Intended for paged, opaque material and for documents viewed on screen in print preview mode.</td>
+    </tr>
+  </table>
+  <p>Example: The purpose of the following group is set to <span class="code">fresnel:print</span>, indicating that formats in this group are applicable for paged output formats.</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:printGroup rdf:type <strong>fresnel:Group</strong> ;
+            <strong>fresnel:purpose fresnel:print ;</strong>
+            fresnel:stylesheetLink &lt;http://www.example.org/example.css&gt; ;
+            fresnel:containerStyle "global"^^fresnel:stlyeClass ; </pre>
+</div>
+
+  <h3><a name="includingCSS" id="includingCSS"></a>6.5. Including CSS/SVG Styling Instructions directly into Fresnel Stylesheets</h3>
+  <p>Some authors of Fresnel stylesheets might find it more convienient to include CSS styling instructions directly into Fresnel stylesheets instead of using styling hooks and CSS classes in an external stylesheet. Therefore  the extended format vocabulary provides the <span class="code">^^fresnel:stylingInstructions</span> datatype for directly including styling instructions. Browsers which want to support this functionality might include the styleing instructions directly into the output document or use them to construct an external CSS stylesheet on the fly.</p>
+  <p>Example: The following Fresnel format defines that the label of the <span class="code">foaf:name</span> property is displayed using the color grey and that the property values are displayed in black. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:nameFormat rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:name ;
+            fresnel:labelStyle &quot;font-color: grey&quot;^^fresnel:stylingInstructions ;
+            fresnel:valueStyle &quot;font-color: black&quot;^^fresnel:stylingInstructions .</pre>
+  </div>
+  <p>Example: The following Fresnel format defines that a line is drawn above the area representing the property <span class="code">foaf:mbox</span> and that a line is drawn below each of the property values. </p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:mboxFormat rdf:type fresnel:Format ;
+            fresnel:formatDomain foaf:mbox ;
+            fresnel:propertyStyle &quot;border-top: solid black&quot;^^fresnel:stylingInstructions ;
+            fresnel:valueStyle &quot;border-bottom: solid black&quot;^^fresnel:stylingInstructions .</pre>
+  </div>
+  <h4>Complete Example</h4>
+  <p>The following example shows how a group of formats is applied to an instance of foaf:Person.</p>
+  <p>RDF data to be displayed:</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">:Chris rdf:type foaf:Person ;
+       foaf:name &quot;Chris Bizer&quot; ;
+       foaf:mbox &lt;mailto:chris@bizer.de&gt; ;
+       foaf:mbox &lt;mailto:bizer@gmx.de&gt; ;
+       foaf:depiction &lt;http://www.wiwiss.fu-berlin.de/suhl/ueber_uns/team/Fotos/ChrisPassbild.jpg&gt; .
+    </pre>
+  </div>
+  <p>Fresnel formats:</p>
+  <div class="exampleOuter exampleInner">
+    <pre class="query">
+:foafGroup rdf:type fresnel:Group ;
+           fresnel:stylesheetLink &lt;http://www.example.org/example.css&gt; ;
+           fresnel:containerStyle "background-color: white;"^^fresnel:stylingInstructions ; 
+
+:foafPersonFormat rdf:type fresnel:Format ;
+                  fresnel:classFormatDomain foaf:Person ;
+                  fresnel:resourceStyle "background-color: gray;"^^fresnel:stylingInstructions ;
+                  fresnel:group :foafGroup .
+	
+:nameFormat rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:name ;
+            fresnel:propertyStyle "border-top: solid black;"^^fresnel:stylingInstructions ;
+            fresnel:labelStyle "font-weight: bold;"^^fresnel:stylingInstructions ;
+            fresnel:group :foafGroup .
+
+:urlFormat rdf:type fresnel:Format ;
+           fresnel:propertyFormatDomain foaf:homepage ;
+           fresnel:propertyFormatDomain foaf:mbox ;
+           fresnel:value fresnel:externalLink ;
+           fresnel:propertyStyle "border-top: solid black;"^^fresnel:stylingInstructions ;
+           fresnel:labelStyle "font-weight: bold;"^^fresnel:stylingInstructions ;
+           fresnel:group :foafGroup .
+
+:depictFormat rdf:type fresnel:Format ;
+              fresnel:propertyFormatDomain foaf:depiction ;
+              fresnel:label fresnel:none ;
+              fresnel:value fresnel:image ;
+              fresnel:propertyStyle "border-top: solid black;"^^fresnel:stylingInstructions ;
+              fresnel:group :foafGroup .</pre>
+  </div>
+  <p>Example of box model instantiation with styling instructions attached:</p>
+  <p><img src="boxmodelexample.gif" width="755" height="370" alt="example instantiation of the box model"/></p>
+  <p>Output rendered by a text-oriented browser based on this box model example:</p>
+  <p><img src="boxmodelexampleoutput.gif" width="237" height="207" alt="example rendering"/></p>
+  <!--
+    <p class="imgCaption">Internal and External Styling Instructions </p>
+    <p>Fresnel offers two ways of attaching styling instructions to Fresnel styling hooks. </p>
+    <p class="imgCaption">1. Internal Styling Instructions</p>
+    <p>Internal styling instructions are attached to styling hooks as typed literals (datatype = <span class="code">fresnel:stylingInstructions</span>). </p>
+    <p> Example:</p>
+    <div class="exampleOuter exampleInner">
+      <pre class="query">:mboxFormat rdf:type fresnel:Format ;
+            fresnel:propertyFormatDomain foaf:mbox ;
+            fresnel:Format <span class="imgCaption">&quot;border-top: solid black&quot;^^fresnel:stylingInstructions</span> .</pre>
+    </div>
+-->
+  <h3></h3>
+  <p>&nbsp;</p>
+  <h2><a name="owl">A. Formal Specification</a></h2>
+  <p>The OWL Specification of the Fresnel vocabularies is found at:</p>
+  <ul>
+    <li><strong>Fresnel Core Vocabulary</strong>: <a href="../../../../2004/09/fresnel-ns/core.owl">core.owl</a> (OWL/XML), containing
+    <ul>
+      <li>Lens-Core, the basic vocabulary for defining and relating lenses.</li>
+      <li>Format-Core, the basic vocabulary for specifying formats.</li>
+    </ul>
+    </li>
+    <li> <strong>Fresnel Extended Vocabulary</strong>: <a href="../../../../2004/09/fresnel-ns/extended.owl">extended.owl</a> containing
+    <ul>
+      <li>Lens-Extended, additional terms for relating lenses and for using lens inheritance.</li>
+      <li>Format-Extended, advanced lens selector, media type and lens purpose vocabularies.</li>
+    </ul>
+    </li>
+  </ul>
+  <p>There are also informative versions of the vocabularies using N3 syntax: <a href="../../../../2004/09/fresnel-ns/core.owl.n3">core.owl.n3</a>, <a href="../../../../2004/09/fresnel-ns/extended.owl.n3">extended.owl.n3</a>.</p>
+
+  <!-- /MARKER html GRAMMAR -->
+
+  <h2><a id="references" name="references">B. References</a></h2>
+
+  <p><a name="rdf" id="rdf">[1]</a> Resource Description Framework (RDF): <a href="http://www.w3.org/RDF/">http://www.w3.org/RDF/</a></p>
+
+  <p><a name="css" id="css">[2]</a> Cascading Style Sheets (CSS): <a href="http://www.w3.org/Style/CSS/">http://www.w3.org/Style/CSS/</a></p>
+  <p><a name="svg" id="svg">[3]</a> Scalable Vector Graphics (SVG): <a href="http://www.w3.org/Graphics/SVG/">http://www.w3.org/Graphics/SVG/</a></p>
+  <p><a name="foaf" id="foaf">[4]</a> Friend of a Friend (FOAF) project: <a href="http://www.foaf-project.org/">http://www.foaf-project.org/</a></p>
+  <p><a name="hs" id="hs">[5]</a> Haystack: <a href="http://haystack.csail.mit.edu/">http://haystack.csail.mit.edu/</a></p>
+  <p><a name="lw" id="lw">[6]</a> Longwell: <a href="http://simile.mit.edu/longwell/">http://simile.mit.edu/longwell/</a></p>
+  <p><a name="iv" id="iv">[7]</a> IsaViz: <a href="http://www.w3.org/2001/11/IsaViz/">http://www.w3.org/2001/11/IsaViz/</a></p>
+  <p><a name="bs" id="bs">[8]</a> BrownSauce: <a href="http://brownsauce.sourceforge.net/">http://brownsauce.sourceforge.net/</a></p>
+  <p><a name="se" id="se">[9]</a> SEAL: <a href="http://www.aifb.uni-karlsruhe.de/%7Esst/Research/Publications/semanticportal.pdf">http://www.aifb.uni-karlsruhe.de/~sst/Research/Publications/semanticportal.pdf</a></p>
+  <p><a name="to" id="to">[10]</a> Topia: <a href="http://wwwis.win.tue.nl:8082/clustermap/index.html">http://wwwis.win.tue.nl:8082/clustermap/index.html</a></p>
+  <p><a name="ms" id="ms">[11]</a> mSpace: <a href="http://www.mspace.fm/">http://www.mspace.fm/</a></p>
+  <p><a name="sparql" id="sparql">[12]</a> SPARQL: <a href="http://www.w3.org/TR/rdf-sparql-query/">http://www.w3.org/TR/rdf-sparql-query/</a></p>
+  <p><a name="fsl" id="fsl">[13]</a> Fresnel Selector Language (FSL): <a href="http://www.w3.org/2005/04/fresnel-info/fsl/">http://www.w3.org/2005/04/fresnel-info/fsl/</a></p>
+  <p><a name="QuanKarger" id="QuanKarger">[14]</a>    Dennis Quan, David R. Karger: How to Make a Semantic Web Browser. <a href="http://www.www2004.org/proceedings/docs/1p255.pdf">http://www.www2004.org/proceedings/docs/1p255.pdf</a></p>
+  <p><a name="Rutledge" id="Rutledge">[15]</a> Lloyd Rutledge, Jacco van Ossenbruggen and Lynda Hardman: Making RDF Presentable. <a href="http://homepages.cwi.nl/%7Emedia/publications/WWW2005.pdf">http://homepages.cwi.nl/~media/publications/WWW2005.pdf</a></p>
+  <p><a name="Pietriga" id="Pietriga">[16]</a>    Emmanuel Pietriga: 
+
+
+ Styling RDF Graphs with GSS. <a href="http://www.xml.com/pub/a/2003/12/03/gss.html">http://www.xml.com/pub/a/2003/12/03/gss.html</a></p>
+  <p><a name="Huynh" id="Huynh">[17]</a> David Huynh: Haystack's User Interface Framework. <a href="http://haystack.csail.mit.edu/documentation/ui.pdf">http://haystack.csail.mit.edu/documentation/ui.pdf</a></p>
+  <p><a name="cocoon" id="cocoon">[18]</a> Apache Cocoon Project. <a href="http://cocoon.apache.org/">http://cocoon.apache.org/</a></p>
+  <p><a name="welkin" id="welkin">[19]</a> Welkin: a graph-based RDF visualizer. <a href="http://simile.mit.edu/welkin/">http://simile.mit.edu/welkin/</a></p>
+  <hr />
+
+<h2><a name="chlog" id="chlog">C. Change Log</a></h2>
+  <ul>
+    <li>2005-06-30 Emmanuel Pietriga:<br />
+Rewrote sections on selector specificity and class vs. instance selectors. Made abstractness of box model more explicit. Editorial changes throughout the document.</li>
+    <li>2005-06-24 Chris Bizer:<br />
+Updated the manual with the results from the discussions on <a href="http://simile.mit.edu/mail/SummarizeList?listId=12">fresnel-dev at simile.mit.edu</a>. </li>
+    <li>2005-04-08 Chris Bizer:<br />
+      Description of fresnel:member, description of default label lens added. Moved fresnel:sublens to core vocabulary. Styling example, better fresnel:use example and some additional references added. </li>
+    <li>2005-04-04 Emmanuel Pietriga:<br />
+  Some terminology changes. Rewording of some paragraphs. Additional explanations and examples for sections involving FSL. Fixed some examples. Added and fixed some references and associated links.</li>
+    <li>2005-03-31 Chris Bizer:<br />
+Removed section about ordering property values. Added section about Fresnel namespace. </li>
+    <li>2005-03-28 Ryan Lee:<br />
+    Grammatical and consistency checks.</li>
+    <li>Revision 1.0  2005-03-23 Chris Bizer:<br />
+    Intital version of this document. </li>
+</ul>
+</body>
+</html>
+

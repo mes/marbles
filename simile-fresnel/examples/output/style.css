@@ -1,0 +1,6 @@
+.f-resource { border: 1px solid #000; background: #eef; padding: 5px; margin: 5px }
+.f-resource > .f-label { font-weight: bold; padding-bottom: 3px; }
+.f-resource .f-resource { background: #ddf; }
+.f-property { padding-bottom: 3px; }
+.f-property > .f-label { font-style: italic; font-size: small; }
+.f-value { padding-left: 3px; }

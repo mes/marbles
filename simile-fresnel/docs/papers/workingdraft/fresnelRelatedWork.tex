@@ -1,0 +1,24 @@
+%--------------------------------------------------------------------
+\section{Related Work}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENTS FROM STEFANO
+% take them into account in the future version of this section
+%%%%%%%%%%%%%%%%%%%%%%%
+%- xslt over RDF/XML is always possible, it's just unberably hard and error prone, due to the XSLT-unfriendly nature of RDF/XML.%- "conceptually wrong" is a little big too strong, use "conceptually defective"? A great example is the fact that rdf:type="blah" can become the element name, modelling this in XPath is extremely hard.%- the other problem with XSLT is the notion that it acts as a transformation filter on a given infoset. In theory, this infoset could be as big as the whole triple store model itself, in practice however, due to the intrinsic nature of XSLT recursivity, it is ill suited for 'selection by filtering'.%- mention XQuery as a potential alternative to the above, but note that it suffers from the same problems as XSLT.%- "potential irregularit, openness and use of different vocabularies" this is not true. XSLT can cope with that too. The problem is not that is the fact that we have graphs instead of trees and all existing technologies work with trees, not graphs.%- Xenon, just like any transformation stage, is not necessarely bound to a display paradigm. It is *possible* to be used in that regard (if there was such a thing as a 'formatting object' equivalent for RDF) but it's not a defect of its design.%- declarative approaches different from procedural approaches in the fact that they don't change the structure of the existing infoset but they augment it. Display properties are 'added' to the original model.%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+There have been various approaches for visualizing RDF data. The approaches can be grouped into three categories: Non-customizable approaches which visualize RDF without taking vocabulary specifiy display knowledge into account\cite{Steer03}, procedural approaches which encode display knowledge as a series of transformation steps and declarative approaches where display knowledge is represented as a set of generic selection and styling instructions. 
+
+\subsection{Procedural Approaches}
+
+Procedural approaches encode display knowledge as a series of transformation steps. One approach from this category is using XSLT\cite{xslt04} to transform RDF/XML\cite{rdfxml04} representations of RDF graphs in an environment like Cocoon\cite{cocoon04}. Authoring XSLT templates and XPath expressions to handle arbitrary RDF/XML is complex, if not impossible, considering the many potential serializations of a given RDF graph and the present lack of a commonly accepted RDF canonicalization in XML\cite{Carroll04}. From a more abstract perspective, working on the XML serialization tree to manipulate RDF graphs, is conceptually wrong since RDF concepts would not be manipulated at the right level of abstraction %\todo{Emmanual: Can you please be more concrete here!}.
+
+The RDF data model is very different from that of XML.  Therefore, a language for presenting Semantic Web data should be tailored to the RDF model by taking into account characteristics of the RDF world (potential irregularity of the data, openness and use of different vocabularies to describe resources).
+
+These problems are addressed by Xenon\cite{quan05}, an RDF stylesheet ontology that builds on the ideas of XSLT, but combines recursive templating mechanisms with SPARQL as an RDF-specific selector language. Xenon suceeds in addressing XSLT's RDF canonicalization problem but still has the drawback - as all procedural approaches - that transformation rules are very closely bound to a specific display paradigm or output format preventing the reuse of display knowledge across applications. 
+
+\subsection{Declarative Approaches}
+
+Declarative approaches represent display knowledge as a set of generic selection and styling instructions. They try to copy the ideas of HTML+CSS that where sucessfull in the classic web. Talk about: GSS \cite{gss03} (negativ: node-and-arc oriented, selector language in RDF), Haystack Slides \cite{HaystackUI03}(negativ: layout oriented, redo of HTML and CSS, HTML font tag problem) , Longwell config (too simple), ... Also talk about \cite{Rutledge05}.

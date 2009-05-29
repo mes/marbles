@@ -1,0 +1,26 @@
+@prefix fresnel:		<http://www.w3.org/2004/09/fresnel#> .
+@prefix fslns:			<http://simile.mit.edu/2006/01/ontologies/fsl-ns#> .
+@prefix rdf:    		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf:   		<http://xmlns.com/foaf/0.1/> .
+@prefix :       		<#> .
+
+<http://xmlns.com/foaf/0.1/> a fslns:Namespace ;
+	fslns:abbreviated "foaf" .
+	
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#> a fslns:Namespace ;
+	fslns:abbreviated "rdf" .
+
+:testGroup a fresnel:Group .
+
+####################################
+# Select all foaf:Person instances #
+####################################
+
+:testLens a fresnel:Lens;
+	fresnel:purpose fresnel:defaultLens ;
+	fresnel:instanceLensDomain "SELECT ?person WHERE { ?person rdf:type foaf:Person }"^^fresnel:sparqlSelector ;	
+	fresnel:showProperties (	foaf:name
+														foaf:img
+														foaf:mbox
+														foaf:knows ) ;
+	fresnel:group :testGroup .

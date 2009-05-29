@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>Fresnel Selector Language for RDF</title>
+  <link rel="stylesheet" type="text/css" href="/StyleSheets/TR/W3C-WD.css" />
+
+<style type="text/css">
+body {
+  background-image: none;
+}
+
+dt {
+  margin:1em;
+}
+
+.tabdata td {
+  border:1px solid black;
+  padding:0.5em;
+}
+
+tr.ruleMainRow td {
+  padding-top:1em;
+}
+
+td.ruleAssign {
+  padding: 0 1em;
+}
+
+.code {
+  font-family:monospace;
+  white-space:pre;
+}
+
+div.code {
+  padding: 1em;
+  border: 1px solid black;
+  background-color: #EEE;
+}
+
+.fslnodestep {
+  color:blue;
+}
+
+.fslarcstep {
+  color:red;
+}
+
+.fslCode {
+  color:green;
+}
+</style>
+
+</head>
+
+<body>
+
+  <div class="head">
+    <h1 id="main">Fresnel Selector Language for RDF (FSL)</h1>
+
+    <h2 id="main_what">18 November 2005</h2>
+
+    <dl>
+
+      <dt>This version:</dt>
+        <dd><a href="http://www.w3.org/2005/04/fresnel-info/fsl-20050726/">http://www.w3.org/2005/04/fresnel-info/fsl-20050726/</a></dd>
+      <dt>Latest version:</dt>
+        <dd><a href="http://www.w3.org/2005/04/fresnel-info/fsl/">http://www.w3.org/2005/04/fresnel-info/fsl/</a></dd>
+      <dt>Editors:</dt>
+      <dd>Emmanuel Pietriga, INRIA &lt;<a href="mailto:emmanuel.pietriga@inria.fr">emmanuel.pietriga@inria.fr</a>&gt;</dd>
+    </dl>
+
+  </div>
+
+  <hr title="Separator for header" />
+
+  <div>
+    <h2 class="notoc"><a id="abstract" name="abstract">Abstract</a></h2>
+
+    <p>The Fresnel Selector Language (FSL) is a language for modeling traversal paths in RDF graphs. It is used as a selector language for the <a href="../manual/">Fresnel display vocabulary for RDF</a>. FSL does not depend on a specific serialization of RDF. It is inspired by the XPath Recommendation <a href="#xpath">[XPath]</a> and <a href="#references">RDFPath language proposals</a> but is not intended to be a full RDFPath language, though it could be extended to become one.</p>
+  </div>
+
+  <hr />
+
+  <div class="toc">
+    <h2><a id="contents" name="contents">Table of Contents</a></h2>
+
+    <ul class="toc">
+      <li class="tocline1">
+        <a href="#introduction" class="tocxref">1 Introduction</a>
+        <ul class="toc">
+          <li class="tocline2"><a href="#introterm">1.1 Terminology</a></li>
+          <li class="tocline2"><a href="#introex">1.2 Introductory Examples</a></li>
+        </ul>
+      </li>
+      <li class="tocline1">
+        <a href="#locationpaths">2 Paths</a>
+        <ul class="toc">
+          <li class="tocline2"><a href="#psel">2.1 Primary Selection</a></li>
+          <li class="tocline2"><a href="#locationsteps">2.2 Location Steps</a></li>
+          <li class="tocline2"><a href="#axes">2.3 Axes</a></li>
+        </ul>
+      </li>
+      <li class="tocline1">
+        <a href="#expressions" class="tocxref">3 Expressions</a>
+      </li>
+      <li class="tocline1">
+        <a href="#functionlib" class="tocxref">4 Core Function Library</a>
+      </li>
+      <li class="tocline1">
+        <a href="#rdfsowl" class="tocxref">5 RDFS/OWL Awareness</a>
+      </li>
+      <li class="tocline1">
+        <a href="#datamodel" class="tocxref">6 Data Model</a>
+        <ul class="toc">
+          <li class="tocline2"><a href="#dmn">6.1 Nodes</a></li>
+          <li class="tocline2"><a href="#dma">6.2 Arcs</a></li>
+        </ul>
+      </li>
+      <li class="tocline1">
+        <a href="#prefixres" class="tocxref">7 Namespace Prefix Binding Resolution</a>
+      </li>
+      <li class="tocline1">
+        <a href="#grammar" class="tocxref">8 FSL Grammar</a>
+      </li>
+    </ul>
+  </div>
+
+  <h3><a id="appendices" name="appendices">Appendices</a></h3>
+
+  <ul>
+    <li class="tocline2"><a href="#references">A References</a></li>
+    <li class="tocline2"><a href="#chlog">B Change Log</a></li>
+  </ul>
+
+  <hr />
+
+  <h2>1 <a id="introduction" name="introduction">Introduction</a></h2>
+
+  <p>The Fresnel Selector Language (FSL) is a language for modeling traversal paths in RDF graphs. FSL is inspired by the XPath Recommendation <a href="#xpath">[XPath]</a> and <a href="#references">RDFPath language proposals</a> but is not intended to be a full RDFPath language, though it could be extended to become one. It has been designed to address the specific requirements of a path language for the <a href="../">Fresnel</a> RDF display vocabulary and tries to be as simple as possible, reusing as many XPath concepts and syntactic constructs as possible while adapting them to the graph-based RDF data model.</p>
+
+  <p>FSL considers RDF models as directed labeled graphs according to the <a href="http://www.w3.org/TR/rdf-concepts/">Resource Description Framework (RDF): Concepts and Abstract Syntax Recommendation</a> and does not depend on any serialization of RDF. FSL expressions represent traversal paths in RDF graphs.</p>
+
+  <p>FSL is syntactically and semantically compatible with Fresnel's <a href="../manual/#selectors">Basic Selectors (Simple RDF Naming)</a> and the latter can be considered as a very limited subset of what can be expressed with FSL.</p>
+
+  <h3>1.1 <a id="introterm" name="introterm">Terminology</a></h3>
+
+  <p>RDF models are considered as directed labeled graphs, made of <strong>nodes</strong> (resources and literals) and <strong>arcs</strong> (properties). In the remainder of this document we will use the general term <strong>graph entity</strong> to refer to both nodes and arcs of a graph.</p>
+
+  <p>An FSL expression represents a path from one graph entity to another. A path is made of <strong>location steps</strong>. Locations steps are made of an optional axis specifier (see <a href="#axes">2.3 Axes</a>), a type test (see <a href="#locationsteps">2.2 Location Steps</a>), and optional predicates following this syntax:</p>
+
+  <div><span class="code">AxisSpecifier::TypeTest[Predicates]</span></div>
+
+  <p>The term <strong>predicate</strong> is to be interpreted as a filtering condition on a location step, as <a href="http://www.w3.org/TR/xpath#predicates">XPath predicates</a>. It is <em>not</em> to be interpreted as the RDF reification term (as in "statements are made of a subject, a predicate, and an object").</p>
+
+  <p>The term <strong>QName</strong> refers to <a href="http://www.w3.org/TR/REC-xml-names/#NT-QName">qualified names</a> as defined by the <a href="http://www.w3.org/TR/REC-xml-names">W3C Recommendation on Namespaces in XML</a>.</p>
+
+  <p>The Notation 3 syntax for RDF is used throughout this document to show examples.</p>
+
+  <h3>1.2 <a id="introex" name="introex">Introductory Examples</a></h3>
+
+  <p>This section is an informal introduction to FSL and contains examples that should give a general idea of the language to the reader. A more formal definition of the language's syntax and semantics is presented in sections 2 to 6.</p>
+
+  <p>FSL uses a syntax close to that of XPath 1.0 <a href="#xpath">[XPath]</a>. The main difference is that arcs are explicitly represented as location steps in FSL paths, contrary to XPath. The latter only represents nodes as location steps, as there is only one kind of relation between nodes in an XML tree: the parent-child relation, which is thus implicit.</p>
+
+  <p>As an example of this explicit representation of arcs as location steps in FSL, the following expression represents a path starting at a resource, traversing a <span class="code">foaf:knows</span> arc, reaching a resource, traversing an <span class="code">rdf:type</span> arc and reaching a resource. The exact interpretation of such a path depends on its context of use. Location steps representing nodes (i.e. resources) are colored in blue, location steps representing arcs (i.e. properties) are colored in red.</p>
+
+  <div class="code"><span class="fslnodestep">*</span>/<span class="fslarcstep">foaf:knows</span>/<span class="fslnodestep">*</span>/<span class="fslarcstep">rdf:type</span>/<span class="fslnodestep">*</span></div>
+
+  <p>The following are examples of FSL expressions and their interpretation depending on their context of use in Fresnel.</p>
+
+<div class="code"><pre>:exampleLens a fresnel:Lens;
+
+
+# exampleLens' <strong>domain</strong>: all resources
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*</span>"^^fresnel:fslselector.
+
+
+# exampleLens' <strong>domain</strong>: all resources of type foaf:Person
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person</span>"^^fresnel:fslselector.
+
+
+# exampleLens' <strong>domain</strong>: all resources of type foaf:Person that foaf:knows another resource
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[foaf:knows]</span>"^^fresnel:fslselector.
+
+
+# exampleLens' <strong>domain</strong>: all resources of type foaf:Person that foaf:knows another resource of type foaf:Person
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[foaf:knows/foaf:Person]</span>"^^fresnel:fslselector.
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: dc:title
+:exampleLens fresnel:showProperties "<span class="fslCode">dc:title</span>"^^fresnel:fslselector.
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: all properties
+:exampleLens fresnel:showProperties "<span class="fslCode">*</span>"^^fresnel:fslselector.
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: foaf:knows properties, provided that
+# their value is a resource typed as a foaf:Person
+:exampleLens fresnel:showProperties "<span class="fslCode">foaf:knows[foaf:Person]</span>"^^fresnel:fslselector.
+</pre></div>
+
+
+  <h2>2 <a id="locationpaths" name="locationpaths">Paths</a></h2>
+
+  <p>All FSL expressions are paths that link graph entities (i.e., nodes or arcs) to other graph entities in the same graph. Paths describe how to reach a target entity from a source entity. FSL expressions can be used to point at target entities from known entities or more generally model conditions on the selection of entities in an RDF model.</p>
+
+  <h3>2.1 <a id="psel" name="psel">Primary Selection</a></h3>
+
+  <p>In all cases, an FSL expression is to be evaluated against of set of entities that represent potential starting points for the path. This set, called the <strong>primary selection</strong>, can either be a set of nodes in the graph or a set of arcs. A full RDFPath language needs to offer means to explicitly specify this set. When used in Fresnel, the primary selection associated with an FSL expression is defined implicitly by its context of use as follows:</p>
+
+  <dl>
+    <dt>FSL expressions as <span class="code">fresnel:showProperties</span> values</dt>
+    <dd>The primary selection is the set of all properties associated with the resource currently being processed by the lens. This includes both properties which have the latter resource as their subject and properties which have it as their object.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:hideProperties</span> values</dt>
+    <dd>Same as <span class="code">fresnel:showProperties</span>.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:instanceLensDomain</span> values</dt>
+    <dd>The primary selection is the set of resources contained in the RDF model to be displayed by Fresnel.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:instanceStyleDomain</span> values</dt>
+    <dd>Same as <span class="code">fresnel:instanceLensDomain</span>.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:sublens</span> values</dt>
+    <dd>The primary selection is the set of resources typed as <span class="code">fresnel:Lens</span> (or any subclass of it) in the RDF model representing the Fresnel transformation.</dd>
+  </dl>
+
+  <p>FSL could be extended so as to allow the explicit specification of the primary selection. Such an extension is however not described here, as our primary goal is to keep the language as simple as possible in the context of its use in Fresnel.</p>
+
+  <h3>2.2 <a id="locationsteps" name="locationsteps">Location Steps</a></h3>
+
+  <p>An FSL expression represents a path from a graph entity (i.e. a node or arc) to another graph entity, passing by an arbitrary number of other graph entities. Each step on the path is called a <strong>location step</strong>. As mentioned earlier, FSL paths explicitly represent both nodes and arcs as location steps, as it is desirable to be able to constrain the type of arcs a path should traverse (something that is not relevant in XPath as the only relation between the nodes of an XML tree is the parent-child relation which bears no explicit semantics). In the following FSL expressions, node location steps are colored in blue, arc location steps are colored in red.</p>
+
+  <div class="code"><span class="fslnodestep">foaf:Person</span>/<span class="fslarcstep">foaf:knows</span>/<span class="fslnodestep">foaf:Person</span>/<span class="fslarcstep">foaf:workplaceHomepage</span>/<span class="fslnodestep">*[uri(.) = 'http://www.inria.fr']</span></div>
+
+  <p>A node location step can only be followed by an arc location step. An arc location step can only be followed by a node location step.</p>
+
+  <h4 id="locstepambig">Ambiguities</h4>
+
+  <p>Having two kinds of location steps introduces ambiguities. For instance, there is an ambiguity about what the following expression selects:</p>
+
+  <div class="code">*/foaf:knows</div>
+
+  <p>Does it select the <span class="code">foaf:knows</span> property instances of any subject resource? Or does it select the resource <span class="code">foaf:knows</span> (of type <span class="code">rdf:Property</span> as it might occur in a model using the RDF-S vocabulary), provided that it is the object of at least one statement involving any property? In other words, is it to be interpreted as <span class="code"><span class="fslnodestep" style="font-style:italic">*</span>/<span class="fslarcstep">foaf:knows</span></span> or <span class="code"><span class="fslarcstep">*</span>/<span class="fslnodestep" style="font-style:italic">foaf:knows</span></span> ?</p>
+
+  <p>Such ambiguities are solved in Fresnel by the context of use of the FSL expression, which gives the nature of the primary selection and thus constrains the first (and therefore all) location step(s) (see <a href="#flsif">First Location Step in Fresnel</a> later in this document for details). The interpretation of FSL expressions outside the Fresnel context is out of the scope of this document, and is the prerogative of each application that wants to use or extend FSL.</p>
+
+  <h4 id="typetests">Type Tests</h4>
+  
+  <p>In XPath, a QName used as a location step is to be interpreted as an equality constraint on the name of XML elements. The name of an XML element reflects its type. It is not a unique element identifier. A natural adaptation of this to RDF and FSL is to interpret QNames used as node location steps as constraints on the type (i.e. the class) of RDF resources.</p> 
+
+  <p><strong>Note:</strong> the other option would have been to interpret QNames as node location steps as constraints on the URI of RDF resources, rather than constraints on their type. This intepretation is however conceptually further away from the XPath/XML model, and more importantly is less relevant, as constraining the URI of a resource on the path is seldom interesting (and can still be achieved with predicates involving function <span class="code">uri()</span> as shown in <a href="#functionlib">4 Core Function Library</a>).</p>
+
+  <p>Symbol <strong>*</strong> as a type test has the following meaning:</p>
+  <ul>
+    <li>for node location steps: the class (or type) of the resource is not constrained (unless there is an explicit predicate constraining it),</li>
+    <li>for arc location steps: the property type (identified by its URI reference, i.e. the arc's label) is not constrained.</li>
+  </ul>
+
+  <p>A QName as a type test has the following meaning:</p>
+  <ul>
+    <li>for node location steps: the resource must be an instance of the class identified by the QName, or of one of its subclasses (see <a href="#functionlib">5 RDFS/OWL Awareness</a>),</li>
+    <li>for arc location steps: the property must be an instance of the property type identified by the URI corresponding to the QName, or one of its subproperties (see <a href="#functionlib">5 RDFS/OWL Awareness</a>).</li>
+  </ul>
+
+  <p>Therefore, location steps of the form:</p>
+
+  <div class="code">qname</div>
+   
+  <p>could also be written as (verbose syntax):</p>
+
+  <div class="code">*[rdf:type/*[uri(.) = exp('qname')]</div>
+
+  <p>More generally, location steps of the form:</p>
+
+  <div class="code">qname[...]</div>
+   
+  <p>where "..." represent a set of predicates applied to the location step could also be written as (verbose syntax):</p>
+
+  <div class="code">*[rdf:type/*[uri(.) = exp('qname') and ...]</div>
+
+  <p>Function <span class="code">exp()</span> takes a QName and returns the corresponding fully expanded URI (see <a href="#functionlib">4 Core Function Library</a>). The use of function <span class="code">exp()</span> is not mandatory. It is possible instead to use the full URI directly, as shown in the examples below.</p>
+
+  <p>The following examples illustrate both the standard and verbose syntaxes. The verbose syntax is presented only to illustrate the semantics of the standard syntax and show that resource type conditions can be expressed in an alternate way. However, although expressions using the verbose form will be interpreted by an FSL engine, there is no advantage in using it.</p>
+
+<div class="code"><pre># <strong>properties</strong> to be shown for resources handled by this lens: foaf:knows provided
+# that the value if of type foaf:Person (all three expressions are equivalent)
+<span class="fslCode">foaf:knows[foaf:Person]</span>
+<span class="fslCode">foaf:knows[*[rdf:type/*[uri(.) = exp('foaf:Person')]]</span>
+<span class="fslCode">foaf:knows[*[rdf:type/*[uri(.) = 'http://xmlns.com/foaf/0.1/Person']]</span>
+
+# exampleLens' <strong>domain</strong>: all foaf:Person instances that foaf:knows something
+# (all three expressions are equivalent)
+<span class="fslCode">foaf:Person[foaf:knows]</span>
+<span class="fslCode">*[rdf:type/*[uri(.)=exp('foaf:Person')] and foaf:knows]</span>
+<span class="fslCode">*[rdf:type/*[uri(.)='http://xmlns.com/foaf/0.1/Person'] and foaf:knows]</span>
+
+# exampleStyle's <strong>domain</strong>: all resources of type rss:item grouped in a list, that
+# have both a title and a description (all three expressions are equivalent)
+<span class="fslCode">*/rdf:li/rss:item[rss:title and rss:description]</span>
+<span class="fslCode">*/rdf:li/*[rdf:type/*[uri(.) = exp('rss:item')] and rss:title and rss:description]</span>
+<span class="fslCode">*/rdf:li/*[rdf:type/*[uri(.) = 'http://purl.org/rss/1.0/item'] and rss:title and rss:description]</span>
+</pre></div>
+
+  <h4 id="flsif">First Location Step in Fresnel</h4>
+
+  <p>A path can start with a node location step or an arc location step. A path can end with a node location step or an arc location step, no matter the type of the initial location step. However, the first location step must be compatible with the primary selection:</p>
+  <ul>
+    <li>if the primary selection is a set of resources (e.g. for <span class="code">fresnel:instanceLensDomain</span>), the first location step should be a node location step,</li>
+    <li>if the primary selection is a set of properties associated with a resource (e.g. <span class="code">fresnel:showProperties</span>), the first location step should be an arc location step.</li>
+  </ul>
+
+  <p>In the context of Fresnel, the start and end location steps should also meet the following requirements depending on the FSL expression's context of interpretation:</p>
+  <dl>
+    <dt>FSL expressions as <span class="code">fresnel:showProperties</span> values</dt>
+    <dd>The expression represents a path from the current resource (considered as the context of evaluation of the expression) to the properties to be displayed. These properties are reached from the current resource through the specified path. The path therefore consists in an odd number of location steps, the first and last location steps being arc location steps. The last location step represents the selected properties. In the most common case, properties that should be displayed are directly associated with the current resource. The path is then made of a single location step that is both the start and end location steps.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:hideProperties</span> values</dt>
+    <dd>Same as <span class="code">fresnel:showProperties</span>.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:instanceLensDomain</span> values</dt>
+    <dd>The expression represents selection constraints and is evaluated against all resources in the RDF model to be displayed. The expression does not represent a path, but rather a general selector. It consists in a single location step with optional predicates. The first and last location steps are the same location step. The expected result is a set of resources on which the lens should be applied. The single location step should therefore be a node location step.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:instanceFormatDomain</span> values</dt>
+    <dd>Same as <span class="code">fresnel:instanceLensDomain</span>. The expected result is a set of resources on which the format should be applied.</dd>
+    <dt>FSL expressions as <span class="code">fresnel:propertyFormatDomain</span> values</dt>
+    <dd>The expression represents selection constraints and is evaluated against all properties of the resource currently being formatted. The expression does not represent a path, but rather a general selector. It consists in a single location step with optional predicates. The first and last location steps are the same location step, which is an arc location step.</dd>
+<!--    <dt>FSL expressions as <span class="code">fresnel:sublens</span> values</dt>
+    <dd>The expression is evaluated against the set of resources that are typed as fresnel:Lens (or subclass of) in the Fresnel transformation. As for <span class="code">fresnel:instanceLensDomain</span>, this is more a selector than a path. It therefore consists in a single location step with optional predicates. The first and last location steps are the same location step.</dd> -->
+  </dl>
+
+  <p>Some examples follow (we only give the FSL expressions, not the full Fresnel statements).</p>
+
+<div class="code"><pre># <strong>properties</strong> to be shown for resources handled by a lens: foaf:knows
+<span class="fslCode">foaf:knows</span>
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: foaf:knows provided
+# that the value is of type foaf:Person
+<span class="fslCode">foaf:knows[foaf:Person]</span>
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: the Class of things
+# known by the current resource. More formally, this will show the class of things that are the
+# object of a foaf:knows statement involving the current resource as their subject
+<span class="fslCode">foaf:knows/*/rdf:type</span>
+
+
+# exampleLens' <strong>domain</strong>: all foaf:Person instances older than 60
+<span class="fslCode">foaf:Person[ex:age/text() &gt; 60]</span>
+
+
+# exampleStyle's <strong>domain</strong>: all resources of type rss:item grouped in a list, that
+# have both a title and a description
+<span class="fslCode">*/rdf:li/rss:item[rss:title and rss:description]</span>
+</pre></div>
+
+
+  <p>The following table summarizes these requirements.</p>
+
+  <table class="tabdata">
+    <tbody>
+    <tr>
+      <td>Expression Evaluation Context</td>
+      <td>Primary Selection</td>
+      <td>First location step</td>
+      <td>Last location step</td>
+      <td>Returns</td>
+    </tr>
+    <tr>
+      <td class="code">fresnel:showProperties</td>
+      <td>All properties associated with the current resource</td>
+      <td>Arc</td>
+      <td>Arc</td>
+      <td>The properties identified by the last location step</td>
+    </tr>
+    <tr>
+      <td class="code">fresnel:hideProperties</td>
+      <td>All properties associated with the current resource</td>
+      <td>Arc</td>
+      <td>Arc</td>
+      <td>The properties identified by the last location step</td>
+    </tr>
+    <tr>
+      <td class="code">fresnel:instanceLensDomain</td>
+      <td>All resources in the RDF model to be displayed</td>
+      <td colspan="2">A single node location step</td>
+      <td>The resources identified by the location step</td>
+    </tr>
+    <tr>
+      <td class="code">fresnel:instanceFormatDomain</td>
+      <td>All resources in the RDF model to be displayed</td>
+      <td colspan="2">A single node location step</td>
+      <td>The resources identified by the location step</td>
+    </tr>
+    <tr>
+      <td class="code">fresnel:sublens</td>
+      <td>All resources typed as fresnel:Lens (or a subclass of) in the Fresnel transformation RDF model</td>
+      <td colspan="2">A single node location step</td>
+      <td>The resources identified by the location step</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <h3>2.3 <a id="axes" name="axes">Axes</a></h3>
+
+  <p>XPath features axes such as descendant, ancestor, and parent to address the context or content of a node. FSL features two axes that are used to walk the graph forward or backward, respectively named <strong>out</strong> and <strong>in</strong>.</p>
+
+  <ul>
+    <li>The <span class="code">out</span> axis applied to arc location steps contains all property arcs that belong to statements which feature the current resource as their subject. Informally, this axis contains all arcs outgoing from the current node.</li>
+    <li>The <span class="code">in</span> axis applied to arc location steps contains all property arcs that belong to statements which feature the current resource as their object. Informally, this axis contains all arcs incoming to the current node.</li>
+    <li>The <span class="code">out</span> axis applied to node location steps contains the object of the statement which features the current property instance as its predicate. Informally, this axis contains the head of the current arc.</li>
+    <li>The <span class="code">in</span> axis applied to node location steps contains the subject of the statement which features the current property instance as its predicate. Informally, this axis contains the tail of the current arc.</li>
+  </ul>
+
+  <p>In the above definitions, the term <strong>current resource/node</strong> refers to:</p>
+  <ul>
+    <li>the resource/node currently being considered in the primary selection, if the arc location step is the first one on the path</li>
+    <li>the resource/node currently selected by the previous location step, if the arc location step is not the first one on the path</li>
+  </ul>
+  <p>The term <strong>current property/arc</strong> refers to:</p>
+  <ul>
+    <li>the property/arc currently being considered in the primary selection, if the node location step is the first one on the path</li>
+    <li>the property/arc currently selected by the previous location step, if the node location step is not the first one on the path</li>
+  </ul>
+
+  <p>The axis can be omitted for any location step. An <em>arc location step</em> missing explicit axis information is considered to be on the <strong>out</strong> axis. A <em>node location step</em> missing explicit axis information is considered to be on the same axis as the previous arc location step. A node location step at the beginning of a path (i.e. for which there is no such previous arc location step) is not considered to be on any particular axis.</p>
+
+<div class="code"><pre># All foaf:knows properties which have the current resource as their subject.
+# This will display all resources known by the resource on which the lens is applied.
+:exampleLens fresnel:showProperties ("<span class="fslCode">out::foaf:knows</span>"^^fresnel:fslselector).
+
+# The above can be abrreviated
+:exampleLens fresnel:showProperties ("<span class="fslCode">foaf:knows</span>"^^fresnel:fslselector).
+
+
+# All foaf:knows properties which have the current resource as their object.
+# This will display all resources that know the resource on which the lens is applied.
+:exampleLens fresnel:showProperties ("<span class="fslCode">in::foaf:knows</span>"^^fresnel:fslselector).
+
+
+# The surname of all resources that know the resource on which the lens is applied.
+:exampleLens fresnel:showProperties ("<span class="fslCode">in::foaf:knows/*/out::foaf:surname</span>"^^fresnel:fslselector).
+
+
+# Note that in the previous example, the axis of the 2nd location step (a node location step)
+# is <strong>in</strong> according to the above-stated rule, since the axis of the previous
+# arc location step is <strong>in</strong>. The previous expression could have been written as:
+:exampleLens fresnel:showProperties ("<span class="fslCode">in::foaf:knows/in::*/out::foaf:surname</span>"^^fresnel:fslselector).
+
+
+# The domain of this lens is all ex:Pet known by other resources typed as foaf:Person
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">ex:Pet[in::foaf:knows/in::foaf:Person]</span>"^^fresnel:fslselector.
+# Removing axis declarations that can be omitted, we get:
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">ex:Pet[in::foaf:knows/foaf:Person]</span>"^^fresnel:fslselector.
+
+
+# The domain of this lens is all foaf:Person resources that know resources that belong to any class
+# but that are themselves known by at least one other foaf:Person resource (i.e. at least two including
+# the current one). The <strong>out</strong> axis is already omitted in this example.
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[foaf:knows/*[count(in::foaf:knows/foaf:Person) &gt; 2]]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <h2>3 <a id="expressions" name="expressions">Expressions</a></h2>
+
+  <p>As we have seen in several prior examples, predicates can be associated with each location step of a path to express further selection conditions on nodes and arcs. As in XPath, predicates are syntactially grouped together between square brackets after the location step's type test (see <a href="#introterm">1.1 Terminology</a>).</p>
+
+  <div class="code"><pre># the domain of this lens is all resources that have both
+# a foaf:surname property and a foaf:firstName property
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[foaf:surname and foaf:firstName]</span>"^^fresnel:fslselector.
+
+# the domain of this lens is all foaf:Person resources that are
+# known by another resource, that know another resource, or both
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[foaf:knows or in::foaf:knows]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p>The conditions that make the predicates of a location step can be intepreted conjunctively or disjunctively using keywords <strong>and</strong> and <strong>or</strong>, respectively. Each condition is an expression. There are different kinds of expressions:</p>
+
+  <ul>
+    <li><p><strong>FSL path expressions</strong>: an FSL path expression as a predicate is interpreted as an existential condition on the nodes or arcs described by this path, intepreted relatively to the current node or arc, i.e. the node or arc selected by the location step on which the predicate applies. The condition is considered as fulfilled if the path points to at least one existing graph entity. The last location step of an FSL path used in this context can refer to a literal as shown in the following example.</p>
+<div class="code"><pre>
+# domain: all foaf:Person resources that have an ex:age property value of "47"
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[ex:age/"47"]</span>"^^fresnel:fslselector.
+</pre></div>
+    <p><strong>text()</strong> can be used as the last location step and represents any literal value.</p>
+<div class="code"><pre>
+# domain: all foaf:Person resources that are older than 60
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[ex:age/text() &gt; 60]</span>"^^fresnel:fslselector.
+</pre></div>
+    <p>As shown in the previous example, function <strong>number()</strong> defined in <a href="#functionlib">4 Core Function Library</a> can be used to convert a literal's value into a number that can be used as an operand of a number comparison operation.</p>
+    </li>
+    <li><strong>Function calls</strong>: a condition expression can be a call to a function that returns a value. Some functions take input parameters as detailed in <a href="#functionlib">4 Core Function Library</a>. If the function returns a boolean, the condition is fulfilled if the returned value is <strong>true</strong>; it is not if the value is <strong>false</strong>. If the function returns a numeric value, <strong>0</strong> is interpreted as <strong>false</strong>, and any other value is intepreted as <strong>true</strong>. All other values such as strings are interpreted as <strong>true</strong> except for the empty string. See Function <strong><a href="#fctboolean">boolean</a></strong> for more details.</li>
+    <li><strong>Comparison expressions</strong>: function calls, FSL path expressions, numeric, and literal values can be the operand of comparison operations as in XPath. Comparison operations return <strong>true</strong> or <strong>false</strong>. The following comparison operators are available: <strong>&lt;</strong>, <strong>&gt;</strong>, <strong>&lt;=</strong>, <strong>&gt;=</strong>, <strong>=</strong>, <strong>!=</strong>.</li>
+  </ul>
+
+  <p>Comparison expressions are evaluated by comparing the objects that result from evaluating the two operands. The comparison of the objects resulting from the evaluation is defined as follows:</p>
+  <ul>
+    <li>If one object is a node-set and the other is a number, then the comparison will be true only if there is a literal node in the node set such that the result of performing the comparison on the number to be compared and on the result of converting the literal value of that node to a number using the <strong><a href="#fctnumber">number</a></strong> function is true.</li>
+    <li>If one object is a node-set and the other is a string, then the comparison will be true only if there is a literal node in the node set such that the result of performing the comparison on the literal value of that node and on the string is true.</li>
+    <li>If one object is a node-set or arc-set and the other is a boolean, then the comparison will be true if and only if the result of performing the comparison on the boolean and on the result of converting the node-set or arc-set to a boolean using the <strong><a href="#fctboolean">boolean</a></strong> function is true.</li>
+    <li>When neither object to be compared is a node-set or arc-set and the operator is <strong>=</strong> or <strong>!=</strong>, then the objects are compared by converting them to a common type as follows and then comparing them. If at least one object to be compared is a boolean, then each object to be compared is converted to a boolean as if by applying the <strong><a href="#fctboolean">boolean</a></strong> function. Otherwise, if at least one object to be compared is a number, then each object to be compared is converted to a number as if by applying the <strong><a href="#fctnumber">number</a></strong> function. Otherwise, both objects to be compared are converted to strings. The <strong>=</strong> comparison will be true if and only if the objects are equal; the <strong>!=</strong> comparison will be true if and only if the objects are not equal. Numbers are compared for equality according to IEEE 754 <a href="#IEEE754">[IEEE 754]</a>. Two booleans are equal if either both are true or both are false. Two strings are equal if and only if they consist of the same sequence of UCS characters.</li>
+    <li>When neither object to be compared is a node-set or arc-set and the operator is <strong>&lt;=</strong>, <strong>&lt;</strong>, <strong>&gt;=</strong> or <strong>&gt;</strong>, then the objects are compared by converting both objects to numbers and comparing the numbers according to IEEE 754. The <strong>&lt;</strong> comparison will be true if and only if the first number is less than the second number. The <strong>&lt;=</strong> comparison will be true if and only if the first number is less than or equal to the second number. The <strong>&gt;</strong> comparison will be true if and only if the first number is greater than the second number. The <strong>&gt;=</strong> comparison will be true if and only if the first number is greater than or equal to the second number.</li>
+  </ul>
+
+  <p>An <strong>or</strong> expression is evaluated by evaluating each operand and converting its value to a boolean as if by a call to the <strong><a href="#fctboolean">boolean</a></strong> function. The result is true if either value is true and false otherwise. The right operand is not evaluated if the left operand evaluates to true.</p>
+
+  <p>An <strong>and</strong> expression is evaluated by evaluating each operand and converting its value to a boolean as if by a call to the <strong><a href="#fctboolean">boolean</a></strong> function. The result is true if both values are true and false otherwise. The right operand is not evaluated if the left operand evaluates to false.</p>
+
+  <h2>4 <a id="functionlib" name="functionlib">Core Function Library</a></h2>
+
+  <p>As a reminder, the term <strong>graph entity</strong> refers indifferently to nodes and arcs. We use <strong>graph-entity-set</strong> to refer to a set of nodes or a set of arcs (but not a set of nodes or arcs).</p>
+
+  <p><strong>Function: </strong><em>number</em> <strong>count</strong>(<em>graph-entity-set</em>)</p>
+  <p>The <strong>count</strong> function returns the number of nodes or arcs in the argument node-set or arc-set.</p>
+
+<div class="code"><pre># Lens domain: all foaf:Person resources that are 
+# the subject of more than 2 foaf:knows statements
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[count(foaf:knows) &gt; 2]</span>"^^fresnel:fslselector.
+
+# Show foaf:knows properties that point to resources that themselves
+# are the subject of at least 4 foaf:knows statements
+:exampleLens fresnel:showProperties ("<span class="fslCode">foaf:knows[*[count(foaf:knows) &gt;= 4]]</span>"^^fresnel:fslselector).
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>local-name</strong>(<em>graph-entity-set</em>)</p>
+  <p>The <strong>local-name</strong> function returns the local part of the expanded-name of the node or arc in the argument graph-entity-set that it finds first (order is not guaranteed). If the argument node-set or arc-set is empty or the first node or arc has no expanded-name, an empty string is returned.</p>
+
+<div class="code"># Show all properties named "label", no matter the vocabulary that defines them,
+# i.e. no matter their namespace
+:exampleLens fresnel:showProperties ("<span class="fslCode">*[local-name(.) = 'label']</span>"^^fresnel:fslselector).
+</div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>namespace-uri</strong>(<em>graph-entity-set</em>)</p>
+  <p>The <strong>namespace-uri</strong> function returns the namespace URI of the expanded-name of the node or arc in the argument graph-entity-set that it finds first (order is not guaranteed). If the argument node-set or arc-set is empty or the first node or arc has no expanded-name, or the namespace URI of the expanded-name is null, an empty string is returned.</p>
+
+<div class="code"># Show all properties defined by the Dublin Core vocabulary
+:exampleLens fresnel:showProperties ("<span class="fslCode">*[namespace-uri(.) = 'http://purl.org/dc/elements/1.1/']</span>"^^fresnel:fslselector).
+</div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>uri</strong>(<em>graph-entity-set</em>)</p>
+  <p>The <strong>uri</strong> function returns the full URI of the expanded-name of the node or arc in the argument graph-entity-set that it finds first (order is not guaranteed). If the argument node-set or arc-set is empty or the first node or arc has no expanded-name, an empty string is returned.</p>
+
+<div class="code"><pre># Apply the lens to the resource identified by http://example.org/foo#bar
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[uri(.) = 'http://example.org/foo#bar']</span>"^^fresnel:fslselector.
+
+# Apply the lens to the resource of type foaf:Person, identified by http://example.org/people#john
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">foaf:Person[uri(.) = 'http://example.org/people#john']</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>exp</strong>(<em>string</em>)</p>
+  <p>The <strong>exp</strong> function returns the fully expanded URI corresponding to the QName given as the argument string. Namespace prefix bindings used for this operation are the same as the ones used to expand location step type test QNames (see <a href="#prefixres">Namespace Prefix Binding Resolution</a>).</p>
+
+<div class="code"><pre># Apply the lens to the resource identified by http://www.foo.org#bar 
+# (prefix foo: is bound to namespace URI http://www.foo.org#)
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[uri(.) = exp('foo:bar')]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>literal-value</strong>(<em>arc-set</em>)</p>
+  <p>The <strong>literal-value</strong> function takes property instances as argument and returns the property value associated with the arc it finds first (order is not guaranteed), provided that the object is a literal. If the object is not a literal, an empty string is returned. If the argument arc-set is empty, an empty string is returned.</p>
+
+<div class="code"><pre># The lens applies to foaf:Person resources that know
+# foaf:Person resources, whose surname is Smith
+:exampleLens fresnel:showProperties ("<span class="fslCode">foaf:Person[foaf:knows/foaf:Person[literal-value(foaf:surname) = 'Smith']]</span>"^^fresnel:fslselector).
+
+# This is equivalent to:
+:exampleLens fresnel:showProperties ("<span class="fslCode">foaf:Person[foaf:knows/foaf:Person[foaf:surname/text() = 'Smith']]</span>"^^fresnel:fslselector).
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>literal-dt</strong>(<em>arc-set</em>)</p>
+  <p>The <strong>literal-dt</strong> function takes property instances as argument and returns the property value's datatype URI associated with the arc it finds first (order is not guaranteed), provided that the object is a literal. If the object is not a literal, an empty string is returned. If the argument arc-set is empty, an empty string is returned.</p>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>starts-with</strong>(<em>string, string</em>)</p>
+  <p>The <strong>starts-with</strong> function returns true if the first argument string starts with the second argument string, and otherwise returns false.</p>
+
+<div class="code"><pre># The lens applies to resources that have a dc:title that starts with "How to"
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[starts-with(literal-value(dc:title), 'How to')]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>contains</strong>(<em>string, string</em>)</p>
+  <p>The <strong>contains</strong> function returns true if the first argument string contains the second argument string, and otherwise returns false.</p>
+
+<div class="code"><pre># The lens applies to resources that have a dc:title that contains "improving"
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[contains(literal-value(dc:title), 'improving')]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>concat</strong>(<em>string, string, string* </em>)</p>
+  <p>The <strong>concat</strong> function returns the concatenation of its arguments.</p>
+
+  <p><strong>Function: </strong><em>string</em> <strong>substring-before</strong>(<em>string, string</em>)</p>
+  <p>The <strong>substring-before</strong> function returns the substring of the first argument string that precedes the first occurrence of the second argument string in the first argument string, or the empty string if the first argument string does not contain the second argument string. For example, <code>substring-before("1999/04/01","/")</code> returns <code>1999</code>.</p>
+
+  <p><strong>Function: </strong><em>string</em> <strong>substring-after</strong>(<em>string, string</em>)</p>
+  <p>The <strong>substring-after</strong> function returns the substring of the first argument string that follows the first occurrence of the second argument string in the first argument string, or the empty string if the first argument string does not contain the second argument string. For example, <code>substring-after("1999/04/01","/")</code> returns <code>04/01</code>, and <code>substring-after("1999/04/01","19")</code> returns <code>99/04/01</code>.</p>
+
+  <p><strong>Function: </strong><em>string</em> <strong>substring</strong>(<em>string, number, number?</em>)</p>
+  <p>The <strong>substring</strong> function returns the substring of the first argument starting at the position specified in the second argument with length specified in the third argument. For example, <span class="code">substring("12345",2,3)</span> returns <span class="code">"234"</span>. If the third argument is not specified, it returns the substring starting at the position specified in the second argument and continuing to the end of the string. For example, <span class="code">substring("12345",2)</span> returns <span class="code">"2345"</span>.</p> <p>More precisely, each character in the string is considered to have a numeric position: the position of the first character is 1, the position of the second character is 2 and so on.</p>
+  <p> <strong>NOTE: </strong>This differs from Java and ECMAScript, in which the <span class="code">String.substring</span> method treats the position of the first character as 0.</p>
+
+  <p><strong>Function: </strong><em>number</em> <strong>string-length</strong>(<em>string</em>)</p>
+  <p>The <strong>string-length</strong> returns the number of characters in the string.</p>
+
+<div class="code"><pre># Display dc:title properties that are no longer than 50 characters
+:exampleLens fresnel:showProperties ("<span class="fslCode">dc:title[string-length(literal-value(.)) &lt;= 50]</span>"^^fresnel:fslselector).
+</pre></div>
+
+  <p><strong>Function: </strong><em>string</em> <strong>normalize-space</strong>(<em>string</em>)</p>
+  <p>The <strong>normalize-space</strong> function returns the argument string with whitespace normalized by stripping leading and trailing whitespace and replacing sequences of whitespace characters by a single space. Whitespace characters are the same as those allowed by the <a href="http://www.w3.org/TR/REC-xml#NT-S">S</a> production in XML.</p>
+
+<div class="code"><pre># Display dc:title properties that are no longer than
+# 50 characters after white space normalization
+:exampleLens fresnel:showProperties ("<span class="fslCode">dc:title[string-length(normalize-space(literal-value(.))) &lt;= 50]</span>"^^fresnel:fslselector).
+</pre></div>
+
+  <p><strong>Function: </strong><em>number</em> <strong>number</strong>(<em>object</em>)</p>
+  <p>The <strong><a id="fctnumber" name="fctnumber">number</a></strong> function converts its argument to a number as follows:</p>
+  <ul>
+    <li><p>a string that consists of optional whitespace followed by an optional minus sign followed by a <a href="#G-number">Number</a> followed by whitespace is converted to the IEEE 754 number that is nearest (according to the IEEE 754 round-to-nearest rule) to the mathematical value represented by the string; any other string is converted to NaN</p></li>
+    <li><p>a literal node is converted to a string by taking its lexical value. That string is converted to a number following the above rule.</p></li>
+  </ul>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>boolean</strong>(<em>object</em>)</p>
+  <p>The <strong><a id="fctboolean" name="fctboolean">boolean</a></strong> function converts its argument to a boolean as follows:</p>
+  <ul>
+    <li><p>a number is true if and only if it is neither positive or negative zero nor NaN</p></li>
+    <li><p>a node-set or arc-set is true if and only if it is non-empty</p></li>
+    <li><p>a string is true if and only if its length is non-zero</p></li>
+  </ul>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>not</strong>(<em>boolean</em>)</p>
+  <p>The <strong>not</strong> function returns true if its argument is false, and false otherwise.</p>
+
+<div class="code"><pre># The lens' domain is all resources that do not have a Dublin Core subject property
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[not(boolean(dc:subject))]</span>"^^fresnel:fslselector.
+
+# The lens' domain is all resources that do not have a Dublin Core subject property
+# and do not have a Dublin Core title property
+:exampleLens fresnel:instanceLensDomain "<span class="fslCode">*[not(boolean(dc:subject) or boolean(dc:title))]</span>"^^fresnel:fslselector.
+</pre></div>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>true</strong>(<em></em>)</p>
+  <p>The <strong>true</strong> function returns true.</p>
+
+  <p><strong>Function: </strong><em>boolean</em> <strong>false</strong>(<em></em>)</p>
+  <p>The <strong>false</strong> function returns false.</p>
+
+  <h2>5 <a id="rdfsowl" name="rdfsowl">RDFS/OWL Awareness</a></h2>
+
+  <p>RDF Schemas and OWL ontologies describe the concepts of a domain in terms of classes and the relationships that exist between these concepts in terms of properties. Classes can be defined as subclasses of other classes using <span class="code">rdfs:subClassOf</span>. Similarly, properties can be defined as subproperties of other properties using <span class="code">rdfs:subPropertyOf</span>. Provided that an RDF Schema or OWL ontology is available and retrievable at the time of execution for a given vocabulary, FSL implementations should exploit subclass and subproperty relationships explicitly stated in these models when the type test QName is prefixed by <strong class="code">^</strong>:</p>
+
+  <p>FSL engines should take into account RDFS/OWL subclass/subtype information when available, but are not required to.</p>
+
+  <ul>
+    <li>a node location step whose type test is a QName prefixed by symbol <strong class="code">^</strong>, specifying a constraint on the class of resources to be selected by this step, should select resources which have an <span class="code">rdf:type</span> property whose value is the class referred to by the location step, but also all other resources that have an <span class="code">rdf:type</span> property whose value is a known subclass of the class referred to by the location step;</li>
+    <li>an arc location step whose type test is a QName prefixed by symbol <strong class="code">^</strong>, specifying a constraint on the type of property of the arc, should select arcs that are labeled with the property type's URI, but also all arcs labeled with the URI of a property type that is known to be a subproperty of the one referred to by the location step.</li>
+  </ul>
+
+<div class="code"><pre># <strong>properties</strong> to be shown for resources handled by this lens: all foaf:knows properties
+# as well as properties declared as subproperties of foaf:knows (in the associated schema)
+<span class="fslCode">^foaf:knows</span>
+
+
+# exampleLens' <strong>domain</strong>: all instances of class foaf:Person (or any of its subclasses) older than 60
+<span class="fslCode">^foaf:Person[ex:age/text() &gt; 60]</span>
+
+
+# <strong>properties</strong> to be shown for resources handled by this lens: foaf:knows and any subproperty of foaf:knows,
+# provided that the value is an instance of class foaf:Person or one of its subclasses
+<span class="fslCode">^foaf:knows[^foaf:Person]</span>
+</pre></div>
+
+  <p>Instances of subclasses should only be selected when the type test QName is prefixed by <strong class="code">^</strong>. The same applies to properties/subproperties. The <strong>default behaviour</strong> (i.e., when there is not prefix in front of the QName) is <strong>not to select</strong> instances of subclasses/subproperties.</p>
+
+  <h2>6 <a id="datamodel" name="datamodel">Data Model</a></h2>
+
+  <h3>6.1 <a id="dmn" name="dmn">Nodes</a></h3>
+
+  <p>The <a href="http://www.w3.org/TR/rdf-concepts/">RDF abstract syntax</a> reflects RDF's graph-based data model which is independent of any serialization syntax. FSL operates on an RDF model as a directed labeled graph.</p>
+
+  <p>The graph contains nodes and directed labeled arcs. There are three types of nodes:</p>
+  <ul>
+    <li>URI references</li>
+    <li>blank nodes</li>
+    <li>literals</li>
+  </ul>
+
+  <p>Literals can be plain or typed. Typed literal have a datatype URI. See <a href="http://www.w3.org/TR/rdf-concepts/#section-Graph-Literal">[RDF-CAS] 6.5 RDF Literals</a> for more details.</p>
+
+  <p>FSL path expressions whose last location step is a node location step return the set of nodes in the graph that can be reached following the path(s) described by the FSL expression starting from a graph entity in the primary selection. FSL does not allow location steps describing literals, except as the last step of path expressions used in predicates of other location steps. This means that an FSL expression never returns literals.</p>
+
+  <h3>6.2 <a id="dma" name="dma">Arcs</a></h3>
+
+  <p>An arc represents a property and is labeled by a URI reference which indicates the property's type.</p>
+
+  <p>It is important to understand that FSL considers every arc as a first class object. Thus,</p>
+  <p class="code">*[uri(.) = 'http://example.org/foo']/foaf:knows</p>
+  <p>refers to the set of arcs labeled by the URI whose QName is foaf:knows, and that originate from the resource whose URI reference is <span class="code">http://example.org/foo</span>. What the following expression returns is a set containing all these arcs, considered here as <em>property instances</em>, which all share the same <em>property type</em>: the one identified by URI <span class="code">http://xmlns.com/foaf/0.1/knows</span>.</p>
+
+  <h2>7 <a id="prefixres" name="prefixres">Namespace Prefix Binding Resolution</a></h2>
+
+  <p>Property URIs as arc location steps are represented by QNames using namespace prefix bindings, as shown in all examples in this document. The binding declarations occur outside the FSL expression. In Fresnel, bindings are declared explicitly in the RDF model (not just in its RDF/XML serialization). An FSL processor is free to get binding declarations from the RDF/XML document (if it exists), but in case of conflicting declarations between the RDF model level and the RDF/XML document, the RDF model bindings prevail.</p>
+
+  <p>The same thing applies to node location steps, which use QNames as class/type constraints (type test), to literal datatype URI references written as QNames, and to QName expansion with function <span class="code">exp()</span>.</p>
+
+  <h2>8 <a id="grammar" name="grammar">FSL Grammar</a></h2>
+
+  <p><a href="http://www.w3.org/2001/11/IsaViz/">IsaViz</a> has an implementation of the FSL grammar based on <a href="http://www.antlr.org/">ANTLR</a>. It can be downloaded from the <a href="http://dev.w3.org/cvsweb/java/classes/org/w3c/IsaViz/fresnel/fsl.g">IsaViz CVS Repository</a>. A compiled version will be made available as a JAR file soon. The grammar is given here using the EBNF notation.</p>
+
+<table>
+<tbody>
+
+<tr class="ruleMainRow">
+<td><a id="G-locationpath" name="G-locationpath">LocationPath</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-step">Step</a> ('/' <a href="#G-step">Step</a>)*</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-step" name="G-step">Step</a></td><td class="ruleAssign"> ::= </td><td>(<a href="#G-axis">Axis</a>)? <a href="#G-test">Test</a> (<a href="#G-predicate">Predicate</a>)*</td>
+</tr>
+<tr>
+<td></td><td></td><td>| <a href="#G-AbbreviatedSelf">AbbreviatedSelf</a></td>
+</tr>
+<tr>
+<td></td><td></td><td>| <a href="#G-literal">Literal</a></td>
+</tr>
+<tr>
+<td></td><td></td><td>| 'text()'</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-axis" name="G-axis">Axis</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-axisname">AxisName</a> '::'</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-axisname" name="G-axisname">AxisName</a></td><td class="ruleAssign"> ::= </td><td>('in' | 'out')</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-test" name="G-test">Test</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-typetest">TypeTest</a></td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-typetest" name="G-typetest">TypeTest</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-anyname">AnyName</a></td>
+</tr>
+<tr>
+<td></td><td></td><td>| ('^')? ((<a href="http://www.w3.org/TR/REC-xml-names#NT-NCName">NCName</a>)? ':')? <a href="http://www.w3.org/TR/REC-xml-names#NT-NCName">NCName</a></td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-anyname" name="G-anyname">AnyName</a></td><td class="ruleAssign"> ::= </td><td>((<a href="http://www.w3.org/TR/REC-xml-names#NT-NCName">NCName</a>)? ':')? '*'</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-predicate" name="G-predicate">Predicate</a></td><td class="ruleAssign"> ::= </td><td>'[' <a href="#G-orexpr">OrExpr</a> ']'</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-orexpr" name="G-orexpr">OrExpr</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-andexpr">AndExpr</a> ('or' <a href="#G-orexpr">OrExpr</a>)?</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-andexpr" name="G-andexpr">AndExpr</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-compexpr">CompExpr</a> ('and' <a href="#G-andexpr">AndExpr</a>)?</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-compexpr" name="G-compexpr">CompExpr</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-unaryexpr">UnaryExpr</a> (<a href="#G-operator">Operator</a> <a href="#G-unaryexpr">UnaryExpr</a>)?</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-unaryexpr" name="G-unaryexpr">UnaryExpr</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-functioncall">FunctionCall</a></td>
+</tr>
+<tr>
+<td></td><td></td><td>| <a href="#G-number">Number</a></td>
+</tr>
+<tr>
+<td></td><td></td><td>| <a href="#G-locationpath">LocationPath</a></td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-operator" name="G-operator">Operator</a></td><td class="ruleAssign"> ::= </td><td>('=' | '!=' | '&lt;' | '&gt;' | '&lt;=' | '&gt;=')</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-functioncall" name="G-functioncall">FunctionCall</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-functionname">FunctionName</a> '(' <a href="#G-arguments">Arguments</a> ')'</td>
+</tr>
+
+
+<tr class="ruleMainRow">
+<td><a id="G-arguments" name="G-arguments">Arguments</a></td><td class="ruleAssign"> ::= </td><td>(<a href="#G-unaryexpr">UnaryExpr</a> ("," <a href="#G-unaryexpr">UnaryExpr</a>)*)?</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-literal" name="G-literal">Literal</a></td><td class="ruleAssign"> ::= </td><td>'"' [^"]* '"' (<a href="#G-datatype">Datatype</a>)?</td>
+</tr>
+<tr>
+<td></td><td></td><td>| "'" [^']* "'" (<a href="#G-datatype">Datatype</a>)?</td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-datatype" name="G-datatype">Datatype</a></td><td class="ruleAssign"> ::= </td><td>'^^' <a href="http://www.w3.org/TR/REC-xml-names#NT-NCName">NCName</a> ':' <a href="http://www.w3.org/TR/REC-xml-names#NT-NCName">NCName</a></td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-AbbreviatedSelf" name="G-AbbreviatedSelf">AbbreviatedSelf</a></td><td class="ruleAssign"> ::= </td><td>'.'</td>
+</tr>
+<tr class="ruleMainRow">
+<td><a id="G-number" name="G-number">Number</a></td><td class="ruleAssign"> ::= </td><td><a href="#G-digits">Digits</a> ('.' <a href="#G-digits">Digits</a>?)?</td>
+</tr>
+
+<tr>
+<td></td><td></td><td>| '.' <a href="#G-digits">Digits</a></td>
+</tr>
+
+<tr class="ruleMainRow">
+<td><a id="G-digits" name="G-digits">Digits</a></td><td class="ruleAssign"> ::= </td><td>[0-9]+</td>
+</tr>
+
+</tbody>
+</table>
+
+
+  <h2><a id="references" name="references">A. References</a></h2>
+
+  <p><strong><a id="xpath" name="xpath">[XPath]</a></strong>World Wide Web Consortium. XML Path Language (XPath) Version 1.0. W3C Recommendation. See <a href="http://www.w3.org/TR/xpath">http://www.w3.org/TR/xpath</a>.</p>
+
+  <p><strong><a id="IEEE754" name="IEEE754">[IEEE 754]</a></strong> Institute of Electrical and Electronics Engineers. <em>IEEE Standard for Binary Floating-Point Arithmetic</em>. ANSI/IEEE Std 754-1985.</p>
+
+  <p><strong>RDFPath Language Proposals and Related Work</strong></p>
+
+  <ul>
+    <li><a href="http://infomesh.net/2003/rdfpath/">Pondering RDF Path</a> (Sean B. Palmer)</li>
+    <li><a href="http://zoe.mathematik.uni-osnabrueck.de/QAT/RDFPath/Quick/Quick.html">Quick introduction to RDFPath</a> (Stefan Kokkelink)</li>
+    <li><a href="http://rx4rdf.liminalzone.org/RxPath">RxPath</a> (Adam Souzis)</li>
+    <li><a href="http://www.xulplanet.com/ndeakin/arts/rpath-fns.txt">ReoPath</a> (Neil Deakin)</li>
+    <li><a href="http://www.semanticplanet.com/2003/09/rdfTemplates">RDF Templates</a> (Ian Davis)</li>
+    <li><a href="http://www.w3.org/2002/02/11-XPath-vs-RDF">XPath vs. RDF</a> (Eric Prud'hommeaux)</li>
+    <li><a href="http://rdfweb.org/people/damian/treehugger/">TreeHugger</a> (Damian Steer)</li>
+  </ul>
+
+  <h2><a name="chlog" id="chlog">B. Change Log</a></h2>
+
+  <ul>
+    <li>Revision 1.6  2005/11/18 Emmanuel: Edited section 5 to explicitly state that FSL engines are not required to support subclass/subtype relationships during matching.</li>
+    <li>Revision 1.5  2005/10/17 Emmanuel: Edited sections 5 and 8 to reflect changes about subclass/subproperty matching.</li>
+    <li>Revision 1.4  2005/07/22 Emmanuel: Replaced datatype fresnel:selector by fresnel:fslselector.</li>
+    <li>Revision 1.3  2005/07/20 Emmanuel: Fixed several examples, reordered section on location steps, introduced function exp().</li>
+    <li>Revision 1.2  2005/04/06 Ryan: Minor edits.</li>
+    <li>Revision 1.1  2005/04/05 Emmanuel: Changed rules about operand evaluation in comparison operations.</li>
+    <li>Revision 1.0  2005/03/31 Emmanuel: Initial version of this document.</li>
+  </ul>
+
+  <hr />
+
+<p>$Id: Overview.html 3211 2005-11-18 15:43:44Z pietriga $</p>
+
+<p>
+  <a href="http://validator.w3.org/check?uri=referer">
+    <img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" />
+  </a>
+</p>
+
+</body>
+</html>

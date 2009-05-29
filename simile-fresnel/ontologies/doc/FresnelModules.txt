@@ -1,0 +1,121 @@
+
+# --------------------------------------------------------------   
+# Fresnel Modules
+# --------------------------------------------------------------
+
+Date: 2005/03/04
+
+After discusions in the last days, we decided to split
+the vocabulary into sperate modules in order to 
+allow implementers to support only the parts they are interested in.
+
+This document describes the different Fresnel modules.
+
+
+# --------------------------------------------------------------   
+# Core Lens Vocabulary
+# --------------------------------------------------------------  
+#
+# The lens vocabulary is used for defining 
+#    - which properties of an RDF resources are displayed.
+#    - how they are ordered. 
+#
+# There are two variations of the vocabulary:
+#    - Simple core, which only supports the selection of nodes by name.
+#    - Extended core, which also supports the selection of nodes using RDFpath.  
+#
+# Contents:
+#     1. Lens Vocabulary
+#     2. Property Selection Vocabulary
+#     3. Special Purpose Lenses
+
+
+# --------------------------------------------------------------   
+# Lens Group Vocabulary 
+# --------------------------------------------------------------  
+#
+# The lens group vocabulary allows you to relate lenses for 
+#    -  defining which RDF resources are displayed together using a lens and related sublenses. 
+#    -  realizing drill-down functionality or alike.
+#   
+# Contents:
+# 1. Lens Relation Vocabulary
+# 2. Property Vocabulary for specifying sublenses, merged properties and alternative properties.
+
+
+# --------------------------------------------------------------   
+# Lens Context Vocabulary (Todo: Think about better name)
+# --------------------------------------------------------------  
+# 
+# This vocabulary might be usefull for answering David Karger's question
+# "What is a lens/view good for?", meaning to give the browser hints in
+# which context a user might want to use which combination of lenses.
+#   
+# Contents:
+# 1. View Vocabulary 
+# 2. Context Vocabulary
+
+
+# --------------------------------------------------------------   
+# Edit Vocabulary (0.0)
+# --------------------------------------------------------------  
+#
+# Vocabulary for describing how to edit information. 
+#
+
+
+# --------------------------------------------------------------   
+# Core Style Vocabulary 
+# --------------------------------------------------------------  
+#
+# The style vocabulary is used for defining how properties are displayed.
+#
+# The basic idea is to use 
+# - display styles for defining the general apperance (text or image)
+# - style attributes to configure display styles
+# - hooks to CSS for details like font size and colors
+
+# There are two variations of the vocabulary:
+#    - Simple core, 
+#           - which only supports the selection of nodes by name.
+#           - which doesn't support cascading style definitions.
+#    - Extended core, 
+#           - which also supports the selection of nodes using RDFpath. 
+#           - which supports cascading style definitions.
+
+# Contents:
+# 1. Display Styles
+# 2. Display Styles Attributes
+# 3. CSS Style
+
+
+# --------------------------------------------------------------   
+# Style - Additional Content Vocabulary 
+# --------------------------------------------------------------  
+#
+# The vocabulary is used for 
+#     - adding additional content to styles. Stuff like CSS:before
+#     - replacing property values by  icons.
+# 
+# We don't know yet if we want to have this vocabulary or if we 
+# can move the functionallity to CSS.
+#   
+# Contents:
+# 1. Fixed Content 
+# 2. Parts
+
+
+# --------------------------------------------------------------   
+# Style - Action Vocabulary 
+# --------------------------------------------------------------  
+#
+# The action vocabulary links actions to styles.
+#
+# Options
+# 1: Link ('goes' to an external resource) 
+#
+# Example
+# ex:style4 fresnel:styleDomain foaf:homepage 
+# ex:style4 fresnel:action  fresnel:Link 
+
+

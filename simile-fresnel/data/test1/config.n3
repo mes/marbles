@@ -1,0 +1,19 @@
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix fslns:    <http://simile.mit.edu/2006/01/ontologies/fsl-ns#> .
+@prefix :         <http://example.org/test1#> .
+
+<http://xmlns.com/foaf/0.1/> fslns:abbreviated "foaf" .
+
+:testGroup
+	rdf:type fresnel:Group ;
+	fresnel:containerStyle "background-color: #aaa;"^^fresnel:stylingInstructions .
+
+:testLens
+	rdf:type fresnel:Lens ;
+	fresnel:purpose fresnel:defaultLens ;
+	fresnel:classLensDomain foaf:Person ;
+	fresnel:showProperties ( "foaf:name"^^fresnel:fslSelector ) ;
+	fresnel:group :testGroup .

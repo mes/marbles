@@ -1,0 +1,99 @@
+% Fresnel paper for ISWC05
+
+% based on LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.2 for LaTeX2e
+%
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{graphicx}
+%
+\begin{document}
+%
+\newcommand{\rdf}[1]{{\small \texttt{#1}}}
+
+\frontmatter          % for the preliminaries
+%
+\pagestyle{headings}  % switches on printing of running heads
+\mainmatter              % start of the contributions
+%
+\title{Fresnel - A Browser-Independent Display Vocabulary for RDF}
+%
+\titlerunning{Fresnel - A browser-independent Display Vocabulary for RDF}
+% abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{Christian Bizer\inst{1} \and Ryan Lee\inst{2} \and Stefano Mazzocchi\inst{3} \and Emmanuel Pietriga\inst{4}}
+%
+%\authorrunning{Bizer et al.}   % abbreviated author list (for running head)
+%
+%%%% modified list of authors for the TOC (add the affiliations)
+\tocauthor{Chris Bizer (Berlin),
+Ryan Lee (MIT),
+Stefano Mazzocchi (MIT Libraries),
+Emmanuel Pietriga (INRIA)}
+%
+\institute{Freie Universit\"at Berlin, Germany \\
+\email{chris@bizer.de}
+\and
+W3C/MIT CSAIL, Cambridge, USA\\
+\email{ryanlee@w3.org}
+\and
+MIT Libraries, Cambridge, USA\\
+\email{stefanom@mit.edu}
+\and
+INRIA \& Laboratoire de Recherche en Informatique (LRI), Orsay, France\\
+\email{emmanuel.pietriga@inria.fr}
+}
+
+\maketitle
+
+%--------------------------------------------------------------------
+\begin{abstract}
+Todo: Change for new structure of paper: 1. There are different approaches, 2. Abstract Selection and Styling as common problems, 3. Developed Fresnel as a browser-independent ontology to handle these problems in order to faciliate the exchange of display knowledge.
+
+Presenting Semantic Web content in a human-readable way consists in addressing two issues: specifying {\em what} information contained in an RDF graph should be presented and {\em how} this information should be presented. Each RDF browser or visualization tool currently relies on its own ad hoc mechanisms and vocabularies for addressing these issues, making it impossible to share RDF presentation knowledge across applications. Recognizing the general need for displaying RDF content and wanting to avoid reinventing the wheel with each new tool, we developed Fresnel as a browser-independent vocabulary of core RDF display concepts applicable across different representation paradigms. Fresnel's two foundational concepts are lenses and styles. Lenses define which properties of an RDF resource, or group of related resources, are displayed and how those properties are ordered. Styles determine how resources and properties are rendered by specifying styling attributes, making use of existing languages such as CSS and SVG wherever possible. In this paper describe the Fresnel display vocabulary and show how Fresnel is used within different RDF browsers, including Longwell and IsaViz.
+\end{abstract}
+
+%--------------------------------------------------------------------
+\input{fresnelIntro}
+
+%--------------------------------------------------------------------
+\input{fresnelRelatedWork}
+
+%--------------------------------------------------------------------
+\input{fresnelLensVocab}
+
+%--------------------------------------------------------------------
+\input{fresnelStyleVocab}
+
+%--------------------------------------------------------------------
+\input{fresnelSelection}
+
+%--------------------------------------------------------------------
+\input{fresnelImpl}
+
+%--------------------------------------------------------------------
+\input{fresnelInLongwell}
+
+%--------------------------------------------------------------------
+\input{fresnelInIsaViz}
+
+%--------------------------------------------------------------------
+\input{fresnelInHaystack}
+
+%--------------------------------------------------------------------
+\input{fresnelConclusion}
+
+
+%
+% ---- Bibliography ----
+%
+
+\bibliographystyle{splncs}
+\bibliography{fresnel}
+
+\end{document}

@@ -1,0 +1,41 @@
+
+<!-- Processed by Id: cwm.py,v 1.148 2004/03/21 04:24:32 timbl Exp -->
+<!--     using base file:/Users/ryanlee/Development/simile/fresnel/trunk/ontologies/namespaces.owl.n3-->
+
+
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <owl:Ontology rdf:about="http://simile.mit.edu/2006/01/ontologies/fsl-ns">
+        <dc:creator>Ryan Lee &#60;ryanlee@w3.org&#62;</dc:creator>
+        <dc:date rdf:datatype="http://www.w3.og/2001/XMLSchema#date">2006-01-27</dc:date>
+        <dc:description xml:lang="en">Ad-hoc vocabulary for namespaces in FSL, as implemented in SIMILE tools</dc:description>
+        <dc:format>RDF</dc:format>
+        <dc:identifier rdf:resource="http://simile.mit.edu/2006/01/ontologies/fsl-ns#"/>
+        <dc:title xml:lang="en">FSL Namespaces Ontology</dc:title>
+    </owl:Ontology>
+
+    <owl:Class rdf:about="http://simile.mit.edu/2006/01/ontologies/fsl-ns#Namespace">
+        <comment xml:lang="en">Resources used as namespaces in FSL expressions.</comment>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fsl-ns"/>
+        <label xml:lang="en">Namespace</label>
+        <subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+        <subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:allValuesFrom rdf:resource="http://www.w3.og/2001/XMLSchema#string"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.og/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            <owl:onProperty rdf:resource="http://simile.mit.edu/2006/01/ontologies/fsl-ns#abbreviated"/>
+        </subClassOf>
+    </owl:Class>
+
+    <owl:DatatypeProperty rdf:about="http://simile.mit.edu/2006/01/ontologies/fsl-ns#abbreviated">
+        <comment xml:lang="en">Known abbreviations for this namespace as seen in FSL expressions; the colon is not considered part of an abbreviation.</comment>
+        <domain rdf:resource="http://simile.mit.edu/2006/01/ontologies/fsl-ns#Namespace"/>
+        <isDefinedBy rdf:resource="http://simile.mit.edu/2006/01/ontologies/fsl-ns"/>
+        <label xml:lang="en">abbreviated</label>
+        <range rdf:resource="http://www.w3.og/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+</rdf:RDF>

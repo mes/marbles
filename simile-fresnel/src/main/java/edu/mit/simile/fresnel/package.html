@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<!--
+
+  @(#)package.html1.60 98/01/27
+
+  Copyright 1998 Sun Microsystems, Inc. 901 San Antonio Road, 
+  Palo Alto, California, 94303, U.S.A.  All Rights Reserved.
+
+  This software is the confidential and proprietary information of Sun
+  Microsystems, Inc. ("Confidential Information").  You shall not
+  disclose such Confidential Information and shall use it only in
+  accordance with the terms of the license agreement you entered into
+  with Sun.
+
+  CopyrightVersion 1.2
+
+-->
+</head>
+<body bgcolor="white">
+
+Implementation of the Fresnel core vocabulary, also includes Fresnel extension for facets and portions of the Fresnel extended vocabulary.  The following is a minimal example of using the API.</p>
+
+<p>Usage (key portions are in <strong>bold</strong>):</p>
+
+<pre>Graph confGraph, ontoGraph, dataGraph;
+
+/* Here, read data into their respective graphs:
+ * confGraph : Fresnel configuration
+ * ontoGraph : Vocabularies used in data
+ * dataGraph : RDF data
+ */
+
+try {
+    Configuration conf = new Configuration(confGraph, ontoGraph);
+    if (conf.hasWarnings()) System.err.println(conf.getWarningsString());
+
+    <strong>Selection selected = conf.select(dataGraph);</strong>
+    <strong>selected = conf.format(dataGraph, selected);</strong>
+    <strong>Document out = selected.render();</strong>
+    OutputFormat format = new OutputFormat(out); 
+
+    // as a String
+    StringWriter stringOut = new StringWriter();
+    XMLSerializer serial = new XMLSerializer(stringOut, format);
+    serial.setNamespaces(true);
+    serial.serialize(out);
+
+    // Display the XML
+    System.out.println(stringOut.toString());
+} catch (Exception e) {
+    e.printStackTrace();
+}</pre>
+
+</body>
+</html>

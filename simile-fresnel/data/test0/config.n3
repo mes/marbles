@@ -1,0 +1,24 @@
+@prefix fresnel:  <http://www.w3.org/2004/09/fresnel#> .
+@prefix foaf:     <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix :         <http://example.org/test0#> .
+
+:foafGroup rdf:type fresnel:Group .
+
+:foafPersonLens
+	rdf:type fresnel:Lens ;
+	fresnel:purpose fresnel:defaultLens ;
+	fresnel:instanceLensDomain :me ;
+	fresnel:showProperties (
+		foaf:givenname 
+		foaf:family_name
+		foaf:mbox ) ;
+	fresnel:group :foafGroup .
+                                                		
+:foafPersonTitleLens
+	rdf:type fresnel:Lens ;
+	fresnel:purpose fresnel:labelLens ;
+	fresnel:instanceLensDomain :me ;
+	fresnel:showProperties ( foaf:title ) ;
+	fresnel:group :foafGroup .

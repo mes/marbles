@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.3)
+The top-level auxiliary file: fresnel.aux
+The style file: splncs.bst
+Database file #1: fresnel.bib
+You've used 22 entries,
+            2043 wiz_defined-function locations,
+            586 strings with 6560 characters,
+and the built_in function-call counts, 3780 in all, are:
+= -- 324
+> -- 152
+< -- 2
++ -- 62
+- -- 40
+* -- 196
+:= -- 554
+add.period$ -- 30
+call.type$ -- 22
+change.case$ -- 22
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 202
+empty$ -- 458
+format.name$ -- 40
+if$ -- 905
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 9
+newline$ -- 100
+num.names$ -- 22
+pop$ -- 126
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 101
+stack$ -- 0
+substring$ -- 48
+swap$ -- 54
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 26
+width$ -- 24
+write$ -- 214

@@ -1,0 +1,32 @@
+%--------------------------------------------------------------------
+\section{Introduction}
+
+Software agents are the primary consumers of Semantic Web content. RDF is thus designed to facilitate machine interpretability of information and does not define a visual presentation model since human readability is not one of its stated goals. Todo: Put this in: 1) observe that RDF applications do not always need to do lots of semantic processing (as in the typical RDF-is-for-machines-view), but often only need to show the information in the RDF repository in a human friendly way....However, content encoded in RDF has to be viewed and understood by humans on many occasions. Displaying RDF in a human-friendly manner is therefore a legitimate concern, addressed by various types of applications using different representation paradigms. Tools like IsaViz \cite{isaviz}and Welkin \cite{Welkin} represent RDF models as node-link diagrams, where the subjects and objects of RDF triples are the nodes, and predicates the arcs, of the graph. Other tools use nested box layouts (Longwell \cite{simile}) or table-like layouts (Brownsauce \cite{Steer03}, Noadster \cite{Rutledge05}, Swoop \cite{MindSwap05}) for displaying properties of RDF resources with varying levels of details. A third approach combines these paradigms and extends them with specialized user interface widgets designed for specific information items like DNA sequences, calendar data or tree structures (Haystack \cite{Quan04}, mSpace\cite{mspace2005}).
+
+
+\subsection{Selection and Styling}
+
+Seen from an abstract perspective  generating a visualization is a 5 step process:
+1. Select which resources to display.
+2. Select which properties to display and how to display property values (DBview/Slice).
+3  Select a presentation paradigm
+4. Style what has been selected (like CSS).
+5. Generate output in the appropriate format.
+
+Step 1 depends on the browsing-paradigm and is not generalizable.
+Step 3 and 5 depends on the browser and target device and is not generalizable.
+Step 2 and 4 are generalizable. Thats why we generalize them in order to faciliate the exchange of knowledge.
+
+% Approaches to the display of RDF data are based on different representation paradigms, but all of them consider the whole operation as a two-step process: content selection and content styling. Todo: Don't talk about process.
+
+Todo: Use the text below to make the points above clear.
+
+Providing a single and global view of an RDF model is often not useful. The amount of data makes it difficult to extract information relevant to the current task and is a cognitive overload. The first step thus consists in restricting the visualization to small but cohesive parts of the RDF graph. Users can then select other points of interest by navigating in the model through hyperlinks and refine the selection with paradigms such as faceted browsing \cite{simile}. Todo refer to DB view or MMS slice\cite{Isakowitz:1995:RMS} as similar concepts.
+
+Identifying what content to show is not sufficient to get a human-friendly presentation of the information. To achieve this goal, the selected content items have to be laid out properly and rendered with graphical attributes that favor legibility in order to facilitate general understanding of the displayed information. Relying solely on the content's structure and exploiting knowledge contained in the schema associated with the data is not sufficient to produce sophisticated visualizations. The second step thus consists in styling selected content items using explicit styling instructions found in stylesheets.
+
+Relying solely on the content's structure and exploiting knowledge contained in the schema associated with the data is not sufficient to produce sophisticated visualizations. ... That why a way to encode additional display knowledge is needed ...
+
+\subsection{Outline of the paper}
+
+In section 2 we discuss the various approaches proposed so far for representing display knowledge neccessary for rendering visualizations of RDF graphs and retrieve requirements from them(good and bad paractices).  Then we abstract two common problems that are handled in an ad hoc manner by all approaches: Selection and Styling. Based on this abstraction we have developed fresnel as a browser-indpendent...exchange of knowledge.... The Fresnel lens and style vocabularies are described in sections 2 and 3. Section 4 describes the selector languages (having a growing expressiviness) which can be used within Fresnel to identify the elements of RDF graphs lenses and styles should apply to. Section 5 shows how Fresnel can be used within different browsers, including Longwell and IsaViz.

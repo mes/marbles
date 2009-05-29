@@ -1,0 +1,92 @@
+% Fresnel paper for ISWC05
+
+% based on LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.2 for LaTeX2e
+%
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{graphicx}
+%
+\begin{document}
+%
+\newcommand{\rdf}[1]{{\small \texttt{#1}}}
+
+\frontmatter          % for the preliminaries
+%
+\pagestyle{headings}  % switches on printing of running heads
+\mainmatter              % start of the contributions
+%
+\title{Fresnel - A Browser-Independent Presentation Vocabulary for RDF}
+%
+\titlerunning{Fresnel - A browser-independent Presentation Vocabulary for RDF}
+% abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{Christian Bizer\inst{1} \and Ryan Lee\inst{2} \and Emmanuel Pietriga\inst{3}}
+%
+%\authorrunning{Bizer et al.}   % abbreviated author list (for running head)
+%
+%%%% modified list of authors for the TOC (add the affiliations)
+\tocauthor{Chris Bizer (Berlin),
+Ryan Lee (MIT),
+Emmanuel Pietriga (INRIA)}
+%
+\institute{Freie Universit\"at Berlin, Germany \\
+\email{chris@bizer.de}
+\and
+W3C/MIT CSAIL, Cambridge, USA\\
+\email{ryanlee@w3.org}
+\and
+INRIA \& Laboratoire de Recherche en Informatique (LRI), Orsay, France\\
+\email{emmanuel.pietriga@inria.fr}
+}
+
+\maketitle
+
+%--------------------------------------------------------------------
+\begin{abstract}
+Semantic Web browsers and other tools aimed at displaying RDF data to end users are all concerned with the same problem: presenting content primarily intended for machine consumption in a human-readable way. Their solutions differ but in the end address the same two high-level issues, no matter the underlying representation paradigm: specifying (i) {\em what} information contained in RDF models should be presented (content selection) and (ii) {\em how} this information should be presented (content formatting and styling). However, each tool currently relies on its own {\em ad hoc} mechanisms and vocabulary for specifying RDF presentation knowledge, making it difficult to share and reuse such knowledge across applications. Recognizing the general need for presenting RDF content to users and wanting to promote the exchange of presentation knowledge, we developed Fresnel as a browser-independent extensible vocabulary of core RDF display concepts.
+\end{abstract}
+
+%--------------------------------------------------------------------
+\input{fresnelIntro}
+
+%--------------------------------------------------------------------
+%\input{fresnelRelatedWork}
+
+%--------------------------------------------------------------------
+\input{fresnelVocabOverview}
+
+%--------------------------------------------------------------------
+\input{fresnelSelection}
+
+%--------------------------------------------------------------------
+\input{fresnelConclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I'm temporarily using the \newpage and \vspace instructions to make sure
+% that ACK and Refs fit on one page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Acknowledgments}
+
+\vspace{-1mm}
+
+\begin{small}
+We would like to thank members of the SIMILE and Haystack projects at MIT for their valuable input, especially Stefano Mazzocchi, David Karger, Stephen Garland, David Huynh, Karun Bakshi, and the others who contributed to the discussion about Fresnel: Hannes Gassert, Jacco van Ossenbruggen, Dennis Quan, and Lloyd Rutledge.
+\end{small}
+
+\vspace{-3mm}
+
+%
+% ---- Bibliography ----
+%
+
+\bibliographystyle{splncs}
+\bibliography{fresnel}
+
+\end{document}

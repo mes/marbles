@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.openrdf.sesame</groupId>
+		<artifactId>sesame-testsuites</artifactId>
+		<version>2.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sesame-rio-compliance</artifactId>
+	<packaging>pom</packaging>
+
+	<name>OpenRDF Rio compliance tests</name>
+	<description>Tests for parsers and writers of various RDF file formats.</description>
+
+	<modules>
+		<module>base</module>
+		<module>n3</module>
+		<module>ntriples</module>
+		<module>rdfxml</module>
+		<module>trig</module>
+		<module>turtle</module>
+	</modules>
+
+	<scm>
+		<connection>scm:svn:https://repo.aduna-software.org/svn/org.openrdf/sesame/trunk/testsuites/rio</connection>
+		<developerConnection>scm:svn:https://repo.aduna-software.org/svn/org.openrdf/sesame/trunk/testsuites/rio</developerConnection>
+		<url>http://repo.aduna-software.org/viewvc/org.openrdf/sesame/trunk/testsuites/rio</url>
+	</scm>
+
+</project>

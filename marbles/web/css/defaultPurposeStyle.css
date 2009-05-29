@@ -1,0 +1,190 @@
+/*
+ *   Copyright (c) 2009, MediaEvent Services GmbH & Co. KG
+ *   http://mediaeventservices.com
+ *   
+ *   This file is part of Marbles.
+ *
+ *   Marbles is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   Marbles is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with Marbles.  If not, see <http://www.gnu.org/licenses/>.
+ *   
+ */
+
+* {
+	padding: 0;
+}
+
+/* opera width + scrollbar fix */
+html, body {/*	width: 100%; */
+	height: 100%;	margin: 0;
+	overflow: hidden;
+}
+
+#canvas {
+/*	width: 100%;*/
+	height: 100%;
+	z-index: 0;
+	overflow: auto;
+	padding: 0 2px;
+}    
+
+body {
+	font-family: Arial;
+	font-size: 8pt;
+}
+
+.mainbox {
+	width: 90%;
+	margin-left:auto;
+	margin-right: auto;
+	border: 1px solid #d2d3da;
+}
+
+.property .label, .property .values, .title {
+	padding: 5px;
+}
+
+
+.label, .values {
+	vertical-align: top;
+}
+
+.property {
+	overflow: auto;
+	border-top: 1px solid #d2d3da;
+	height: 100%;
+}
+
+.label {
+	float: left;
+	clear: none;
+}
+
+.values {
+	clear: right;
+	float: right;
+	width: 65%;
+	/* display: table-cell; */
+}
+
+.title {
+	font-size: 15pt;
+	margin-bottom: 10px;
+}
+
+h1 {
+	font-size: 14pt;
+}
+
+.abstract {
+	font-size: 8pt;
+	margin-bottom: 10px;
+}
+
+.small-float {
+	max-width: 120px;
+	max-height: 120px;
+	float: right;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.inline {
+	display: inline;
+}
+
+ul {
+	margin: 0;
+}
+
+.small {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+
+.box {
+	border: 1px solid #d2d3da;
+	padding: 3px;
+	font-size: 10pt;
+}
+
+.box iframe {
+	width: 450px;
+	height: 300px;
+	border: none;
+}
+
+.resource img {
+	max-height: 80%;
+	max-width: 80%;
+	border: none;
+	margin: 3px;
+}
+
+.horizontalimg {
+	display: inline;
+	margin: 3px 0;
+}
+
+#topnavigation {
+	height: 35px;
+ 	width: 90%;
+	margin: 10px auto;
+}
+
+#topnavigation form {
+	float: left;
+	width: 70%;
+	margin-top: 10px;
+}
+
+#logo * {
+	display: inline;
+}
+
+#logo img {
+	vertical-align: middle;
+}
+
+#logo {
+	float: right;
+	display: block;
+}
+
+#topnavigation h1 {
+	color: #003149;
+	font-size: 19px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+	
+#topnavigation #uri {
+	width: 80%;
+	margin-left: -1px;
+	margin-right: 2px;
+	padding: 2px 4px;
+	border: solid 1px #d2d3da;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+#topnavigation #submit {
+	vertical-align: middle;
+	height: 21px;
+	font-size: 12px;	
+	border: solid 1px;
+	border-color: #f2f2fb #c9cad1 #d2d3da #f2f2fb;
+	background-color: #EEEFF7;
+	padding: 0px 10px;
+	text-align:center;
+}
