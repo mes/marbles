@@ -338,7 +338,7 @@ pre {
       <li> The <em>photo view</em> provides photos for a given resource. These are often provided by <a href="http://dbpedia.org">DBpedia</a>, FOAF data, or the <a href="http://www4.wiwiss.fu-berlin.de/flickrwrappr/">flickr wrappr</a>.</li>
     </ul>
     <h3 id="retrieval">Data Retrieval</h3>
-    <p>Data is retrieved from multiple sources and integrated into a single graph that is persisted across user sessions. When provided with the URI of a resource to display, Marbles tries to dereference it. In parallel, it queries <a href="http://sindice.com/">Sindice</a> for datasources that contain information about the given resource, and <a href="http://revyu.com/">Revyu</a> for reviews.
+    <p>Data is retrieved from multiple sources and integrated into a single graph that is persisted across user sessions. When provided with the URI of a resource to display, Marbles tries to dereference it. In parallel, it queries <a href="http://sindice.com/">Sindice</a> and <a href="http://iws.seu.edu.cn/services/falcons/objectsearch/index.jsp">Falcons</a> for datasources that contain information about the given resource, and <a href="http://revyu.com/">Revyu</a> for reviews.
       In a similar manner as the <a href="http://www4.wiwiss.fu-berlin.de/bizer/ng4j/semwebclient/">Semantic Web Client Library</a>, Marbles follows specific predicates found in retrieved data such as <tt>owl:sameAs</tt> and <tt>rdfs:seeAlso</tt> in order to gain more information about a resource and to obtain human-friendly resource labels.</p>
     <h2 id="services">2. Endpoint Services</h2>
     <H3 id="sparql">SPARQL</H3>
@@ -355,7 +355,7 @@ pre {
       <li> lang = ISO language code (optional, defaults to <tt>en</tt>)</li>
     </ul></p>
     <h4>discover</h4>
-    <p>Tries to dereference the URI and queries Sindice and Revyu for data; then follows known predicates.</p>
+    <p>Tries to dereference the URI and queries Sindice, Falcons and Revyu for data; then follows known predicates.</p>
      <p>Parameters:
     <ul>
       <li> do = discover</li>
