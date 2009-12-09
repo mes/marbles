@@ -53,7 +53,7 @@ public class SindiceProvider implements DataProvider {
 	/**
 	 * The URL of Sindice's lookup service 
 	 */
-	private final String SERVICE_URL = "http://api.sindice.com/v2/search?qt=term&q=";
+	private final String SERVICE_URL = "http://api.sindice.com/v2/search?qt=term&page=1&q=";
 	
 	/**
 	 * Generates the lookup URL for a given resource
