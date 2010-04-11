@@ -105,8 +105,13 @@ public class SemanticWebClient {
 		
 		/* Dereference the resource itself */
 		try {
-			if (!(resource instanceof BNode))
+			if (!(resource instanceof BNode)) {
 				urls.add(new URI(resource.toString(), true));
+				/* Temporarily work around DBpedia 303 redirection bug that occurs when special characters are involved */
+				if (resource.toString().startsWith("http://dbpedia.org/resource/")) {
+					urls.add(new URI(resource.toString().replace("http://dbpedia.org/resource/", "http://dbpedia.org/data/") + ".xml", true));
+				}
+			}
 		} catch (URIException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
