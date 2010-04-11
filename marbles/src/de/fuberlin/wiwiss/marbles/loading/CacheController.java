@@ -90,7 +90,7 @@ public class CacheController {
 	 * Removes data for a given URL
 	 * @param url	The URL whose data is to be removed
 	 */
-	public void removeData(String url) {
+	public synchronized void removeData(String url) {
 		/* Prevent deletion of base graphs */
 		if (Constants.isBaseUrl(url))
 			return;
@@ -101,10 +101,8 @@ public class CacheController {
 		
 		try {
 			dataConn = dataRepository.getConnection();
-			dataConn.setAutoCommit(false);
 			inferencerConn = (InferencerConnection) dataRepository.getSail().getConnection();
 			metaDataConn = metaDataRepository.getConnection();
-			metaDataConn.setAutoCommit(false);
 
 			URI urlDataContext = dataRepository.getValueFactory().createURI(url);
 			URI urlInferencerContext = dataRepository.getSail().getValueFactory().createURI(url);
@@ -112,9 +110,9 @@ public class CacheController {
 
 			inferencerConn.removeInferredStatement((Resource)null, null, null, urlInferencerContext);
 			/* 
-			 * Because inferencerConnection now holds the transaction lock on the store,
+			 * Because inferencerConn now holds the transaction lock on the store,
 			 * we need to commit changes first or we'll run into a deadlock when removing statements
-			 * using dataConn. They could be removed using inferencerConn; but the problem
+			 * using dataConn. They could be removed using dataConn; but the problem
 			 * would remain for the adding of statements.
 			 */ 
 			inferencerConn.commit();			
@@ -122,9 +120,7 @@ public class CacheController {
 			metaDataConn.remove(urlMetadata, null, null, contextCacheDataURI);
 
 			/* Commit */
-			dataConn.commit();
-			inferencerConn.commit();
-			metaDataConn.commit();
+//			inferencerConn.commit();
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		} catch (SailException e) {
@@ -159,17 +155,15 @@ public class CacheController {
 	 * @param method	Used to obtain metadata
 	 */
 	
-	public void addURLData(String url, Graph data, HttpMethod method) {
+	public synchronized void addURLData(String url, Graph data, HttpMethod method) {
 		RepositoryConnection dataConn = null;
 		InferencerConnection inferencerConn = null;
 		RepositoryConnection metaDataConn = null;
 
 		try {
 			dataConn = dataRepository.getConnection();
-			dataConn.setAutoCommit(false);
 			inferencerConn = (InferencerConnection) dataRepository.getSail().getConnection();
 			metaDataConn = metaDataRepository.getConnection();
-			metaDataConn.setAutoCommit(false);
 
 			URI urlDataContext = dataRepository.getValueFactory().createURI(url);
 			URI urlInferencerContext = dataRepository.getValueFactory().createURI(url);
@@ -178,9 +172,9 @@ public class CacheController {
 			/* Remove cached data and previous metadata */
 			inferencerConn.removeInferredStatement((Resource)null, null, null, urlInferencerContext);
 			/* 
-			 * Because inferencerConnection now holds the transaction lock on the store,
+			 * Because inferencerConn now holds the transaction lock on the store,
 			 * we need to commit changes first or we'll run into a deadlock when removing statements
-			 * using dataConn. They could be removed using inferencerConn; but the problem
+			 * using dataConn. They could be removed using dataConn; but the problem
 			 * would remain for the adding of statements.
 			 */ 
 			inferencerConn.commit();
@@ -219,9 +213,7 @@ public class CacheController {
 					contextCacheDataURI);
 						
 			/* Commit */
-			dataConn.commit();
-			inferencerConn.commit();
-			metaDataConn.commit();
+//			inferencerConn.commit();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (RepositoryException e) {

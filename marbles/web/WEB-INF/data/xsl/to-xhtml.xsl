@@ -112,6 +112,7 @@
 				<xsl:if test="$isMobile='true'">
 					<link rel="stylesheet" type="text/css" href="{$assetsURL}css/{$purpose}Style-mobile.css"/>
 				</xsl:if>
+				<link rel="icon" type="image/png" href="{$assetsURL}img/marbles-small.png"/>
 				<xsl:comment>[if lte IE 6]&gt;
 					&lt;link href="<xsl:value-of select="$assetsURL"/>css/<xsl:value-of select="$purpose"/>Style-ie6.css" rel="stylesheet" type="text/css" /&gt;
 				&lt;![endif]</xsl:comment>
@@ -145,7 +146,7 @@
 					<xsl:if test="$purpose = 'defaultPurpose'">
 						<!-- Top navigation -->
 				      	<div id="topnavigation">
-				      		<a href="http://marbles.sf.net/">
+				      		<a href="http://marbles.sourceforge.net/">
 					            <div id="logo">
 									<img src="{$assetsURL}img/marbles.png" alt="Marbles"/>
 								</div>
@@ -200,12 +201,12 @@
 			<xsl:choose>
 				<xsl:when test="f:title">
 					<div class="title">
-						<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" target="_blank"><xsl:value-of select="f:title"/></a>
+						<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}"><xsl:value-of select="f:title"/></a>
 					</div>
 				</xsl:when>				
 				<xsl:when test="@uri">
 					<div class="title">
-						<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" target="_blank"><xsl:value-of select="@uri"/></a>
+						<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}"><xsl:value-of select="@uri"/></a>
 					</div>
 				</xsl:when>
 			</xsl:choose>
@@ -225,8 +226,8 @@
 			<!-- Links -->
 			<xsl:if test="$purpose = 'abstractPurpose' and (not(functx:contains-word(../../../@class,'boxed')))">
 				<hr/>
-				<a href="{$serviceURL}?{$sessionParams}&amp;purpose=photoPurpose&amp;uri={encode-for-uri(@uri)}" target="_blank">Photos of <xsl:value-of select="f:title" disable-output-escaping="yes"/></a><br/>
-				<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" target="_blank">Full View</a>
+				<a href="{$serviceURL}?{$sessionParams}&amp;purpose=photoPurpose&amp;uri={encode-for-uri(@uri)}">Photos of <xsl:value-of select="f:title" disable-output-escaping="yes"/></a><br/>
+				<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}">Full View</a>
 			</xsl:if>
 		</div>
 	</xsl:template>
@@ -239,10 +240,10 @@
 		    		<xsl:choose>
 		    			<!-- try to use fresnel-supplied label -->
 			    		<xsl:when test='f:label/f:title != ""'>
-		    				<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" title="{@uri}" target="_blank"><xsl:value-of select="f:label/f:title" disable-output-escaping="yes"/></a>
+		    				<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" title="{@uri}"><xsl:value-of select="f:label/f:title" disable-output-escaping="yes"/></a>
 			    		</xsl:when>
 			    		<xsl:otherwise>
-							<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" title="{@uri}" target="_blank"><xsl:value-of select="@uri"/></a>
+							<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(@uri)}" title="{@uri}"><xsl:value-of select="@uri"/></a>
 			        	</xsl:otherwise>
 			        </xsl:choose>
 			        <xsl:if test="@inverse = 'true'">&nbsp;of</xsl:if>
@@ -276,13 +277,13 @@
 
 				<!-- image output type -->
 				<xsl:when test="@output-type = 'image'">
-					<a href="{f:resource/@uri}" target="_blank"><img src="{f:resource/@uri}"/></a>
+					<a href="{f:resource/@uri}"><img src="{f:resource/@uri}"/></a>
 					<xsl:sequence select="fresnelview:source(f:source)"/>				
 				</xsl:when>
 				
 				<!-- link output type -->
 				<xsl:when test="@output-type = 'link'">
-					<a href="{f:resource/@uri}" target="_blank">
+					<a href="{f:resource/@uri}">
 						<xsl:choose>
 							<xsl:when test="$purpose = 'abstractPurpose'">
 								<xsl:value-of select="fresnelview:cut-text(f:resource/f:title, 50)" disable-output-escaping="yes"/>
@@ -311,12 +312,12 @@
 					<li>
 		    			<xsl:choose>
 			    			<xsl:when test='f:resource/@uri'>
-								<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(f:resource/@uri)}" title="{f:resource/@uri}" target="_blank"><xsl:value-of select="f:resource/f:title" disable-output-escaping="yes"/></a>
+								<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(f:resource/@uri)}" title="{f:resource/@uri}"><xsl:value-of select="f:resource/f:title" disable-output-escaping="yes"/></a>
 								<!-- Alias resources -->
 								<xsl:if test="f:alias">
 								(also at <xsl:for-each select="f:alias">
 										<xsl:if test="position() &gt; 1">,&nbsp;</xsl:if>
-										<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(.)}" title="{.}" target="_blank"><xsl:value-of select="fresnelview:getHost(.)" disable-output-escaping="yes"/></a>
+										<a href="{$serviceURL}?{$sessionParams}&amp;uri={encode-for-uri(.)}" title="{.}"><xsl:value-of select="fresnelview:getHost(.)" disable-output-escaping="yes"/></a>
 									</xsl:for-each>)
 								</xsl:if>
 							</xsl:when>
@@ -371,7 +372,7 @@
 	<xsl:template match="fresnelview:source">
 		<li>
 			<a name="source-{encode-for-uri(fresnelview:uri)}"/>
-			<a href="{fresnelview:uri}" target="_blank">
+			<a href="{fresnelview:uri}">
 				<xsl:choose>
 					<!-- "off" icon for failed sources -->
 					<xsl:when test="(fresnelview:status = 'failed' or fresnelview:status = 'pending') and fresnelview:icon castable as xs:integer">
@@ -382,7 +383,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</a>
-			<a href="{fresnelview:uri}" target="_blank"><xsl:value-of select="fresnelview:cut-text(fresnelview:uri, 75)"/></a>
+			<a href="{fresnelview:uri}"><xsl:value-of select="fresnelview:cut-text(fresnelview:uri, 75)"/></a>
 			<span class="sourcedetails">
 				&nbsp;<xsl:value-of select="fresnelview:status"/>
 				<xsl:if test="fresnelview:responseCode != ''">&nbsp;(<xsl:value-of select="fresnelview:responseCode"/>)</xsl:if>

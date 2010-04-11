@@ -53,6 +53,16 @@ public class SemanticWebClient {
 	 * Number of seconds to wait for additional data once focal resource is loaded
 	 */
 	final int TIME_LIMIT_ADDITIONAL = 3;
+	
+	/**
+	 * Maximum number of steps for autonomous discovery
+	 */
+	final int MAX_STEPS = 1;
+	
+	/**
+	 * Maximum number of redirects to follow in the course of a single request for a document
+	 */
+	final int MAX_REDIRECTS = 2;
 
 	private Collection<DataProvider> dataProviders;
 	
@@ -121,7 +131,7 @@ public class SemanticWebClient {
 	 */
 	public List<URI> discoverResource(Resource resource, boolean wait) {
 		List<URI>urlsToBeFetched = getURLsForResource(resource);
-		DereferencerBatch dereferencerBatch = new DereferencerBatch(cacheController, uriQueue, dataProviders, resource, 1 /* maxSteps */);
+		DereferencerBatch dereferencerBatch = new DereferencerBatch(cacheController, uriQueue, dataProviders, resource, MAX_STEPS, MAX_REDIRECTS);
 		
 		/* provide URLs to dereferencer */ 
 		for (URI url : urlsToBeFetched) {
@@ -137,6 +147,7 @@ public class SemanticWebClient {
 		
 		/* Wait loop with timeout */
 		long timeStarted = System.currentTimeMillis();
+		System.err.println(Thread.currentThread().getName() + ": starting discoverResource() at " + timeStarted);
 	
 		if (wait) {
 			synchronized (dereferencerBatch) {
@@ -151,6 +162,7 @@ public class SemanticWebClient {
 		       	}
 			}
 		}
+		System.err.println(Thread.currentThread().getName() + ": finished discoverResource() after " + ((System.currentTimeMillis() - timeStarted) / 1000) + "s");
 		
 		/*
 		 * We stop waiting here so that the data retrieved so far can be shown to the client.
@@ -168,7 +180,7 @@ public class SemanticWebClient {
 	 * @param wait	If true, the method returns after the request has been processed
 	 */
 	public void loadURL(URI url, boolean wait) {
-		DereferencerBatch dereferencerBatch = new DereferencerBatch(cacheController, uriQueue, dataProviders, null, 0 /* maxSteps (!) */);
+		DereferencerBatch dereferencerBatch = new DereferencerBatch(cacheController, uriQueue, dataProviders, null, 0 /* maxSteps (!) */, MAX_REDIRECTS);
 		
 		/* Provide URLs to dereferencer */ 
 		try {

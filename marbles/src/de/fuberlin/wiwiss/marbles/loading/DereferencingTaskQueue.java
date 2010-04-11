@@ -74,17 +74,8 @@ public class DereferencingTaskQueue extends Thread {
 	}
 	
 	private void checkForTasksAndWait() {
-		while (!this.tasks.isEmpty()) {
-			DereferencingTask task = (DereferencingTask) this.tasks.getFirst();
-			if (tryAssignTask(task)) {
-				this.tasks.removeFirst();
-				this.log.debug("Dequeue: <" + task.getURI() + ">@" + task.getStep() + 
-						" (n = " + this.tasks.size() + ")");
-			} else {
-				break;
-			}
-		}
 		try {
+			this.tryAssignTask();
 			// TODO Wake up when a worker thread is finished
 			synchronized (this) {
 				wait(100);
@@ -95,15 +86,22 @@ public class DereferencingTaskQueue extends Thread {
 		}
 	}
 
-	private boolean tryAssignTask(DereferencingTask task) {
+	private synchronized void tryAssignTask() {
+		if (this.tasks.isEmpty())
+			return;
+			
+		DereferencingTask task = (DereferencingTask) this.tasks.getFirst();
+		
 		Iterator<DereferencerThread> it = this.threads.iterator();
 		while (it.hasNext()) {
 			DereferencerThread thread = it.next();
 			if (thread.startDereferencingIfAvailable(task)) {
-				return true;
+				this.tasks.removeFirst();
+				this.log.debug("Dequeue: <" + task.getURI() + ">@" + task.getStep() + 
+						" (n = " + this.tasks.size() + ")");
+				break;
 			}
 		}
-		return false;
 	}
 
 	private void initThreadPool(int numThreads) {

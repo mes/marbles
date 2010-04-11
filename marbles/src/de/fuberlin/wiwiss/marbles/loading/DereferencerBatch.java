@@ -56,6 +56,7 @@ public class DereferencerBatch implements DereferencingListener {
 	private DereferencingTaskQueue uriQueue;
 	private Collection<DataProvider> dataProviders;
 	private int maxSteps;
+	private int maxRedirects;
 	
 	/**
 	 * Constructs a new <code>DereferencerBatch</code>
@@ -65,12 +66,13 @@ public class DereferencerBatch implements DereferencingListener {
 	 * @param mainResource
 	 * @param maxSteps
 	 */
-	public DereferencerBatch(CacheController cacheController, DereferencingTaskQueue uriQueue, Collection<DataProvider> dataProviders, Resource mainResource, int maxSteps) {
+	public DereferencerBatch(CacheController cacheController, DereferencingTaskQueue uriQueue, Collection<DataProvider> dataProviders, Resource mainResource, int maxSteps, int maxRedirects) {
 		this.cacheController = cacheController;
 		this.mainResource = mainResource;
 		this.uriQueue = uriQueue;
 		this.dataProviders = dataProviders;
 		this.maxSteps = maxSteps;
+		this.maxRedirects = maxRedirects;
 	}
 
 	/**
@@ -83,7 +85,7 @@ public class DereferencerBatch implements DereferencingListener {
 	 * @throws URIException
 	 */
 	public void loadURL(URI url, int step, int redirectCount, boolean forceReload) throws URIException {
-		if (step > maxSteps)
+		if (step > maxSteps || redirectCount > maxRedirects)
 			return;
 		
 		/* Cut off local names from URI */ 

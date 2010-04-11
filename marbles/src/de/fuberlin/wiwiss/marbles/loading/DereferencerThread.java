@@ -26,6 +26,7 @@ import org.openrdf.rio.RDFParseException;
 import org.openrdf.rio.RDFParser;
 import org.openrdf.rio.Rio;
 
+import de.fuberlin.wiwiss.marbles.Constants;
 import de.fuberlin.wiwiss.ng4j.semwebclient.DereferencingTask;
 import de.fuberlin.wiwiss.ng4j.semwebclient.LimitedInputStream;
 
@@ -165,7 +166,7 @@ public class DereferencerThread extends Thread {
 				+ "text/html;q=0.5"
 				);
 		
-		method.setRequestHeader("User-Agent", "marbles/0.9 (http://dbpedia.org/marbles)");
+		method.setRequestHeader("User-Agent", Constants.userAgent);
 				
 		/* Own redirect handling in order to tie it in with caching etc. */
 		method.setFollowRedirects(false);

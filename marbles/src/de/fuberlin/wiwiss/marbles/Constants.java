@@ -33,6 +33,8 @@ import org.openrdf.model.vocabulary.RDFS;
  */
 
 public final class Constants {
+	public final static String userAgent = "marbles/1.0 (http://marbles.sourceforge.net)";
+	
 	/* External namespaces */
     public final static String nsDBpedia = "http://dbpedia.org/resource/";
     public final static String nsDBpediaProp = "http://dbpedia.org/property/";
