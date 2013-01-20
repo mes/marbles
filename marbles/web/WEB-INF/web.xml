@@ -6,7 +6,7 @@
       <!-- Data Providers to activate -->
       <init-param>
         <param-name>dataProviders</param-name>
-        <param-value>de.fuberlin.wiwiss.marbles.dataproviders.RevyuProvider,de.fuberlin.wiwiss.marbles.dataproviders.SindiceProvider,de.fuberlin.wiwiss.marbles.dataproviders.FalconsProvider</param-value>
+        <param-value>de.fuberlin.wiwiss.marbles.dataproviders.RevyuProvider,de.fuberlin.wiwiss.marbles.dataproviders.SindiceProvider</param-value>
       </init-param>    
       <!-- Path to data directory with subdirectories for fresnel configuration ("fresnel"), built-in ontologies ("ontologies") and XSLT transformations ("xsl"), absolute or relative to the Marbles app directory -->
       <init-param>
