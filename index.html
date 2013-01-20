@@ -1,0 +1,632 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Marbles Linked Data Engine</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-15">
+<STYLE type="text/css">
+body {
+	background: white;
+	color: black;
+	font-family: Georgia, serif;
+	color: #333333;
+	line-height: 1.4em;
+	padding: 1.25em 3em;
+	margin: 0;
+}
+:link {
+	color: #000000;
+}
+:visited {
+	color: #000000;
+}
+a:link img {
+	border: none;
+}
+a:visited img {
+	border: none;
+}
+h1, h2, h3, h4 {
+	background: white;
+	color: #d52d2b;
+}
+h1 {
+	font: 170% serif;
+	margin: 0;
+}
+h2 {
+	font: 140% serif;
+	margin: 1.5em 0 0.5em 0;
+}
+h3 {
+	font: 120% serif;
+	margin: 1.0em 0 0.25em 0;
+}
+h4 {
+	font: bold 105% serif;
+	margin: 1.0em 0 0.1em 0;
+}
+h5 {
+	font: italic 100% sans-serif;
+}
+h6 {
+	font: small-caps 100% sans-serif;
+}
+.hide {
+	display: none;
+}
+pre {
+	background: #fff6bb;
+	font-family: monospace;
+	line-height: 1.2em;
+	padding: 1em 2em;
+}
+dt {
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+dd {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+code, tt {
+	font-family: monospace;
+}
+code {
+	border-left: 2px solid #d52d2b;
+	margin: 0.75em 0 0.75em 0.5em;
+	padding-left: 1.5em;
+	display: block;
+}
+ul.toc {
+	list-style-type: none;
+}
+ol.toc li a {
+	text-decoration: none;
+}
+.note {
+	color: red;
+}
+#header {
+	border-bottom: 1px solid #CCCCCC;
+	clear: both;
+	width: 100%;
+	height: 90px;
+}
+#logo {
+	float: left;
+}
+#authors {
+	clear: right;
+	float: right;
+	font-size: 80%;
+	text-align: right;
+	margin-top: 22px;
+}
+#content {
+	clear: both;
+	margin: 1em auto 0 0;
+	text-align: justify
+}
+#download {
+	font-family: sans-serif;
+	margin-bottom: 1em;
+	text-align: center;
+}
+#download h2 {
+	font-size: 125%;
+	margin: 1.5em 0 -0.2em 0;
+}
+#download small {
+	color: #888;
+	font-size: 80%;
+}
+#footer {
+	border-top: 1px solid #ccc;
+	color: #aaa;
+	margin: 2em 0 0;
+}
+th, td {
+	vertical-align: top;
+	padding: 0.35em 0.5em;
+}
+form {
+	border: 1px dashed;
+	padding: 0.5em 1em;
+	background-color: #ffe9d4;
+}
+table.noborder td {
+	padding: 0.35em 0.1em;
+}
+table {
+	border: none;
+}
+td, th {
+	border: 1px dashed;
+	border-bottom: none;
+	border-right: none;
+}
+th {
+	border-top: none;
+}
+.first {
+	border-left: none;
+}
+td.first {
+	font-style: italic;
+}
+table.noborder td, table.noborder th { border: none; }
+
+body {
+	min-width: 1050px;
+}
+
+#topbox {
+	min-height: 467px;
+}
+
+.intro {
+	line-height: 1.5em;
+	word-spacing: 0.15em;
+	display: block;
+	margin: 0.05em 0;
+	font-size: 110%;
+	letter-spacing: 0.05em;
+	font-style: italic;
+}
+
+#gallery1 {
+	text-align: left;
+	width: 502px !important;
+	height: 472px !important;
+	border: none !important;
+	float: right;
+	margin: 0 0 1em 2.25em;
+}
+.gallery h2, .gallery h2 a, .gallery h2 a:hover, .gallery h2 a:active, .gallery h2 a:visited {
+	text-align: left;
+	color: white;
+	border: none;
+	font-weight: bold;
+	background: none;
+}
+.gallery h2 a {
+	text-decoration: underline;
+}
+.slideElement {
+	border: 1px solid #ccc;
+	width: 500px !important;
+	height: 470px !important;
+}
+.gallery p {
+	display: none;
+}
+.slideInfoZone h2 {
+	font-size: 95% !important;
+	margin: 4px 12px !important;
+}
+ @media Print {
+* {
+	font-size: 92%;
+}
+body {
+	padding: 0;
+	line-height: 1.2em;
+}
+#content {
+	margin: 0;
+	width: 100%;
+}
+}
+@media Aural {
+h1 {
+	stress: 20;
+	richness: 90;
+}
+h2 {
+	stress: 20;
+	richness: 90;
+}
+h3 {
+	stress: 20;
+	richness: 90;
+}
+.hide {
+	speak: none;
+}
+dt {
+	pause-before: 20%;
+}
+pre {
+	speak-punctuation: code;
+}
+}
+</STYLE>
+<link rel="stylesheet" href="smoothgallery/css/jd.gallery.css" type="text/css" media="screen">
+<script src="smoothgallery/scripts/mootools.v1.11.js" type="text/javascript"></script>
+<script src="smoothgallery/scripts/jd.gallery.js" type="text/javascript"></script>
+<script type="text/javascript">
+	function startGallery() {
+		var gallery1 = new gallery($('gallery1'), {
+			timed: true,
+			showArrows: true,
+			showCarousel: false,
+			embedLinks: true,
+			delay: 15000
+		});
+	}
+	window.addEvent('domready',startGallery);
+</script>
+</HEAD>
+<BODY>
+<!-- Start WBSG navbar -->
+<style>
+#wbsg_navbar {
+    background-color: #dedede;
+    color: #7d7d7d;
+	font-size: 80%;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	text-align: right;
+	top: 0;
+	width: 100%;
+	background-color: #DEDEDE;
+	font-family: arial,helvetica,sans-serif;
+
+	/* Safari 5.1, Chrome 10+ */ 
+	background: -webkit-linear-gradient(top, #ffffff, #dedede);
+	
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, #ffffff, #dedede);
+	
+	/* IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dedede');
+
+	/* IE 10 */
+	background: -ms-linear-gradient(top, #ffffff, #dedede);
+	
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #ffffff, #dedede);
+
+	text-shadow: 0px 1px 0px #ffffff;
+}
+
+#wbsg_navbar a {
+    color: #4e4e4e;
+	text-decoration: none;
+}
+
+#wbsg_navbar a:hover {
+    color: #1d1d1d;
+}
+
+#wbsg_navbar_intro {
+	line-height: 25px;
+	width: 100%;
+	border-bottom: 1px solid #BCBCBC;
+}
+
+#wbsg_navbar_projects {
+	float: right;
+}
+
+#wbsg_navbar_projects a {
+	display: block;
+	float: left;
+	line-height: 25px;
+	padding: 0 0.5em;
+	border-left: 1px solid #d2d2d2;
+	border-bottom: 1px solid #BCBCBC;
+}
+
+#wbsg_navbar_projects a:hover {
+	background: #eaeaea;
+	
+	/* Safari 5.1, Chrome 10+ */ 
+	background: -webkit-linear-gradient(top, #ffffff, #eaeaea);
+	
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, #ffffff, #eaeaea);
+	
+	/* IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea');
+
+	/* IE 10 */
+	background: -ms-linear-gradient(top, #ffffff, #eaeaea);
+	
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #ffffff, #eaeaea);
+}
+
+.wbsg_navbar_active_project {
+	font-weight: bold;
+	color: #373737 !important;
+	border-bottom: 1px solid #ffffff !important;
+	
+	background: #ffffff !important;
+	
+	/* Safari 5.1, Chrome 10+ */ 
+	background: -webkit-linear-gradient(top, #f2f2f2, #ffffff) !important;
+	
+	/* Firefox 3.6+ */
+	background: -moz-linear-gradient(top, #f2f2f2, #ffffff) !important;
+	
+	/* IE */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#ffffff') !important;
+	
+	/* IE 10 */
+	background: -ms-linear-gradient(top, #f2f2f2, #ffffff) !important;
+	
+	/* Opera 11.10+ */
+	background: -o-linear-gradient(top, #f2f2f2, #ffffff) !important;
+}
+
+body {
+	padding-top: 50px;
+	margin: 0;
+}
+</style>
+
+<div id="wbsg_navbar">
+	<div id="wbsg_navbar_projects">
+	<a href="http://dbpedia.org" title="DBpedia is a community effort to extract structured information from Wikipedia and to make this information available on the Web" >DBpedia</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/d2r-server/" title="D2R Server is a tool for publishing the content of relational databases on the Semantic Web" >D2R Server</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/r2r/" title="R2R Framework &ndash; Translating RDF data from the Web to a target vocabulary" >R2R</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/silk/" title="The Silk framework is a tool for discovering relationships between data items within different Linked Data sources" >Silk</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/ldif/" title="LDIF &ndash; Linked Data Integration Framework translates heterogeneous Linked Data from the Web into a clean, local target representation while keeping track of data provenance" >LDIF</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/ng4j/" title="The Named Graphs API for Jena (NG4J) is an extension to the Jena Semantic Web framework for parsing, manipulating and serializing sets of Named Graphs" >NG4J</a>
+		<a href="http://marbles.sourceforge.net/" title="Marbles is a server-side application that formats Semantic Web content for XHTML clients using Fresnel lenses and formats" class="wbsg_navbar_active_project">Marbles</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/bizer/wiqa/" title="The WIQA - Information Quality Assessment Framework is a set of software components that empowers information consumers to employ a wide range of different information quality assessment policies to filter information from the Web" >WIQA</a>
+		<a href="http://www4.wiwiss.fu-berlin.de/pubby/" title="Pubby &ndash; A Linked Data Frontend for SPARQL Endpoints can be used to add Linked Data interfaces to SPARQL endpoints" >Pubby</a>
+		<a href="http://sites.wiwiss.fu-berlin.de/suhl/bizer/rdfapi/index.html" title="RAP &ndash; RDF API for PHP is a software package for parsing, querying, manipulating, serializing and serving RDF models" >RAP</a>
+	</div>
+	<div id="wbsg_navbar_intro">Open Source projects by the <a href="http://www.wiwiss.fu-berlin.de/en/institute/pwo/bizer/index.html">Web-based Systems Group</a>:&nbsp;&nbsp;</div>
+</div>
+
+<!-- End WBSG navbar -->
+<DIV id=header>
+  <DIV id=logo><A href="http://marbles.sf.net/"><IMG
+	alt="Marbles Linked Data Engine" src="img/marbles-logo.png"></A> </DIV>
+  <DIV id=authors> <A href="http://beckr.org" target=_blank>Christian Becker</A><br>
+    <A href="http://www.bizer.de/" target=_blank>Chris Bizer</A> </DIV>
+</DIV>
+<DIV id="content">
+  <div id="topbox">
+    <div id="gallery1" class="gallery">
+      <div class="imageElement">
+        <h3>A <i>full details view</i> of <a href="http://www5.wiwiss.fu-berlin.de/marbles?uri=http://dbpedia.org/resource/Beijing_Capital_International_Airport&amp;lang=en&amp;mobile=false">Beijing Capital Airport</a> that includes data from DBpedia, GeoNames and the flickr wrappr.</h3>
+        <p></p>
+        <a href="http://www5.wiwiss.fu-berlin.de/marbles?uri=http://dbpedia.org/resource/Beijing_Capital_International_Airport&amp;lang=en&amp;mobile=false" title="Open using Marbles" class="open"></a> <img src="img/beijing-airport.png" class="full"> </div>
+      <div class="imageElement">
+        <h3>A <i>full details view</i> of <a href="http://www5.wiwiss.fu-berlin.de/marbles?lang=en&amp;uri=http%3A%2F%2Fwww.w3.org%2FPeople%2FBerners-Lee%2Fcard%23i">Tim Berners-Lee's FOAF profile</a> with data sources indicated using &quot;marbles&quot;</h3>
+        <p></p>
+        <a href="http://www5.wiwiss.fu-berlin.de/marbles?lang=en&amp;uri=http%3A%2F%2Fwww.w3.org%2FPeople%2FBerners-Lee%2Fcard%23i" title="Open using Marbles" class="open"></a> <img src="img/timbl.png" class="full"> </div>
+    </div>
+    <div id="topleft">
+      <P><span class="intro">Marbles is a server-side application that formats Semantic Web content for XHTML clients using <a href="http://www.w3.org/2005/04/fresnel-info/">Fresnel</a> lenses and formats. Colored dots are used to correlate the origin of displayed data with a list of data sources, hence the name.</span></P>
+      <p>By performing all formatting, data retrieval and storage activities on the server side rather than on a potentially thinly equipped client, the view generation can touch on large amounts of data and requests can be answered relatively quickly. Marbles provides display and database capabilities for <a href="http://wiki.dbpedia.org/DBpediaMobile?v=hak">DBpedia Mobile</a>.</P>
+      <h3 id="tryit">Try it out!</h3>
+      <p>A public installation of Marbles is located at <a href="http://www5.wiwiss.fu-berlin.de/marbles/">http://www5.wiwiss.fu-berlin.de/marbles/</a>. Use the following form to start browsing with it.</p>
+      <form style="width: 455px; margin: 0.5em 0" action="http://www5.wiwiss.fu-berlin.de/marbles" method="get" name="form1">
+      <input type="hidden" name="mobile" value="false">
+      <input type="hidden" name="lang" value="en">
+	  <table class="noborder">
+      <tr>
+      <td>URI:</td>
+      <td><input type="text" value="http://dbpedia.org/resource/Beijing_Capital_International_Airport" id="uri" name="uri" style="width: 400px"></td>
+      </tr>
+      <tr>
+        <td>View:</td>
+        <td><select name="purpose" style="width: 150px">
+          <option value="defaultPurpose">full view</option>
+          <option value="abstractPurpose">summary view</option>
+          <option value="photoPurpose">photo view</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+      <td>
+      </td>
+      <td><input type="submit" value="Open" name="Submit" style="padding: 0 5px">
+    </td>
+    </tr>
+    </table></form>
+    
+    </div>
+   
+  </div>
+  <div id="mainbox">
+ <h2>News</h2>
+    <ul>
+      <li>2009/07/04: The Marbles server on www5 is now back up following maintenance work.</li>
+      <li>2009/06/05: Added ANTLR properties in <a href="http://marbles.svn.sourceforge.net/viewvc/marbles/trunk/marbles/doc/marbles.policy">marbles.policy</a> that prevented abstract view generation (thanks to Simon Reinhardt).</li>
+      <li>2009/05/28: Initial release of Marbles 1.0 on SourceForge.</li>
+    </ul>   
+      <H2>Contents</H2>
+      <OL>
+        <LI><a href="#concepts">Concepts</a></LI>
+        <LI><a href="#services">Endpoint Services</a></LI>
+        <LI><a href="#installation">Installation and Configuration</a></LI>
+        <LI><a href="#sourcecode">Sourcecode</a></LI>
+        <LI><a href="#credits">Credits</a></LI>
+        <LI><a href="#references">References</A></LI>
+        <LI><a href="#feedback">Feedback</a></LI>
+      </OL>
+ 
+    <H2 id="concepts">1. Concepts</H2>
+   
+    <h3>Views</h3>
+    <p>Apart from a <em>full details</em> view that lists all known properties for resource, Marbles allows for the generation of <a href="http://www.w3.org/2005/04/fresnel-info/">Fresnel</a>-based views that are complemented by corresponding CSS stylesheets.</p>
+    <p>
+      There are currently two views in use, which were designed for <a  href="http://wiki.dbpedia.org/DBpediaMobile?v=hak" class="" title="DBpedia Mobile">DBpedia Mobile</a>: </p>
+    <ul>
+      <li> The <em>summary view</em> features a short text describing the resource and optionally an image, a link to the resource's <tt><a href="http://xmlns.com/foaf/0.1/#term_homepage">foaf:homepage</a></tt> and reviews from the <a href="http://revyu.com">Revyu</a> rating site if existent. </li>
+      <li> The <em>photo view</em> provides photos for a given resource. These are often provided by <a href="http://dbpedia.org">DBpedia</a>, FOAF data, or the <a href="http://www4.wiwiss.fu-berlin.de/flickrwrappr/">flickr wrappr</a>.</li>
+    </ul>
+    <h3 id="retrieval">Data Retrieval</h3>
+    <p>Data is retrieved from multiple sources and integrated into a single graph that is persisted across user sessions. When provided with the URI of a resource to display, Marbles tries to dereference it. In parallel, it queries <a href="http://sindice.com/">Sindice</a> and <a href="http://iws.seu.edu.cn/services/falcons/objectsearch/index.jsp">Falcons</a> for datasources that contain information about the given resource, and <a href="http://revyu.com/">Revyu</a> for reviews.
+      In a similar manner as the <a href="http://www4.wiwiss.fu-berlin.de/bizer/ng4j/semwebclient/">Semantic Web Client Library</a>, Marbles follows specific predicates found in retrieved data such as <tt>owl:sameAs</tt> and <tt>rdfs:seeAlso</tt> in order to gain more information about a resource and to obtain human-friendly resource labels.</p>
+    <h2 id="services">2. Endpoint Services</h2>
+    <H3 id="sparql">SPARQL</H3>
+    <p>Marbles can act as a SPARQL Endpoint and supports the <tt>SELECT</tt>, <tt>CONSTRUCT</tt> and <tt>DESCRIBE</tt> forms. The endpoint URL is provided by the <em>marbles</em> servlet. The public service is <a href="http://www5.wiwiss.fu-berlin.de/marbles">http://www5.wiwiss.fu-berlin.de/marbles</a>.</p>
+    <h3 id="rest">REST</h3>
+    <p>The endpoint service supports the following commands via HTTP <tt>GET</tt> or <tt>POST</tt>:    </p>
+    <h4>view</h4>
+    <p>Discovers an URI (see below) and renders a given view.</p>
+    <p>Parameters: 
+    <ul>
+      <li> do = view</li>
+      <li>uri = The URI of interest (urlencoded)</li>
+      <li>purpose = <tt>abstractPurpose</tt> | <tt>defaultPurpose</tt> | <tt>photoPurpose</tt> (optional)</li>
+      <li> lang = ISO language code (optional, defaults to <tt>en</tt>)</li>
+    </ul></p>
+    <h4>discover</h4>
+    <p>Tries to dereference the URI and queries Sindice, Falcons and Revyu for data; then follows known predicates.</p>
+     <p>Parameters:
+    <ul>
+      <li> do = discover</li>
+      <li>uri = The URI of interest (urlencoded)</li>
+    </ul></p>
+    <h4>load</h4>
+    <p>(Re)loads an URL into the cache</p>
+     <p>Parameters:
+    <ul>
+      <li> do = load</li>
+      <li>url = The URL to load (urlencoded)</li>
+    </ul></p>
+    <h4>clear</h4>
+    <p>Removes an URL from the cache</p>
+    <p>Parameters:
+    <ul>
+      <li> do = clear</li>
+      <li>url = The URL to remove (urlencoded)</li>
+    </ul></p>
+    <H2 id="installation">3. Installation and Configuration</H2>
+    <p>This section explains how to set up a local copy of Marbles. If you just want to use Marbles, the public endpoint will be around for a while.</p>
+    <H3>Obtaining Marbles</H3>
+    <p>Obtain the <tt>.war</tt> distribution in the <a href="https://sourceforge.net/project/showfiles.php?group_id=262878">SourceForge project download area</a> and place it into a J2EE web container, such as <a href="http://tomcat.apache.org/">Tomcat</a>. Marbles should automatically get installed. Alternatively, you can invoke the <tt>ant install</tt> and <tt>remove</tt> tasks on the source distribution. <a href="http://tomcat.apache.org/tomcat-6.0-doc/appdev/processes.html">Here's how to set up ant  to do this</a>.    </p>
+    <p>The Marbles servlet can then be invoked at the directory root, e.g. <tt>http://localhost:8080/marbles-1.0/</tt>, or <tt>/&lt;installation path&gt;/marbles</tt> for pre-2.4 servlet containers. </p>
+    <H3 id="securitypolicy">Security policy</H3>
+    <p>When running in a servlet container with active security restrictions, Marbles must be granted rights to:
+    <ul>
+      <li>write and delete access to the RDF stores, which are located under <tt>WEB-INF/data/stores</tt> by default</li>
+      <li>outgoing TCP communication with the world (<tt>connect</tt> and <tt>resolve</tt>)</li>
+      <li>reading of properties <tt>info.aduna.*</tt>, <tt>org.openrdf.*</tt> and <tt>org.xml.sax.driver</tt></li>
+    </ul></p>
+    <p>A sample policy file is provided in <a href="marbles.policy">marbles.policy</a>, which would be placed under <tt>conf/policy.d</tt> in a Tomcat setup. Consider disabling security settings if things don't work right from the start.</p>
+    <H3>Database setup</H3>
+   <p>Marbles has three RDF stores:
+    <ul>
+      <li>A <em>cache store</em>, which holds data retrieved from the Semantic Web</li>
+      <li>A <em>metadata store</em>, which holds information about the data present in the cache, such as date and time as well as headers</li>
+      <li>An <em>ontology store</em>, which contains vocabularies placed under the <tt>WEB-INF/data/ontologies</tt> directory</li>
+    </ul></p>
+    <p>By default, all stores are automatically created as file-based stores under the <tt>WEB-INF/data/stores</tt> directory. For performance reasons, it is recommended to place the cache store in a MySQL-based RDBMS store by supplying appropriate login information in <tt>web.xml</tt> (see <a href="#configuration">Configuration</a>).</p>
+    <p>MySQL's <tt>wait_timeout</tt> should be set sufficiently high to prevent disconnection when the server is idle (this value defaults to 8 hours). Marbles also profits from a high <tt>key_buffer</tt> value. <a href="marbles.cnf">marbles.cnf</a> contains a recommended configuration for a machine with 1 GB RAM, which may be placed   into <tt>/etc/mysql/conf.d</tt>.</p>
+    <p>Note that for better performance, automatic purging of the database was disabled as it occurs randomly and blocks all writes for a long period. If required, the database should simply be dropped as a whole, along with the <em>metadata</em> store.</p>
+    <H3 id="configuration">Configuration</H3>
+    <p>Marbles is configured using the servlet configuration file <tt>WEB-INF/web.xml</tt>, which is found in the extracted application container after installation. The default values allow Marbles to work &quot;out of the box&quot;, but the settings need to be changed to set up a MySQL-based store etc.</p>
+    <table width="900" border="1">
+      <tr>
+        <th class="first" width="142" scope="col">Field</th>
+        <th width="313" scope="col">Description</th>
+        <th width="423" scope="col">Default value</th>
+      </tr>
+      <tr>
+        <td class="first">dataProviders</td>
+        <td>Data Providers to activate</td>
+        <td><tt>de.fuberlin.wiwiss.marbles.dataproviders.RevyuProvider</tt>, <tt>de.fuberlin.wiwiss.marbles.dataproviders.SindiceProvider</tt>, <tt>de.fuberlin.wiwiss.marbles.dataproviders.FalconsProvider</tt></td>
+      </tr>
+      <tr>
+        <td class="first">dataRoot</td>
+        <td>Path to data directory with subdirectories for fresnel configuration (<tt>fresnel</tt>), built-in ontologies (<tt>ontologies</tt>) and XSLT transformations (<tt>xsl</tt>), absolute or relative to the Marbles installation directory</td>
+        <td><tt>WEB-INF/data</tt></td>
+      </tr>
+      <tr>
+        <td class="first">ontologyStore</td>
+        <td>Path for native store that holds built-in ontologies</td>
+        <td><tt>WEB-INF/data/stores/ontologies</tt></td>
+      </tr>
+      <tr>
+        <td class="first">cacheStore</td>
+        <td>Path for native store that holds cached data (when MySQL database is not used)</td>
+        <td><tt>WEB-INF/data/stores/cache</tt></td>
+      </tr>
+      <tr>
+        <td class="first">metadataStore</td>
+        <td>Path for native store that holds metadata</td>
+        <td><tt>WEB-INF/data/stores/metadata</tt></td>
+      </tr>
+      <tr>
+        <td class="first">assetsURL</td>
+        <td>Full HTTP path to assets in the <tt>web</tt> directory; specify if reverse-proxied</td>
+        <td>(empty), e.g. <tt>http://localhost:8080/marbles-1.0/</tt></td>
+      </tr>
+      <tr>
+        <td class="first">serviceURL</td>
+        <td>HTTP URL of this service, specify if reverse-proxied</td>
+        <td>(empty), e.g. <tt>http://localhost:8080/marbles-1.0/</tt></td>
+      </tr>
+      <tr>
+        <td class="first">spongerServiceURL</td>
+        <td><em>Optional:</em> HTTP URL of Virtuoso Sponger service to be used for further RDF Extraction</td>
+        <td>e.g. <tt>http://localhost:8890/proxy</tt></td>
+      </tr>
+      <tr>
+        <td class="first"><em>mysqlServer</em></td>
+        <td><em>Optional:</em> MySQL  host</td>
+        <td>e.g. <tt>127.0.0.1</tt></td>
+      </tr>
+      <tr>
+        <td class="first">mysqlDb</td>
+        <td><em>Optional:</em> MySQL database</td>
+        <td>e.g. <tt>marbles</tt></td>
+      </tr>
+      <tr>
+        <td class="first">mysqlUser</td>
+        <td><em>Optional:</em> MySQL user</td>
+        <td>e.g. <tt>root</tt></td>
+      </tr>
+      <tr>
+        <td class="first">mysqlPass</td>
+        <td><em>Optional:</em> MySQL password</td>
+        <td>e.g. (empty)</td>
+      </tr>
+    </table>
+
+    <H3 id="integration">Integrating into existing URL namespaces</H3>
+    <p>In order to integrate Marbles into an existing URL namespace that is served by an Apache HTTP Server, a redirection may be set up using <a href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html"><tt>mod_rewrite</tt></a> with <a href="http://httpd.apache.org/docs/2.0/mod/mod_proxy.html"><tt>mod_proxy</tt></a> enabled. The following shows an exemplary <tt>mod_rewrite</tt> configuration block inside a virtual host configuration:</p>
+    
+    <code>RewriteEngine on<br>
+    RewriteRule ^/marbles(/(.*))? http://localhost:8080/marbles-1.0/$2 [P]</code>
+    
+    <p>The Marbles <tt>assetsURL</tt> and <tt>serviceURL</tt> settings should be set to reflect the new paths, as these will be sent in the HTML output.</p>
+    <H3 id="vocabularies">Custom Ontologies</H3>
+    <p>The SIMILE Fresnel Engine supports labels specified using <tt>rdfs:label</tt> and <tt>dc:title</tt> for vocabulary items. To incorporate labels for custom ontologies, place those them the directory <tt>&lt;data&gt;/ontologies</tt>. Ontologies are added into the ontologies store upon servlet initialization.</p>
+    <h2 id="sourcecode">4. Sourcecode</h2>
+    <p>The source code is available in the <a href="https://sourceforge.net/project/showfiles.php?group_id=262878">SourceForge project download area</a> or <a href="https://sourceforge.net/scm/?type=svn&group_id=262878">via SVN</a>. JavaDoc is provided <a href="javadoc">here</a>.</p>
+    <h2 id="credits">5. Credits</h2>
+    <p>Marbles uses the&nbsp;following components:
+
+    <ul>
+      <li> <a href="http://openrdf.org">Sesame 2.1 with MySQL Storage</a> for the browser's data model and storage of cached data; tweaked to support inference </li>
+      <li> <a href="http://simile.mit.edu/wiki/Fresnel">SIMILE Fresnel Engine</a> and <a href="http://www.w3.org/2001/11/IsaViz/">IsaViz FSL</a>; both were tweaked to support provenance and performant access to large graphs.</li>
+      <li> <a href="http://saxon.sourceforge.net/">SAXON XSLT and XQuery Processor</a> to generate XHTML representations of the rendered Fresnel trees</li>
+      <li> The dereferencer is partially based on the <a href="http://www4.wiwiss.fu-berlin.de/bizer/ng4j/semwebclient/">Semantic Web Client Library</a> and makes use of the <a href="http://hc.apache.org/httpclient-3.x/index.html">Apache Commons HTTP Client</a> for optimized retrieval</li>
+    </ul></p>
+    <p>The open-sourcing of Marbles was supported in part by a research grant from Eli Lilly and Company.</p>
+    <p><a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=262878&amp;type=2" width="125" height="37" border="0" alt="SourceForge.net Logo"></a><br>
+    Hosted on SourceForge</p>
+    <h2 id="references">6. References</h2>
+    <p>Christian Becker, Christian Bizer: DBpedia Mobile: A Location-Enabled Linked Data Browser. 1st Workshop about Linked Data on the Web (LDOW2008), Beijing, China, April 2008.&nbsp;<a href="http://beckr.org/wp-content/uploads/DBpediaMobile.pdf"><img valign="absmiddle" alt="PDF" src="img/page_white_acrobat.png"> Paper</a>&nbsp;&nbsp;<a href="http://beckr.org/wp-content/uploads/DBpediaMobile-slides.pdf"><img valign="absmiddle" alt="PDF" src="img/page_white_acrobat.png"> Slides</a></p>
+    <h2 id="feedback">7. Feedback</h2>
+    <p>We are very interested in hearing your opinion about this service. Please send comments to <a href="http://beckr.org/contact/">Christian Becker</a> and <a href="mailto:chris@bizer.de">Chris Bizer</a>.</p>
+    <p>Further information about our work in the area of the Semantic Web/Web-of-Data can be found at<br>
+    <span class="TitelKopfzeile"><a href="http://www.wiwiss.fu-berlin.de/en/institute/pwo/bizer/research/projects/index.html">List of our other open source projects @ Freie Universit&auml;t Berlin</a></span></p>
+  </div>
+</div>
+</BODY>
+</HTML>

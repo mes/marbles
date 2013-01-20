@@ -1,0 +1,7 @@
+grant codeBase "file:${catalina.base}/webapps/marbles-1.0/-" {
+	permission java.util.PropertyPermission "info.aduna.*", "read";	
+	permission java.util.PropertyPermission "org.openrdf.*", "read";
+	permission java.util.PropertyPermission "org.xml.sax.driver", "read";
+	permission java.io.FilePermission "${catalina.base}/webapps/marbles-1.0/WEB-INF/data/stores/-", "read,write,delete";	
+	permission java.net.SocketPermission "*", "connect,resolve";
+};
