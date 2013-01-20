@@ -146,7 +146,7 @@
 					<xsl:if test="$purpose = 'defaultPurpose'">
 						<!-- Top navigation -->
 				      	<div id="topnavigation">
-				      		<a href="http://marbles.sourceforge.net/">
+				      		<a href="http://mes.github.com/marbles/">
 					            <div id="logo">
 									<img src="{$assetsURL}img/marbles.png" alt="Marbles"/>
 								</div>
